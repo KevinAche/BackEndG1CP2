@@ -15,4 +15,5 @@ public class persona {
 
     //private String apellidos;
     //private String direccion;
+    //CAMBIO PARA VERO
 }
