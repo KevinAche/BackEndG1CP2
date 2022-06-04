@@ -1,6 +1,7 @@
 package Grupo1.BackEndG1CP2.Models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "persona")
