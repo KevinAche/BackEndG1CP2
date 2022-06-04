@@ -9,7 +9,10 @@ public class persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String apellidos;
-    private String direccion;
+
+// private string nombre;
+
+
+    //private String apellidos;
+    //private String direccion;
 }
