@@ -11,4 +11,7 @@ public class persona {
     private Long id;
 
 // private string nombre;
+
+    //private String apellidos;
+
 }
