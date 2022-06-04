@@ -12,6 +12,7 @@ public class persona {
 
 // private string nombre;
 
-    //private String apellidos;
 
+    //private String apellidos;
+    //private String direccion;
 }
