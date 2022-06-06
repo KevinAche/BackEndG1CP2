@@ -9,117 +9,162 @@ public class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idPersona;
 
-    @Column(length = 10)
+    @Column(length = 10, nullable = false)
     private String cedula;
 
-    @Column(length = 60)
-    private  String nombres;
+    @Column(length = 60,  nullable = false)
+    private  String primerNombre;
+    
+    @Column(length = 60,  nullable = false)
+    private  String segundoNombre;
+    
+    @Column(length = 60,  nullable = false)
+    private  String primerApellido;
+    
+    @Column(length = 60,  nullable = false)
+    private  String segundoApellido;
 
-    @Column(length = 60)
-    private String apellidos;
+    @Column(name = "fecha_nac",  nullable = false)
+    private Date fechaNac;
 
-    @Column(name = "fecha_nac")
-    private Date fecha_nac;
-
-    @Column(length = 15)
+    @Column(length = 15,  nullable = false)
     private String telefono;
 
-    @Column(length = 150)
+    @Column(length = 150,  nullable = false)
     private String direccion;
 
-    @Column(length = 150)
+    @Column(length = 150,  nullable = false)
     private String correo;
+    
+    @OneToOne(mappedBy = "persona")
+    private Alumno alumno;
+    
+    @OneToOne(mappedBy = "persona")
+    private Docente docente;
+    
+    @OneToOne(mappedBy = "persona")
+    private PersonalEmpresa personalEmpresa;
+    
+    
+	public Persona() {
+	}
 
-    public Persona() {
-    }
+	public Long getId() {
+		return idPersona;
+	}
 
-    public Persona(String cedula, String nombres, String apellidos, Date fecha_nac, String telefono, String direccion, String correo) {
-        this.cedula = cedula;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.fecha_nac = fecha_nac;
-        this.telefono = telefono;
-        this.direccion = direccion;
-        this.correo = correo;
-    }
+	public void setId(Long id) {
+		this.idPersona = id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getCedula() {
+		return cedula;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
 
-    public String getCedula() {
-        return cedula;
-    }
+	public String getPrimerNombre() {
+		return primerNombre;
+	}
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
+	public void setPrimerNombre(String primerNombre) {
+		this.primerNombre = primerNombre;
+	}
 
-    public String getNombres() {
-        return nombres;
-    }
+	public String getSegundoNombre() {
+		return segundoNombre;
+	}
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
+	public void setSegundoNombre(String segundoNombre) {
+		this.segundoNombre = segundoNombre;
+	}
 
-    public String getApellidos() {
-        return apellidos;
-    }
+	public String getPrimerApellido() {
+		return primerApellido;
+	}
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
+	public void setPrimerApellido(String primerApellido) {
+		this.primerApellido = primerApellido;
+	}
 
-    public Date getFecha_nac() {
-        return fecha_nac;
-    }
+	public String getSegundoApellido() {
+		return segundoApellido;
+	}
 
-    public void setFecha_nac(Date fecha_nac) {
-        this.fecha_nac = fecha_nac;
-    }
+	public void setSegundoApellido(String segundoApellido) {
+		this.segundoApellido = segundoApellido;
+	}
 
-    public String getTelefono() {
-        return telefono;
-    }
+	public Date getFechaNac() {
+		return fechaNac;
+	}
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+	public void setFechaNac(Date fechaNac) {
+		this.fechaNac = fechaNac;
+	}
 
-    public String getDireccion() {
-        return direccion;
-    }
+	public String getTelefono() {
+		return telefono;
+	}
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 
-    public String getCorreo() {
-        return correo;
-    }
+	public String getDireccion() {
+		return direccion;
+	}
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
 
-    @Override
-    public String toString() {
-        return "persona{" +
-                "id=" + id +
-                ", cedula='" + cedula + '\'' +
-                ", nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", fecha_nac=" + fecha_nac +
-                ", telefono='" + telefono + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", correo='" + correo + '\'' +
-                '}';
-    }
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public Long getIdPersona() {
+		return idPersona;
+	}
+
+	public void setIdPersona(Long idPersona) {
+		this.idPersona = idPersona;
+	}
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
+	}
+
+	public Docente getDocente() {
+		return docente;
+	}
+
+	public void setDocente(Docente docente) {
+		this.docente = docente;
+	}
+
+	public PersonalEmpresa getPersonalEmpresa() {
+		return personalEmpresa;
+	}
+
+	public void setPersonalEmpresa(PersonalEmpresa personalEmpresa) {
+		this.personalEmpresa = personalEmpresa;
+	}
+	
+	
+    
+    
+
 }

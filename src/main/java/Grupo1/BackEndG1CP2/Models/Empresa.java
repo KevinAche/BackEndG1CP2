@@ -1,87 +1,112 @@
 package Grupo1.BackEndG1CP2.Models;
 
-import javax.persistence.*;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "empresa")
 public class Empresa {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idEmpresa;
+	
+	@Column(nullable = false)
+	private String nombreEmpresa;
+	
+	@Column(nullable = false)
+	private String ruc;
+	
+	@Column(nullable = false)
+	private String mision;
+	
+	@Column(nullable = false)
+	private String vision;
+	
+	@Column(nullable = false)
+	private String direccion;
+	
+	@Column(nullable = false)
+	private String telefono;
+	
+	@OneToMany(mappedBy = "empresa")
+	private List<PersonalEmpresa> personalEmpresa;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
-    private  String gerente;
-    private String direccion;
-    private  String telefono;
-    private  String mision;
-    private  String vision;
+	public Empresa() {
+		super();
+	}
 
-    public Empresa() {
-    }
+	public Long getIdEmpresa() {
+		return idEmpresa;
+	}
 
-    public Empresa(Long id, String nombre, String gerente, String direccion, String telefono, String mision, String vision) {
-        this.id = id;
-        this.nombre = nombre;
-        this.gerente = gerente;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.mision = mision;
-        this.vision = vision;
-    }
+	public void setIdEmpresa(Long idEmpresa) {
+		this.idEmpresa = idEmpresa;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getNombreEmpresa() {
+		return nombreEmpresa;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setNombreEmpresa(String nombreEmpresa) {
+		this.nombreEmpresa = nombreEmpresa;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public String getRuc() {
+		return ruc;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setRuc(String ruc) {
+		this.ruc = ruc;
+	}
 
-    public String getGerente() {
-        return gerente;
-    }
+	public String getMision() {
+		return mision;
+	}
 
-    public void setGerente(String gerente) {
-        this.gerente = gerente;
-    }
+	public void setMision(String mision) {
+		this.mision = mision;
+	}
 
-    public String getDireccion() {
-        return direccion;
-    }
+	public String getVision() {
+		return vision;
+	}
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
+	public void setVision(String vision) {
+		this.vision = vision;
+	}
 
-    public String getTelefono() {
-        return telefono;
-    }
+	public String getDireccion() {
+		return direccion;
+	}
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
 
-    public String getMision() {
-        return mision;
-    }
+	public String getTelefono() {
+		return telefono;
+	}
 
-    public void setMision(String mision) {
-        this.mision = mision;
-    }
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 
-    public String getVision() {
-        return vision;
-    }
+	public List<PersonalEmpresa> getPersonalEmpresa() {
+		return personalEmpresa;
+	}
 
-    public void setVision(String vision) {
-        this.vision = vision;
-    }
+	public void setPersonalEmpresa(List<PersonalEmpresa> personalEmpresa) {
+		this.personalEmpresa = personalEmpresa;
+	}
+	
+	
+
 }
