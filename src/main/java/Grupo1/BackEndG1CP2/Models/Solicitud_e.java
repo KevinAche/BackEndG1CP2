@@ -1,13 +1,21 @@
 package Grupo1.BackEndG1CP2.Models;
 
-public class solicitud_e {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "solicitud_e")
+public class Solicitud_e {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private  String pendiente;
     private  String respuesta;
 
-    public solicitud_e() {
+    public Solicitud_e() {
     }
 
-    public solicitud_e(String pendiente, String respuesta) {
+    public Solicitud_e(String pendiente, String respuesta) {
         this.pendiente = pendiente;
         this.respuesta = respuesta;
     }

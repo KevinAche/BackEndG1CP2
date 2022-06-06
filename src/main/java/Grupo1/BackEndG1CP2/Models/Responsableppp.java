@@ -5,14 +5,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "responsablepp")
-public class responsableppp {
+public class Responsableppp {
     private String empresa;
 
-    public responsableppp(String empresa) {
+    public Responsableppp(String empresa) {
         this.empresa = empresa;
     }
 
-    public responsableppp() {
+    public Responsableppp() {
     }
 
     public String getEmpresa() {

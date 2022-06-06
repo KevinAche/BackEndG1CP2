@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "persona")
-public class persona {
+public class Persona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +32,10 @@ public class persona {
     @Column(length = 150)
     private String correo;
 
-    public persona() {
+    public Persona() {
     }
 
-    public persona(String cedula, String nombres, String apellidos, Date fecha_nac, String telefono, String direccion, String correo) {
+    public Persona(String cedula, String nombres, String apellidos, Date fecha_nac, String telefono, String direccion, String correo) {
         this.cedula = cedula;
         this.nombres = nombres;
         this.apellidos = apellidos;
