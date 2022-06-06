@@ -20,10 +20,13 @@ public class Alumno{
 	
 	@Column(nullable = false)
 	private String ciclo;
-	
+
 	@Column(nullable = false)
 	private String paralelo;
-	
+
+	@Column(nullable = false)
+	private double promedio;
+
 	@OneToOne
 	@JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
 	private Persona persona;
@@ -68,5 +71,12 @@ public class Alumno{
 	public void setParalelo(String paralelo) {
 		this.paralelo = paralelo;
 	}
-	
+
+	public double getPromedio() {
+		return promedio;
+	}
+
+	public void setPromedio(double promedio) {
+		this.promedio = promedio;
+	}
 }
