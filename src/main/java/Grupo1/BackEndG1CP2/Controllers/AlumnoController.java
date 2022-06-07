@@ -31,34 +31,36 @@ public class AlumnoController {
     }
 
     @PostMapping("/CrearAlumno")
-    public ResponseEntity<RespuestaGenerica> CrearNuevoAlumno(@RequestBody Persona persona ,@RequestBody Alumno alumno){
+    public ResponseEntity<RespuestaGenerica> CrearNuevoAlumno(@RequestBody Alumno alumno){
 
         List<Alumno> data = new ArrayList<>();
         RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
 
         try{
 
-            Persona persona1 =  personaRepository.save(persona);
-            if(persona1!=null){
-                respuesta.setMensaje("SE INSERTO PERSONA: "+persona1.toString());
+            Persona persona1 =  new Persona(alumno.getPersona().getCedula(),
+                    alumno.getPersona().getPrimerNombre(),
+                    alumno.getPersona().getSegundoNombre(),
+                    alumno.getPersona().getPrimerApellido(),
+                    alumno.getPersona().getSegundoApellido(),
+                    alumno.getPersona().getFechaNac(),
+                    alumno.getPersona().getTelefono(),
+                    alumno.getPersona().getDireccion(),
+                    alumno.getPersona().getCorreo());
+
+            Persona persona2 = personaRepository.save(persona1);
+            if(persona2!=null){
+                respuesta.setMensaje("SE INSERTO LA PERSONA: "+persona2.toString());
                 respuesta.setData(data);
                 respuesta.setEstado(0);
-                if (!personaRepository.findById(persona.getIdPersona()).isEmpty()){
-                    alumno.setPersona(persona1);
-                    Alumno alumno1 = alumnoRepository.save(alumno);
-                    if(alumno1!=null){
-                        respuesta.setMensaje("SE INSERTO PERSONA:"+alumno1.toString());
-                        respuesta.setData(data);
-                        respuesta.setEstado(1);
-                    }
-                }
+
             }else{
                 respuesta.setMensaje("Hubo un problema al insertar PERSONA");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
             }
         }catch (Exception ex){
-            respuesta.setMensaje("Hubo un problema al insertar el nuevo alumno");
+            respuesta.setMensaje("Hubo un problema al insertar el nuevo PERSONA");
             respuesta.setData(data);
             respuesta.setEstado(1);
             System.out.println("No se pudo almacenar el objeto en la base de datos");

@@ -51,6 +51,18 @@ public class Persona {
 	public Persona() {
 	}
 
+	public Persona(String cedula, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, Date fechaNac, String telefono, String direccion, String correo) {
+		this.cedula = cedula;
+		this.primerNombre = primerNombre;
+		this.segundoNombre = segundoNombre;
+		this.primerApellido = primerApellido;
+		this.segundoApellido = segundoApellido;
+		this.fechaNac = fechaNac;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.correo = correo;
+	}
+
 	public String getCedula() {
 		return cedula;
 	}
