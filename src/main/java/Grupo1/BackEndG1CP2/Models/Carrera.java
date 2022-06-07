@@ -36,6 +36,9 @@ public class Carrera {
 	@OneToMany(mappedBy = "carrera")
 	private List<Asignaturas> asignaturas;
 
+	@OneToMany(mappedBy = "carrera")
+	private List<SolicitudEmpresa> solicitudEmpresas;
+
 	public Carrera() {
 		super();
 	}

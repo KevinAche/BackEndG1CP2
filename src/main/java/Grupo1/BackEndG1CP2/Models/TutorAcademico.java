@@ -20,6 +20,10 @@ public class TutorAcademico{
 	@OneToOne
 	@JoinColumn(name = "idDocente", referencedColumnName = "idDocente")
 	private Docente docente;
+
+	@OneToOne
+	@JoinColumn(name = "idAlumno", referencedColumnName = "idAlumno")
+	private Alumno alumno;
 	
 	public TutorAcademico() {
 		super();
