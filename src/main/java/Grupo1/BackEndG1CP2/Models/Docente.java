@@ -28,12 +28,28 @@ public class Docente{
 	
 	@OneToOne(mappedBy = "docente")
 	private TutorAcademico tutorAcademico;
+	
+	@ManyToOne
+	@JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera")
+	private Carrera carrera;
 
 	public Docente() {
 	}
 	
 	
 	
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+
+
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
+	}
+
+
+
 	public Persona getPersona() {
 		return persona;
 	}

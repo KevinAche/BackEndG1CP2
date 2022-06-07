@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -30,12 +31,27 @@ public class Alumno{
 	@OneToOne
 	@JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
 	private Persona persona;
+	
+	@ManyToOne
+	@JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera")
+	private Carrera carrera;
 
 	public Alumno() {
 	}
 	
-	
-	
+
+	public Carrera getCarrera() {
+		return carrera;
+	}
+
+
+
+	public void setCarrera(Carrera carrera) {
+		this.carrera = carrera;
+	}
+
+
+
 	public Persona getPersona() {
 		return persona;
 	}

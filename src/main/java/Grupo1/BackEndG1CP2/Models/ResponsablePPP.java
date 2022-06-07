@@ -1,11 +1,15 @@
 package Grupo1.BackEndG1CP2.Models;
 
+import java.util.List;
+
 import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -21,11 +25,13 @@ public class ResponsablePPP{
 	@OneToOne
 	@JoinColumn(name = "idDocente", referencedColumnName = "idDocente")
 	private Docente docente;
+	
+	@OneToMany(mappedBy = "responsablePPP")
+	private List<SolicitudEmpresa> solicitudEmpresa;
 
 	public ResponsablePPP() {
 		super();
 	}
-	
 	
 	
 	public Docente getDocente() {

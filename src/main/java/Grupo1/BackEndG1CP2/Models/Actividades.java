@@ -8,7 +8,19 @@ public class Actividades {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private Long idActividad;
+    
+    private String descripcion;
+    
+    private String area;
+    
+    @ManyToOne
+    @JoinColumn(name = "idAsignatura", referencedColumnName = "idAsignatura")
+    private Asignaturas asignatura;
+    
+    @ManyToOne
+    @JoinColumn(name = "idSolicitud", referencedColumnName = "idSolicitud")
+    private SolicitudEmpresa solicitudEmpresa;
+    
 
 }

@@ -1,5 +1,7 @@
 package Grupo1.BackEndG1CP2.Models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,6 +39,9 @@ public class PersonalEmpresa {
 	
 	@OneToOne(mappedBy = "personalEmpresa")
 	private TutorEmpresarial tutorEmpresarial;
+	
+	@OneToMany(mappedBy = "empleado")
+	private List<SolicitudEmpresa> solicitudEmpresa;
 
 	public PersonalEmpresa() {
 		super();
@@ -80,7 +86,22 @@ public class PersonalEmpresa {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-	
-	
 
+	public TutorEmpresarial getTutorEmpresarial() {
+		return tutorEmpresarial;
+	}
+
+	public void setTutorEmpresarial(TutorEmpresarial tutorEmpresarial) {
+		this.tutorEmpresarial = tutorEmpresarial;
+	}
+
+	public List<SolicitudEmpresa> getSolicitudEmpresa() {
+		return solicitudEmpresa;
+	}
+
+	public void setSolicitudEmpresa(List<SolicitudEmpresa> solicitudEmpresa) {
+		this.solicitudEmpresa = solicitudEmpresa;
+	}
+
+	
 }
