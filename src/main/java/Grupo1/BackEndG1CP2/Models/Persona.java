@@ -51,14 +51,6 @@ public class Persona {
 	public Persona() {
 	}
 
-	public Long getId() {
-		return idPersona;
-	}
-
-	public void setId(Long id) {
-		this.idPersona = id;
-	}
-
 	public String getCedula() {
 		return cedula;
 	}
