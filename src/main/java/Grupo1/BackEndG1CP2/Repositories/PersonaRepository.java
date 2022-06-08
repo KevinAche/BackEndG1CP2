@@ -2,6 +2,7 @@ package Grupo1.BackEndG1CP2.Repositories;
 
 import Grupo1.BackEndG1CP2.Models.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
