@@ -20,7 +20,7 @@ public class PersonaController {
     private PersonaRepository personaRepository;
 
     @GetMapping("/ListaPersonas")
-    public ResponseEntity<RespuestaGenerica> ListarEstudiantes(){
+    public ResponseEntity<RespuestaGenerica> ListarPersonas(){
         List<Persona> data = new ArrayList<>();
         RespuestaGenerica<Persona> respuesta = new RespuestaGenerica<>();
         try {

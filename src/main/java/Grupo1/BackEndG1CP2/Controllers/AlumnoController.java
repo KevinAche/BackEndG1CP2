@@ -3,16 +3,18 @@ package Grupo1.BackEndG1CP2.Controllers;
 import Grupo1.BackEndG1CP2.Models.Alumno;
 import Grupo1.BackEndG1CP2.Models.Persona;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
+import Grupo1.BackEndG1CP2.Models.Views.VistaListarAlumnos;
 import Grupo1.BackEndG1CP2.Repositories.AlumnoRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarAlumnosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/GestionAlumno")
@@ -21,23 +23,67 @@ public class AlumnoController {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
+    @Autowired
+    private ListarAlumnosRepository listaAlumnosRepository;
+
+    @Autowired
+    private PersonaRepository personaRepository;
+
+
 
     @GetMapping("/ListaAlumnos")
     public ResponseEntity<RespuestaGenerica> ListarAlumnos(){
-       List<Alumno> data = new ArrayList<>();
-       RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
+       List<VistaListarAlumnos> data = new ArrayList<>();
+       RespuestaGenerica<VistaListarAlumnos> respuesta = new RespuestaGenerica<>();
        try{
-            data= alumnoRepository.findAll();
-           respuesta.setMensaje("Se genero LISTADO PERSONAS EXITOXAMENTE");
+           data= listaAlumnosRepository.findAll();
+           respuesta.setMensaje("Se genero LISTADO ALUMNOS EXITOXAMENTE");
            respuesta.setData(data);
            respuesta.setEstado(0);
        }catch (Exception e){
-
+           respuesta.setMensaje("Hubo un problema al generar LISTADO ALUMNOS, causa ->"+e.getCause()+" || message->"+e.getMessage());
+           respuesta.setData(data);
+           respuesta.setEstado(1);
        }
-
-       return null;
+       return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
+
+    @PostMapping("/CrearAlumno/{id_persona}")
+    public ResponseEntity<RespuestaGenerica> CrearAlumno(@RequestBody Alumno alumnoEnviado,@PathVariable Long id_persona){
+        List<Alumno> data = new ArrayList<>();
+        RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.CREATED;
+        try {
+            Optional<Persona> persona = personaRepository.findById(id_persona);
+            if(!persona.isEmpty()){
+                alumnoEnviado.setPersona(persona.get());
+                Alumno alumno = alumnoRepository.save(alumnoEnviado);
+                data.add(alumno);
+                if(alumno !=null){
+                    respuesta.setMensaje("SE REGISTRO ALUMNO CORRECTAMENTE");
+                    respuesta.setData(data);
+                    respuesta.setEstado(0);
+                }else{
+                    respuesta.setMensaje("NO SE REGISTRO ALUMNO CORRECTAMENTE");
+                    respuesta.setData(data);
+                    respuesta.setEstado(1);
+                    estado= HttpStatus.BAD_REQUEST;
+                }
+            }else{
+                respuesta.setMensaje("NO SE REGISTRO ALUMNO CORRECTAMENTE DEBIDO A QUE EL ID DE PERSONA ENVIADO NO SE ENCONTRO EN LA BASE");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+                estado= HttpStatus.BAD_REQUEST;
+            }
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al insertar ALUMNO, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+            estado= HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
+    }
 
 
 }
