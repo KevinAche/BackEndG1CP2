@@ -38,14 +38,14 @@ public class Persona {
     @Column(length = 150,  nullable = false)
     private String correo;
     
-    @OneToOne(mappedBy = "persona")
+    /*@OneToOne(mappedBy = "persona")
     private Alumno alumno;
     
     @OneToOne(mappedBy = "persona")
     private Docente docente;
     
     @OneToOne(mappedBy = "persona")
-    private PersonalEmpresa personalEmpresa;
+    private PersonalEmpresa personalEmpresa;*/
     
     
 	public Persona() {
@@ -143,29 +143,7 @@ public class Persona {
 		this.idPersona = idPersona;
 	}
 
-	public Alumno getAlumno() {
-		return alumno;
-	}
 
-	public void setAlumno(Alumno alumno) {
-		this.alumno = alumno;
-	}
-
-	public Docente getDocente() {
-		return docente;
-	}
-
-	public void setDocente(Docente docente) {
-		this.docente = docente;
-	}
-
-	public PersonalEmpresa getPersonalEmpresa() {
-		return personalEmpresa;
-	}
-
-	public void setPersonalEmpresa(PersonalEmpresa personalEmpresa) {
-		this.personalEmpresa = personalEmpresa;
-	}
 	
 	
     
