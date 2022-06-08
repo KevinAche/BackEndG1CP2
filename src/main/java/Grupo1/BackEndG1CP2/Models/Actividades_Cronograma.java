@@ -11,17 +11,26 @@ public class Actividades_Cronograma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int num_actividad;
+    private int numActividad;
 
-    private Date fecha_seguimiento;
+    private Date fechaSeguimiento;
 
-    private Date fecha_finalizacion;
+    private Date fechaFinalizacion;
 
-    private float porcentaje;
+    private double porcentaje;
 
-    private String detalle;
+    private String observacion;
 
-    private String actividades;
+    @OneToOne
+    @JoinColumn(name = "idActividadesD",referencedColumnName = "idActividadesD")
+    private Actividades_Diarias actividadesDiarias;
+
+    @ManyToOne
+    @JoinColumn(name = "idCronograma",referencedColumnName = "idCronograma" )
+    private Cronograma cronograma;
+
+    public Actividades_Cronograma() {
+    }
 
     public Long getId() {
         return id;
@@ -31,64 +40,59 @@ public class Actividades_Cronograma {
         this.id = id;
     }
 
-    public int getNum_actividad() {
-        return num_actividad;
+    public int getNumActividad() {
+        return numActividad;
     }
 
-    public void setNum_actividad(int num_actividad) {
-        this.num_actividad = num_actividad;
+    public void setNumActividad(int numActividad) {
+        this.numActividad = numActividad;
     }
 
-    public Date getFecha_seguimiento() {
-        return fecha_seguimiento;
+    public Date getFechaSeguimiento() {
+        return fechaSeguimiento;
     }
 
-    public void setFecha_seguimiento(Date fecha_seguimiento) {
-        this.fecha_seguimiento = fecha_seguimiento;
+    public void setFechaSeguimiento(Date fechaSeguimiento) {
+        this.fechaSeguimiento = fechaSeguimiento;
     }
 
-    public Date getFecha_finalizacion() {
-        return fecha_finalizacion;
+    public Date getFechaFinalizacion() {
+        return fechaFinalizacion;
     }
 
-    public void setFecha_finalizacion(Date fecha_finalizacion) {
-        this.fecha_finalizacion = fecha_finalizacion;
+    public void setFechaFinalizacion(Date fechaFinalizacion) {
+        this.fechaFinalizacion = fechaFinalizacion;
     }
 
-    public float getPorcentaje() {
+    public double getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(float porcentaje) {
+    public void setPorcentaje(double porcentaje) {
         this.porcentaje = porcentaje;
     }
 
-    public String getDetalle() {
-        return detalle;
+    public String getObservacion() {
+        return observacion;
     }
 
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
     }
 
-    public String getActividades() {
-        return actividades;
+    public Actividades_Diarias getActividadesDiarias() {
+        return actividadesDiarias;
     }
 
-    public void setActividades(String actividades) {
-        this.actividades = actividades;
+    public void setActividadesDiarias(Actividades_Diarias actividadesDiarias) {
+        this.actividadesDiarias = actividadesDiarias;
     }
 
-    @Override
-    public String  toString() {
-        return "Actividades_Cronograma{" +
-                "id=" + id +
-                ", num_actividad=" + num_actividad +
-                ", fecha_seguimiento=" + fecha_seguimiento +
-                ", fecha_finalizacion=" + fecha_finalizacion +
-                ", porcentaje=" + porcentaje +
-                ", detalle='" + detalle + '\'' +
-                ", actividades='" + actividades + '\'' +
-                '}';
+    public Cronograma getCronograma() {
+        return cronograma;
+    }
+
+    public void setCronograma(Cronograma cronograma) {
+        this.cronograma = cronograma;
     }
 }

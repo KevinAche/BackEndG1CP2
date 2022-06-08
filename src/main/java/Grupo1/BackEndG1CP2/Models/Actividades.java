@@ -1,6 +1,7 @@
 package Grupo1.BackEndG1CP2.Models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "actividades")
@@ -22,7 +23,18 @@ public class Actividades {
     @JoinColumn(name = "idSolicitudEmpresa", referencedColumnName = "idSolicitudEmpresa")
     private SolicitudEmpresa solicitudEmpresa;
 
+    @OneToMany(mappedBy = "actividades")
+    private List<ActividadesAReunion> actividadesAReunions;
+
     public Actividades() {
+    }
+
+    public List<ActividadesAReunion> getActividadesAReunions() {
+        return actividadesAReunions;
+    }
+
+    public void setActividadesAReunions(List<ActividadesAReunion> actividadesAReunions) {
+        this.actividadesAReunions = actividadesAReunions;
     }
 
     public Long getIdActividad() {

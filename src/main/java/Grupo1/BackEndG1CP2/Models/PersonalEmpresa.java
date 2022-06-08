@@ -44,7 +44,7 @@ public class PersonalEmpresa {
 	private List<SolicitudEmpresa> solicitudEmpresa;
 
 	public PersonalEmpresa() {
-		super();
+
 	}
 
 	public Long getIdPersonal() {

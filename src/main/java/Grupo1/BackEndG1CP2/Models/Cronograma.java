@@ -1,6 +1,7 @@
 package Grupo1.BackEndG1CP2.Models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "cronograma")
@@ -8,51 +9,27 @@ public class Cronograma {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idCronograma;
 
-    private String estudiante;
-    private String tutor_empre;
-    private String empresa;
+    @OneToMany(mappedBy = "cronograma")
+    private List<Actividades_Cronograma> actividadesCronograma;
 
-    public Long getId() {
-        return id;
+    public Cronograma() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdCronograma() {
+        return idCronograma;
     }
 
-    public String getEstudiante() {
-        return estudiante;
+    public void setIdCronograma(Long idCronograma) {
+        this.idCronograma = idCronograma;
     }
 
-    public void setEstudiante(String estudiante) {
-        this.estudiante = estudiante;
+    public List<Actividades_Cronograma> getActividadesCronograma() {
+        return actividadesCronograma;
     }
 
-    public String getTutor_empre() {
-        return tutor_empre;
-    }
-
-    public void setTutor_empre(String tutor_empre) {
-        this.tutor_empre = tutor_empre;
-    }
-
-    public String getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(String empresa) {
-        this.empresa = empresa;
-    }
-
-    @Override
-    public String toString() {
-        return "Cronograma{" +
-                "id=" + id +
-                ", estudiante='" + estudiante + '\'' +
-                ", tutor_empre='" + tutor_empre + '\'' +
-                ", empresa='" + empresa + '\'' +
-                '}';
+    public void setActividadesCronograma(List<Actividades_Cronograma> actividadesCronograma) {
+        this.actividadesCronograma = actividadesCronograma;
     }
 }

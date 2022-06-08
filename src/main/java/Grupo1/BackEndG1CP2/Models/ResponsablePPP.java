@@ -30,7 +30,7 @@ public class ResponsablePPP{
 	private List<SolicitudEmpresa> solicitudEmpresa;
 
 	public ResponsablePPP() {
-		super();
+
 	}
 	
 	
@@ -39,6 +39,13 @@ public class ResponsablePPP{
 	}
 
 
+	public List<SolicitudEmpresa> getSolicitudEmpresa() {
+		return solicitudEmpresa;
+	}
+
+	public void setSolicitudEmpresa(List<SolicitudEmpresa> solicitudEmpresa) {
+		this.solicitudEmpresa = solicitudEmpresa;
+	}
 
 	public void setDocente(Docente docente) {
 		this.docente = docente;

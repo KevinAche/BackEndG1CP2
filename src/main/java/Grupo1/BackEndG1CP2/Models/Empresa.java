@@ -40,8 +40,9 @@ public class Empresa {
 	private List<PersonalEmpresa> personalEmpresa;
 
 	public Empresa() {
-		super();
+
 	}
+
 
 	public Long getIdEmpresa() {
 		return idEmpresa;

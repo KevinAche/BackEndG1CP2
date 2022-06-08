@@ -19,7 +19,7 @@ public class Rol {
 	private String rol;
 
 	public Rol() {
-		super();
+
 	}
 
 	public Long getIdRol() {

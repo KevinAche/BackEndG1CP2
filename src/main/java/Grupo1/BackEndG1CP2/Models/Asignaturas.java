@@ -28,6 +28,8 @@ public class Asignaturas {
 	public Asignaturas() {
 	}
 
+
+
 	public Long getIdAsignatura() {
 		return idAsignatura;
 	}
