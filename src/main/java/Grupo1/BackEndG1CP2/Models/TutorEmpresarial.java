@@ -17,8 +17,31 @@ public class TutorEmpresarial{
 	@JoinColumn(name = "idPersonal", referencedColumnName = "idPersonal")
 	private PersonalEmpresa personalEmpresa;
 
+	@OneToOne
+	@JoinColumn(name = "idAlumno", referencedColumnName = "idAlumno")
+	private Alumno alumno;
+
+	//Anexo 5
+	private String docAsignacion;
+
 	public TutorEmpresarial() {
-		super();
+
+	}
+
+	public String getDocAsignacion() {
+		return docAsignacion;
+	}
+
+	public void setDocAsignacion(String docAsignacion) {
+		this.docAsignacion = docAsignacion;
+	}
+
+	public Alumno getAlumno() {
+		return alumno;
+	}
+
+	public void setAlumno(Alumno alumno) {
+		this.alumno = alumno;
 	}
 
 	public Long getIdTutorEmpresarial() {

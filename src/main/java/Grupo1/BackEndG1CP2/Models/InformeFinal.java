@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "informe_culminacion")
-public class Informe_Culminacion {
+@Table(name = "informe_final")
+public class InformeFinal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idInformeCulminacion;
+    private Long idInformeFinal;
 
     private Date fechaEmision;
 
@@ -17,15 +17,23 @@ public class Informe_Culminacion {
     @JoinColumn(name = "idAlumno",referencedColumnName = "idAlumno")
     private Alumno alumno;
 
-    public Informe_Culminacion() {
+    //Anexo15
+    private String docInformeFinal;
+
+    @PrePersist
+    public void fecha(){
+        this.fechaEmision=new Date();
     }
 
-    public Long getIdInformeCulminacion() {
-        return idInformeCulminacion;
+    public InformeFinal() {
     }
 
-    public void setIdInformeCulminacion(Long idInformeCulminacion) {
-        this.idInformeCulminacion = idInformeCulminacion;
+    public Long getIdInformeFinal() {
+        return idInformeFinal;
+    }
+
+    public void setIdInformeFinal(Long idInformeFinal) {
+        this.idInformeFinal = idInformeFinal;
     }
 
     public Date getFechaEmision() {
@@ -42,5 +50,13 @@ public class Informe_Culminacion {
 
     public void setAlumno(Alumno alumno) {
         this.alumno = alumno;
+    }
+
+    public String getDocInformeFinal() {
+        return docInformeFinal;
+    }
+
+    public void setDocInformeFinal(String docInformeFinal) {
+        this.docInformeFinal = docInformeFinal;
     }
 }

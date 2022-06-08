@@ -8,25 +8,31 @@ import java.util.Date;
 public class Informe_Visita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idInformeVisita;
 
     private Date fecha;
 
+    private String asunto;
+
+    private String observaciones;
+
     private String horaInicio;
+
     private String horaFin;
 
-    private String Asunto;
-    private String Actividades;
-    private String Comentarios;
-//    Esta bien este atributo ?
-    private String Firma;
+    @ManyToOne
+    @JoinColumn(name = "idRegistroVisitaE",referencedColumnName = "idRegistroVisitaE")
+    private Registro_VisitaEmpresa registroVisitaEmpresa;
 
-    public Long getId() {
-        return id;
+    public Informe_Visita() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdInformeVisita() {
+        return idInformeVisita;
+    }
+
+    public void setIdInformeVisita(Long idInformeVisita) {
+        this.idInformeVisita = idInformeVisita;
     }
 
     public Date getFecha() {
@@ -35,6 +41,22 @@ public class Informe_Visita {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public String getAsunto() {
+        return asunto;
+    }
+
+    public void setAsunto(String asunto) {
+        this.asunto = asunto;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
     }
 
     public String getHoraInicio() {
@@ -53,49 +75,11 @@ public class Informe_Visita {
         this.horaFin = horaFin;
     }
 
-    public String getAsunto() {
-        return Asunto;
+    public Registro_VisitaEmpresa getRegistroVisitaEmpresa() {
+        return registroVisitaEmpresa;
     }
 
-    public void setAsunto(String asunto) {
-        Asunto = asunto;
-    }
-
-    public String getActividades() {
-        return Actividades;
-    }
-
-    public void setActividades(String actividades) {
-        Actividades = actividades;
-    }
-
-    public String getComentarios() {
-        return Comentarios;
-    }
-
-    public void setComentarios(String comentarios) {
-        Comentarios = comentarios;
-    }
-
-    public String getFirma() {
-        return Firma;
-    }
-
-    public void setFirma(String firma) {
-        Firma = firma;
-    }
-
-    @Override
-    public String   toString() {
-        return "Informe_Visita{" +
-                "id=" + id +
-                ", fecha=" + fecha +
-                ", horaInicio='" + horaInicio + '\'' +
-                ", horaFin='" + horaFin + '\'' +
-                ", Asunto='" + Asunto + '\'' +
-                ", Actividades='" + Actividades + '\'' +
-                ", Comentarios='" + Comentarios + '\'' +
-                ", Firma='" + Firma + '\'' +
-                '}';
+    public void setRegistroVisitaEmpresa(Registro_VisitaEmpresa registroVisitaEmpresa) {
+        this.registroVisitaEmpresa = registroVisitaEmpresa;
     }
 }

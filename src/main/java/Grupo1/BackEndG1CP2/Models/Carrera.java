@@ -40,7 +40,23 @@ public class Carrera {
 	private List<SolicitudEmpresa> solicitudEmpresas;
 
 	public Carrera() {
-		super();
+
+	}
+
+	public List<Asignaturas> getAsignaturas() {
+		return asignaturas;
+	}
+
+	public void setAsignaturas(List<Asignaturas> asignaturas) {
+		this.asignaturas = asignaturas;
+	}
+
+	public List<SolicitudEmpresa> getSolicitudEmpresas() {
+		return solicitudEmpresas;
+	}
+
+	public void setSolicitudEmpresas(List<SolicitudEmpresa> solicitudEmpresas) {
+		this.solicitudEmpresas = solicitudEmpresas;
 	}
 
 	public Long getIdCarrera() {

@@ -1,9 +1,9 @@
 package Grupo1.BackEndG1CP2.Repositories;
 
-import Grupo1.BackEndG1CP2.Models.CertificadoA12_1;
+import Grupo1.BackEndG1CP2.Models.CertificadoEmpresa;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CertificadoA12Repository extends JpaRepository<CertificadoA12_1,Long> {
+public interface CertificadoA12Repository extends JpaRepository<CertificadoEmpresa,Long> {
 
 
 }

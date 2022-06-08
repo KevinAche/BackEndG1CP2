@@ -33,7 +33,7 @@ public class Usuario {
 	private List<Rol> rol;
 
 	public Usuario() {
-		super();
+
 	}
 
 	public Long getIdUsuario() {

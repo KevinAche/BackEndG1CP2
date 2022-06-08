@@ -34,9 +34,37 @@ public class Alumno{
 	@OneToOne(mappedBy = "alumno")
 	private TutorAcademico tutorAcademico;
 
+	@OneToOne(mappedBy = "alumno")
+	private TutorEmpresarial tutorEmpresarial;
+
 	public Alumno() {
 	}
-	
+
+
+
+	public List<SolicitudAlumno> getSolicitudAlumnoList() {
+		return solicitudAlumnoList;
+	}
+
+	public void setSolicitudAlumnoList(List<SolicitudAlumno> solicitudAlumnoList) {
+		this.solicitudAlumnoList = solicitudAlumnoList;
+	}
+
+	public TutorAcademico getTutorAcademico() {
+		return tutorAcademico;
+	}
+
+	public void setTutorAcademico(TutorAcademico tutorAcademico) {
+		this.tutorAcademico = tutorAcademico;
+	}
+
+	public TutorEmpresarial getTutorEmpresarial() {
+		return tutorEmpresarial;
+	}
+
+	public void setTutorEmpresarial(TutorEmpresarial tutorEmpresarial) {
+		this.tutorEmpresarial = tutorEmpresarial;
+	}
 
 	public Carrera getCarrera() {
 		return carrera;

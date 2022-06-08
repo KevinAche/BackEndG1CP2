@@ -8,19 +8,26 @@ public class Evidencias {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idEvidencias;
 
     private String descripcion;
 
-//    String o Byte64 ?
-    private String imagen;
+    //se refiere a la imagen u otro tipo de archivo
+    private String anexos;
 
-    public Long getId() {
-        return id;
+    @ManyToOne
+    @JoinColumn(name = "idInformeCulminacion", referencedColumnName = "idInformeCulminacion")
+    private Informe_Culminacion informeCulminacion;
+
+    public Evidencias() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdEvidencias() {
+        return idEvidencias;
+    }
+
+    public void setIdEvidencias(Long idEvidencias) {
+        this.idEvidencias = idEvidencias;
     }
 
     public String getDescripcion() {
@@ -31,20 +38,19 @@ public class Evidencias {
         this.descripcion = descripcion;
     }
 
-    public String getImagen() {
-        return imagen;
+    public String getAnexos() {
+        return anexos;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setAnexos(String anexos) {
+        this.anexos = anexos;
     }
 
-    @Override
-    public String toString() {
-        return "Evidencias{" +
-                "id=" + id +
-                ", descripcion='" + descripcion + '\'' +
-                ", imagen='" + imagen + '\'' +
-                '}';
+    public Informe_Culminacion getInformeCulminacion() {
+        return informeCulminacion;
+    }
+
+    public void setInformeCulminacion(Informe_Culminacion informeCulminacion) {
+        this.informeCulminacion = informeCulminacion;
     }
 }

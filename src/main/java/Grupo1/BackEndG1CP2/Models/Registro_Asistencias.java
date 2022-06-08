@@ -2,6 +2,7 @@ package Grupo1.BackEndG1CP2.Models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "reg_asistencias")
@@ -9,68 +10,51 @@ public class Registro_Asistencias {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idRegistroAsistencia;
 
-    private int num_hojas;
+    //Anexo 9
+    private String docRegistroA;
 
-    private String hora_entrada;
+    @OneToOne
+    @JoinColumn(name = "idAlumno",referencedColumnName = "idAlumno")
+    private Alumno alumno;
 
-    private String hora_salida;
+    @OneToMany(mappedBy = "registroA")
+    private List<Actividades_Diarias> actividades;
 
-    private Date fecha;
-
-//    private String anexo9;
-
-
-    public Long getId() {
-        return id;
+    public Registro_Asistencias() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdRegistroAsistencia() {
+        return idRegistroAsistencia;
     }
 
-    public int getNum_hojas() {
-        return num_hojas;
+    public void setIdRegistroAsistencia(Long idRegistroAsistencia) {
+        this.idRegistroAsistencia = idRegistroAsistencia;
     }
 
-    public void setNum_hojas(int num_hojas) {
-        this.num_hojas = num_hojas;
+    public String getDocRegistroA() {
+        return docRegistroA;
     }
 
-    public String getHora_entrada() {
-        return hora_entrada;
+    public void setDocRegistroA(String docRegistroA) {
+        this.docRegistroA = docRegistroA;
     }
 
-    public void setHora_entrada(String hora_entrada) {
-        this.hora_entrada = hora_entrada;
+    public Alumno getAlumno() {
+        return alumno;
     }
 
-    public String getHora_salida() {
-        return hora_salida;
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
-    public void setHora_salida(String hora_salida) {
-        this.hora_salida = hora_salida;
+    public List<Actividades_Diarias> getActividades() {
+        return actividades;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    @Override
-    public String toString() {
-        return "Registro_Asistencias{" +
-                "id=" + id +
-                ", num_hojas=" + num_hojas +
-                ", hora_entrada='" + hora_entrada + '\'' +
-                ", hora_salida='" + hora_salida + '\'' +
-                ", fecha=" + fecha +
-                '}';
+    public void setActividades(List<Actividades_Diarias> actividades) {
+        this.actividades = actividades;
     }
 }
 
