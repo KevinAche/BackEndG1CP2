@@ -28,8 +28,6 @@ public class Alumno{
 	@JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera")
 	private Carrera carrera;
 
-	@OneToMany(mappedBy = "alumno")
-	private List<SolicitudAlumno> solicitudAlumnoList;
 
 	@OneToOne(mappedBy = "alumno")
 	private TutorAcademico tutorAcademico;
@@ -41,14 +39,6 @@ public class Alumno{
 	}
 
 
-
-	public List<SolicitudAlumno> getSolicitudAlumnoList() {
-		return solicitudAlumnoList;
-	}
-
-	public void setSolicitudAlumnoList(List<SolicitudAlumno> solicitudAlumnoList) {
-		this.solicitudAlumnoList = solicitudAlumnoList;
-	}
 
 	public TutorAcademico getTutorAcademico() {
 		return tutorAcademico;

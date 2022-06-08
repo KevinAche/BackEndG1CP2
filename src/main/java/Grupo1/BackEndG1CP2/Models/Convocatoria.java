@@ -23,19 +23,9 @@ public class Convocatoria {
     @JoinColumn(name = "idSolicitudEmpresa",referencedColumnName = "idSolicitudEmpresa")
     private SolicitudEmpresa solicitudEmpresa;
 
-    @OneToMany(mappedBy = "convocatoria")
-    private List<SolicitudAlumno> solicitudAlumnoList;
-
     public Convocatoria() {
     }
 
-    public List<SolicitudAlumno> getSolicitudAlumnoList() {
-        return solicitudAlumnoList;
-    }
-
-    public void setSolicitudAlumnoList(List<SolicitudAlumno> solicitudAlumnoList) {
-        this.solicitudAlumnoList = solicitudAlumnoList;
-    }
 
     public Long getIdConvocatoria() {
         return idConvocatoria;

@@ -26,38 +26,12 @@ public class Carrera {
 	
 	@Column(nullable = false)
 	private String modalidad;
-	
-	@OneToMany(mappedBy = "carrera")
-	private List<Docente> docente;
-	
-	@OneToMany(mappedBy = "carrera")
-	private List<Alumno> alumno;
-	
-	@OneToMany(mappedBy = "carrera")
-	private List<Asignaturas> asignaturas;
 
-	@OneToMany(mappedBy = "carrera")
-	private List<SolicitudEmpresa> solicitudEmpresas;
 
 	public Carrera() {
 
 	}
 
-	public List<Asignaturas> getAsignaturas() {
-		return asignaturas;
-	}
-
-	public void setAsignaturas(List<Asignaturas> asignaturas) {
-		this.asignaturas = asignaturas;
-	}
-
-	public List<SolicitudEmpresa> getSolicitudEmpresas() {
-		return solicitudEmpresas;
-	}
-
-	public void setSolicitudEmpresas(List<SolicitudEmpresa> solicitudEmpresas) {
-		this.solicitudEmpresas = solicitudEmpresas;
-	}
 
 	public Long getIdCarrera() {
 		return idCarrera;
@@ -91,21 +65,6 @@ public class Carrera {
 		this.modalidad = modalidad;
 	}
 
-	public List<Docente> getDocente() {
-		return docente;
-	}
-
-	public void setDocente(List<Docente> docente) {
-		this.docente = docente;
-	}
-
-	public List<Alumno> getAlumno() {
-		return alumno;
-	}
-
-	public void setAlumno(List<Alumno> alumno) {
-		this.alumno = alumno;
-	}
 	
 	
 

@@ -29,11 +29,6 @@ public class ActaDeReunion {
     //Anexo 8.1
     private String notificacionTA;
 
-    @OneToMany(mappedBy = "actaDeReunion")
-    private List<ActividadesAReunion> actividadesAReunions;
-
-    @OneToMany(mappedBy = "actaDeReunion")
-    private List<Acuerdos> acuerdos;
 
     public ActaDeReunion() {
     }
@@ -102,19 +97,4 @@ public class ActaDeReunion {
         this.notificacionTA = notificacionTA;
     }
 
-    public List<ActividadesAReunion> getActividadesAReunions() {
-        return actividadesAReunions;
-    }
-
-    public void setActividadesAReunions(List<ActividadesAReunion> actividadesAReunions) {
-        this.actividadesAReunions = actividadesAReunions;
-    }
-
-    public List<Acuerdos> getAcuerdos() {
-        return acuerdos;
-    }
-
-    public void setAcuerdos(List<Acuerdos> acuerdos) {
-        this.acuerdos = acuerdos;
-    }
 }
