@@ -1,4 +1,6 @@
 DROP TABLE listar_alumnos;
+DROP TABLE listar_docentes;
+CREATE VIEW listar_docentes AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, d.titulo, d.area, d.abrev_titulo, c.nombre as "carrera" from persona p, docente d, carreras c where p.id_persona=d.id_persona and d.id_carrera=c.id_carrera;
 CREATE VIEW listar_alumnos AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, a.ciclo, a.paralelo, a.promedio, c.nombre as "carrera" from persona p, alumno a, carreras c where p.id_persona=a.id_persona and a.id_carrera=c.id_carrera;
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0150287671', 'aaa@gmail.com','Monay','2000-11-10','AGUILAR','KEVIN','LITUMA','VINICIO','0991663079');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1723489742', 'bbb@gmail.com','Monay','2002-11-10','AGUILAR','XIMENA','LITUMA','MARIANA','0962381723');
@@ -33,3 +35,10 @@ INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VAL
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('A','MAB',6,1,3);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','MAB',9,1,4);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','M5B',7,1,5);
+INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Ing', 'TICS', 'Ingeniero', 1, 6);
+INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Mgtr', 'Ciberseguridad', 'Magister', 1, 7);
+INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Tec', 'Calentamientos', 'Tecnologo', 2, 8);
+INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Lic', 'Crossfit', 'Licenciado', 2, 9);
+INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Ing', 'Circuitos', 'Ingeniero', 3, 10);
+
+
