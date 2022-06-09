@@ -1,5 +1,7 @@
 package Grupo1.BackEndG1CP2.security.dto;
 
+import Grupo1.BackEndG1CP2.Models.Persona;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,6 +21,8 @@ public class NuevoUsuario {
 	
 	@NotBlank
 	private String password;
+
+	private Persona persona;
 	
 	private Set<String> roles = new HashSet<>();
 
@@ -62,5 +66,11 @@ public class NuevoUsuario {
 		this.roles = roles;
 	}
 
-	
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
 }

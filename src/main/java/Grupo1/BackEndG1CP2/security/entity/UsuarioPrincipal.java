@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import Grupo1.BackEndG1CP2.Models.Persona;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,13 +19,15 @@ public class UsuarioPrincipal implements UserDetails {
 
 	private String password;
 
+	private Persona persona;
+
 	private Collection<? extends GrantedAuthority> authorities;
 
 	public static UsuarioPrincipal build(Usuario usuario) {
 		List<GrantedAuthority> authorities = usuario.getRoles().stream()
 				.map(rol -> new SimpleGrantedAuthority(rol.getRolNombre().name())).collect(Collectors.toList());
 		return new UsuarioPrincipal(usuario.getNombre(), usuario.getUsername(), usuario.getEmail(),
-				usuario.getPassword(), authorities);
+				usuario.getPassword(),usuario.getPersona(), authorities);
 	}
 
 	@Override
@@ -78,6 +81,14 @@ public class UsuarioPrincipal implements UserDetails {
 		this.email = email;
 	}
 
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
 	public UsuarioPrincipal() {
 	}
 
@@ -90,4 +101,13 @@ public class UsuarioPrincipal implements UserDetails {
 		this.authorities = authorities;
 	}
 
+	public UsuarioPrincipal(String nombre, String username, String email, String password,
+							Persona persona, Collection<? extends GrantedAuthority> authorities) {
+		this.nombre = nombre;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.persona = persona;
+		this.authorities = authorities;
+	}
 }

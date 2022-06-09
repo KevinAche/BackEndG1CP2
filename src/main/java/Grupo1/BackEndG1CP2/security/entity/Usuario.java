@@ -56,6 +56,14 @@ public class Usuario {
 		this.password = password;
 	}
 
+	public Usuario(String nombre, String username, String email, String password, Persona persona) {
+		this.nombre = nombre;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.persona = persona;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -103,5 +111,12 @@ public class Usuario {
 	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
 	}
-	
+
+	public Persona getPersona() {
+		return persona;
+	}
+
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
 }
