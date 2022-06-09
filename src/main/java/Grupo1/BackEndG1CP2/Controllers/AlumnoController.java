@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100" })
@@ -100,32 +101,102 @@ public class AlumnoController {
         return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
     }
 
-  /*  @PostMapping("/EditarAlumno/{cedula}")
+
+    @PutMapping("/EditarAlumno/{cedula}")
     public ResponseEntity<RespuestaGenerica> EditarAlumno(@RequestBody Alumno alumnoEnviado,@PathVariable String cedula){
         List<Alumno> data = new ArrayList<>();
         RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
-        HttpStatus estado  = HttpStatus.CREATED;
+        AtomicReference<HttpStatus> estado  = new AtomicReference<>(HttpStatus.OK);
         try {
             Persona persona = personaRepository.findByCedula(cedula);
-            alumnoEnviado.setPersona(persona);
-
-            if(persona!= null){
-
-
+            if(persona!=null){
+                List<Alumno> listaAlumnos = alumnoRepository.findAll();
+                for (Alumno al: listaAlumnos) {
+                    if(al.getPersona().getCedula()==persona.getCedula()){
+                        alumnoEnviado.setCarrera(al.getCarrera());
+                        alumnoEnviado.setPersona(al.getPersona());
+                        alumnoEnviado.setIdAlumno(al.getIdAlumno());
+                    }
+                }
+                Alumno alumno = alumnoRepository.findById(alumnoEnviado.getIdAlumno()).map(res ->{
+                    res.setCiclo(alumnoEnviado.getCiclo());
+                    res.setParalelo(alumnoEnviado.getParalelo());
+                    res.setPromedio(alumnoEnviado.getPromedio());
+                    res.setCarrera(alumnoEnviado.getCarrera());
+                    res.setPersona(alumnoEnviado.getPersona());
+                    data.add(res);
+                    respuesta.setMensaje("SE MODIFICO ALUMNO CORRECTAMENTE");
+                    respuesta.setData(data);
+                    respuesta.setEstado(0);
+                    return alumnoRepository.save(res);
+                }).orElseGet(()->{
+                    respuesta.setMensaje("NO SE MODIFICO EL ALUMNO");
+                    respuesta.setData(data);
+                    respuesta.setEstado(0);
+                    return new Alumno();
+                });
             }else{
-                respuesta.setMensaje("Hubo un problema al editar ALUMNO,DEDIDO A QUE LA CEDULA INGRESADA NO FUE ENCONTRADA");
+                respuesta.setMensaje("EL ALUMNO NO PUDO SER MODIFICADO DEBIDO A QUE LA CEDULA -> "+cedula+" NO FUE ENCONTRADA");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+                estado.set(HttpStatus.BAD_REQUEST);
+            }
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al MODIFICAR CARRERA, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+            estado.set(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado.get());
+    }
+
+
+    @DeleteMapping("/EliminarAlumno/{cedula}")
+    public ResponseEntity<RespuestaGenerica> EliminarAlumno(@PathVariable String cedula){
+        List<Alumno> data = new ArrayList<Alumno>();
+        RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            Persona persona = personaRepository.findByCedula(cedula);
+            if(persona!=null){
+                List<Alumno> listaAlumnos = alumnoRepository.findAll();
+                Alumno alumno = new Alumno();
+                for (Alumno al: listaAlumnos) {
+                    if(persona.getCedula()==al.getPersona().getCedula()){
+                        alumno=al;
+                    }
+                }
+                if(alumno.getPersona().getCedula().equals(cedula)){
+                     alumnoRepository.deleteById(alumno.getIdAlumno());
+                     personaRepository.deleteById(persona.getIdPersona());
+                    data.add(new Alumno());
+                    respuesta.setMensaje("SE ELIMINO ALUMNO CORRECTAMENTE");
+                    respuesta.setData(data);
+                    respuesta.setEstado(0);
+
+                }else{
+                    data.add(null);
+                    respuesta.setMensaje("EL ALUMNO NO PUDO SER ELIMINADO DEBIDO A QUE LA CEDULA -> "+cedula+" NO FUE ENCONTRADA ALUM");
+                    respuesta.setData(data);
+                    respuesta.setEstado(1);
+                    estado= HttpStatus.BAD_REQUEST;
+                }
+            }else{
+                data.add(null);
+                respuesta.setMensaje("EL ALUMNO NO PUDO SER ELIMINADO DEBIDO A QUE LA CEDULA -> "+cedula+" NO FUE ENCONTRADA");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
                 estado= HttpStatus.BAD_REQUEST;
             }
         }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al insertar ALUMNO, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al ELIMINAR CARRERA, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
-            estado= HttpStatus.BAD_REQUEST;
         }
-        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
     }
-*/
+
+
 
 }
