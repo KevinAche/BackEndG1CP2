@@ -1,3 +1,23 @@
 DROP TABLE listar_alumnos;
 CREATE VIEW listar_alumnos AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, a.ciclo, a.paralelo, a.promedio, c.nombre as "carrera" from persona p, alumno a, carreras c where p.id_persona=a.id_persona and a.id_carrera=c.id_carrera;
-
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0150287671', 'aaa@gmail.com','Monay','2000-11-10','AGUILAR','KEVIN','LITUMA','VINICIO','0991663079');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1723489743', 'bbb@gmail.com','Monay','2002-11-10','AGUILAR','XIMENA','LITUMA','MARIANA','0962381723');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1234567891', 'ccc@gmail.com','Biblian','2001-1-2','LOPEZ','MENDEZ','MARIA','ANA','0962538361');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1112233456', 'ddd@gmail.com','San Jose','2002-2-5','ROMERO','ANDREA','LITUMA','INES','0991456789');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('8746380942', 'eee@hotmail.com','Rosario','2002-11-10','AGUILAR','ANDRES','SUAREZ','LUIS','0991663079');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('9846382763', 'fff@hotmail.com','Monay','2000-11-10','PAZ','MARLENE','SUAREZ','ANDREA','0991663079');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1827364592', 'ggg@gmail.com','Cuenca','2000-11-10','ANDRADE','ALEXANDER','SUAREZ','VINICIO','0972537281');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('9736485762', 'hhh@gmail.com','Valle','2001-11-10','AREVALO','MARIA','LOPEZ','ANA','0968364123');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('9273649172', 'iii@gmail.com','Cochapamba','2002-1-2','SALINA','PEDRO','LUNA','JUAN','0975382712');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0273947129', 'jjj@gmail.com','Miraflores','2003-2-5','ORTIZ','ROSA','SANTOS','ZOILA','0972381923');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0184628462', 'kkk@hotmail.com','Monay','2001-11-10','CUEVA','MARLON','APA','KEVIN','0963482345');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0142738429', 'lll@hotmail.com','Ricaurte','2002-11-10','NIEVES','MORALES','SUAREZ','ANDREA','0961523456');
+INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSDS','PRESENCIAL','DESARROLLO DE SOFTWARE');
+INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSED','PRESENCIAL','ENTRENAMIENTO DEPORTIVO');
+INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSSP','PRESENCIAL','ELECTRICIDAD');
+INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSAS','PRESENCIAL','DESARROLLO DE SOFTWARE');
+INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','M5B',10,1,1);
+INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('A','MAB',9,1,2);
+INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('A','MAB',6,1,3);
+INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','MAB',9,1,4);
+INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','M5B',7,1,5);
