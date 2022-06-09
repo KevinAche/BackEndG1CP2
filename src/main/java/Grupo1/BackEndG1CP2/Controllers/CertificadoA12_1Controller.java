@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/CertificadoA12")
+@RequestMapping("/GestionCertificadoA12")
 public class CertificadoA12_1Controller {
 
     @Autowired

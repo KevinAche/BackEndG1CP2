@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100" })
 @RequestMapping("/GestionEmpresa")
 public class EmpresaController {
 
