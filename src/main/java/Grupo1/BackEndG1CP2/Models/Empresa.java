@@ -35,9 +35,7 @@ public class Empresa {
 	
 	@Column(nullable = false)
 	private String telefono;
-	
-	@OneToMany(mappedBy = "empresa")
-	private List<PersonalEmpresa> personalEmpresa;
+
 
 	public Empresa() {
 
@@ -100,14 +98,6 @@ public class Empresa {
 		this.telefono = telefono;
 	}
 
-	public List<PersonalEmpresa> getPersonalEmpresa() {
-		return personalEmpresa;
-	}
-
-	public void setPersonalEmpresa(List<PersonalEmpresa> personalEmpresa) {
-		this.personalEmpresa = personalEmpresa;
-	}
-	
 	
 
 }

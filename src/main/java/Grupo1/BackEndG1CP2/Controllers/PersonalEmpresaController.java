@@ -62,9 +62,11 @@ public class PersonalEmpresaController {
        }
        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
-    
+
+
+
     @PostMapping("/CrearPersonal/{cedula}/{id_empresa}")
-    public ResponseEntity<RespuestaGenerica> CrearAlumno(@RequestBody PersonalEmpresa personalEnviado,@PathVariable String cedula,@PathVariable Long id_empresa){
+    public ResponseEntity<RespuestaGenerica> CrearPersonalE(@RequestBody PersonalEmpresa personalEnviado,@PathVariable String cedula,@PathVariable Long id_empresa){
         List<PersonalEmpresa> data = new ArrayList<>();
         RespuestaGenerica<PersonalEmpresa> respuesta = new RespuestaGenerica<>();
         HttpStatus estado  = HttpStatus.CREATED;
