@@ -41,10 +41,7 @@ public class SolicitudEmpresa {
 	
 	@Column(nullable = false)
 	private boolean estado;
-	
-	@OneToMany(mappedBy = "solicitudEmpresa")
-	private List<Actividades> actividades;
-	
+
 	@ManyToOne
 	@JoinColumn(name ="idEmpleado", referencedColumnName = "idPersonal")
 	private PersonalEmpresa empleado;
@@ -119,13 +116,6 @@ public class SolicitudEmpresa {
 		this.estado = estado;
 	}
 
-	public List<Actividades> getActividades() {
-		return actividades;
-	}
-
-	public void setActividades(List<Actividades> actividades) {
-		this.actividades = actividades;
-	}
 
 	public PersonalEmpresa getEmpleado() {
 		return empleado;

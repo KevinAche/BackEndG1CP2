@@ -1,13 +1,7 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
-import Grupo1.BackEndG1CP2.Models.Persona;
-import Grupo1.BackEndG1CP2.Models.PersonalEmpresa;
-import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
-import Grupo1.BackEndG1CP2.Models.SolicitudEmpresa;
-import Grupo1.BackEndG1CP2.Repositories.EmpresaRepository;
-import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
-import Grupo1.BackEndG1CP2.Repositories.PersonalEmpresaRepository;
-import Grupo1.BackEndG1CP2.Repositories.SolicitudEmpRepository;
+import Grupo1.BackEndG1CP2.Models.*;
+import Grupo1.BackEndG1CP2.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,29 +13,32 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100" })
-@RequestMapping("/GestionSolicitudEmpresa")
-public class SolicitudEmpresaController {
+@RequestMapping("/GestionTutorAcademico")
+public class TutorAcademicoController {
 
     @Autowired
-    private SolicitudEmpRepository solicitudEmpRepository;
+    private TutorAcademicoRepository tutorAcademicoRepository;
 
     @Autowired
     private PersonaRepository personaRepository;
 
     @Autowired
-    private PersonalEmpresaRepository personalEmpresaRepository;
+    private DocenteRepository docenteRepository;
 
-    @GetMapping("/ListaSolicitudEmpresa")
-    public ResponseEntity<RespuestaGenerica> ListarSolicitudEmpresa(){
-        List<SolicitudEmpresa> data = new ArrayList<>();
-        RespuestaGenerica<SolicitudEmpresa> respuesta = new RespuestaGenerica<>();
+    @Autowired
+    private AlumnoRepository alumnoRepository;
+
+    @GetMapping("/ListaTutorAcademico")
+    public ResponseEntity<RespuestaGenerica> ListarTutorAcademico(){
+        List<TutorAcademico> data = new ArrayList<>();
+        RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
         try {
-            data=solicitudEmpRepository.findAll();
-            respuesta.setMensaje("Se genero LISTADO SOLICITUDES EMPRESA");
+            data=tutorAcademicoRepository.findAll();
+            respuesta.setMensaje("Se genero LISTADO TutorAcademico");
             respuesta.setData(data);
             respuesta.setEstado(0);
         }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al generar LISTADO SOLICITUDES EMPRESA, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+            respuesta.setMensaje("Hubo un problema al generar LISTADO TutorAcademico, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }
@@ -49,37 +46,41 @@ public class SolicitudEmpresaController {
     }
 
 
-    @PostMapping("/CrearSolicitudEmpresa/{cedula}")
-    public ResponseEntity<RespuestaGenerica> CrearSolicitudEmpresa(@RequestBody SolicitudEmpresa solicitudEmpresaEnviada ,@PathVariable String cedula){
-        List<SolicitudEmpresa> data = new ArrayList<>();
-        RespuestaGenerica<SolicitudEmpresa> respuesta = new RespuestaGenerica<>();
+    @PostMapping("/CrearTutorAcademico/{cedulaD}/{cedulaA}")
+    public ResponseEntity<RespuestaGenerica> CrearTutorAcademico(@RequestBody TutorAcademico tutorAcademicoEnviado ,@PathVariable String cedulaD,@PathVariable String cedulaA){
+        List<TutorAcademico> data = new ArrayList<>();
+        RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
         HttpStatus estado  = HttpStatus.CREATED;
         try {
-            Persona persona = personaRepository.findByCedula(cedula);
-            PersonalEmpresa personalEmpresa= personalEmpresaRepository.findByPersona(persona);
-            solicitudEmpresaEnviada.setEmpleado(personalEmpresa);
-            SolicitudEmpresa solicitudEmpresa = solicitudEmpRepository.save(solicitudEmpresaEnviada);
-            data.add(solicitudEmpresa);
-            if(solicitudEmpresa !=null){
-                respuesta.setMensaje("SE REGISTRO SolicitudEmpresa CORRECTAMENTE");
+            Persona personaD = personaRepository.findByCedula(cedulaD);
+            Persona personaA = personaRepository.findByCedula(cedulaA);
+
+            Docente docente= docenteRepository.findByPersona(personaD);
+            Alumno alumno= alumnoRepository.findByPersona(personaA);
+            tutorAcademicoEnviado.setDocente(docente);
+            tutorAcademicoEnviado.setAlumno(alumno);
+            TutorAcademico tutorAcademico = tutorAcademicoRepository.save(tutorAcademicoEnviado);
+            data.add(tutorAcademico);
+            if(tutorAcademico !=null){
+                respuesta.setMensaje("SE REGISTRO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
             }else{
-                respuesta.setMensaje("NO SE REGISTRO SolicitudEmpresa CORRECTAMENTE");
+                respuesta.setMensaje("NO SE REGISTRO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
                 estado= HttpStatus.BAD_REQUEST;
             }
         }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al insertar SolicitudEmpresa, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setMensaje("Hubo un problema al insertar TutorAcademico, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
             estado= HttpStatus.BAD_REQUEST;
         }
         return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
     }
-
-    @PutMapping("/EditarSolicitudEmpresa/{id}")
+/*
+    @PutMapping("/EditarTutorAcademico/{id}")
     public ResponseEntity<RespuestaGenerica> EditarSolicitudEmpresa(@RequestBody SolicitudEmpresa solicitudEmpresaEnviada,@PathVariable Long id){
         List<SolicitudEmpresa> data = new ArrayList<>();
         RespuestaGenerica<SolicitudEmpresa> respuesta = new RespuestaGenerica<>();
@@ -147,5 +148,5 @@ public class SolicitudEmpresaController {
         }
 
         return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
-    }
+    }*/
 }

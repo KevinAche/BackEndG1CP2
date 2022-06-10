@@ -9,7 +9,7 @@ import java.util.List;
 public interface PersonalEmpresaRepository extends JpaRepository<PersonalEmpresa,Long> {
 
     List<PersonalEmpresa> findAllByCargo(String cargo);
-   
+    PersonalEmpresa findByPersona(Persona persona);
 
 
 }

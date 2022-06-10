@@ -22,12 +22,7 @@ public class Docente{
 	@OneToOne
 	@JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
 	private Persona persona;
-	
-	@OneToOne(mappedBy = "docente")
-	private ResponsablePPP responsablePPP;
-	
-	@OneToOne(mappedBy = "docente")
-	private TutorAcademico tutorAcademico;
+
 	
 	@ManyToOne
 	@JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera")
@@ -59,31 +54,6 @@ public class Docente{
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-
-
-
-	public ResponsablePPP getResponsablePPP() {
-		return responsablePPP;
-	}
-
-
-
-	public void setResponsablePPP(ResponsablePPP responsablePPP) {
-		this.responsablePPP = responsablePPP;
-	}
-
-
-
-	public TutorAcademico getTutorAcademico() {
-		return tutorAcademico;
-	}
-
-
-
-	public void setTutorAcademico(TutorAcademico tutorAcademico) {
-		this.tutorAcademico = tutorAcademico;
-	}
-
 
 
 	public Long getIdDocente() {

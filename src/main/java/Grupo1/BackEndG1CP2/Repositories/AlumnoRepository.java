@@ -1,6 +1,8 @@
 package Grupo1.BackEndG1CP2.Repositories;
 
 import Grupo1.BackEndG1CP2.Models.Alumno;
+import Grupo1.BackEndG1CP2.Models.Persona;
+import Grupo1.BackEndG1CP2.Models.PersonalEmpresa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -21,5 +23,6 @@ public interface AlumnoRepository extends JpaRepository<Alumno,Long> {
             "where p.id_persona=a.id_persona and a.id_carrera=c.id_carrera")
     List<Alumno> ListaAlumnos();
 
+    Alumno findByPersona(Persona persona);
 
 }

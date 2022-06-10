@@ -36,12 +36,8 @@ public class PersonalEmpresa {
 	@OneToOne
 	@JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
 	private Persona persona;
-	
-	@OneToOne(mappedBy = "personalEmpresa")
-	private TutorEmpresarial tutorEmpresarial;
-	
-	@OneToMany(mappedBy = "empleado")
-	private List<SolicitudEmpresa> solicitudEmpresa;
+
+
 
 	public PersonalEmpresa() {
 
@@ -87,21 +83,4 @@ public class PersonalEmpresa {
 		this.persona = persona;
 	}
 
-	public TutorEmpresarial getTutorEmpresarial() {
-		return tutorEmpresarial;
-	}
-
-	public void setTutorEmpresarial(TutorEmpresarial tutorEmpresarial) {
-		this.tutorEmpresarial = tutorEmpresarial;
-	}
-
-	public List<SolicitudEmpresa> getSolicitudEmpresa() {
-		return solicitudEmpresa;
-	}
-
-	public void setSolicitudEmpresa(List<SolicitudEmpresa> solicitudEmpresa) {
-		this.solicitudEmpresa = solicitudEmpresa;
-	}
-
-	
 }

@@ -13,11 +13,11 @@ public class TutorEmpresarial{
 	@Column(nullable = false)
 	private String control;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "idPersonal", referencedColumnName = "idPersonal")
 	private PersonalEmpresa personalEmpresa;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "idAlumno", referencedColumnName = "idAlumno")
 	private Alumno alumno;
 
