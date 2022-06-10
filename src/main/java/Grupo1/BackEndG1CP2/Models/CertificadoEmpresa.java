@@ -4,9 +4,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "certificadoA12_1")
+@Table(name = "certificadoEmpresa")
 public class CertificadoEmpresa {
 
+    //certificado A12.1
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCertificadoEmpresa;

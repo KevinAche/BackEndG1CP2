@@ -79,38 +79,36 @@ public class TutorAcademicoController {
         }
         return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
     }
-/*
+
     @PutMapping("/EditarTutorAcademico/{id}")
-    public ResponseEntity<RespuestaGenerica> EditarSolicitudEmpresa(@RequestBody SolicitudEmpresa solicitudEmpresaEnviada,@PathVariable Long id){
-        List<SolicitudEmpresa> data = new ArrayList<>();
-        RespuestaGenerica<SolicitudEmpresa> respuesta = new RespuestaGenerica<>();
+    public ResponseEntity<RespuestaGenerica> EditarSolicitudEmpresa(@RequestBody TutorAcademico tutorAcademicoEnviado,@PathVariable Long id){
+        List<TutorAcademico> data = new ArrayList<>();
+        RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
         AtomicReference<HttpStatus> estado  = new AtomicReference<>(HttpStatus.OK);
         try {
-            SolicitudEmpresa soli = solicitudEmpRepository.findById(id)
+            TutorAcademico tutA = tutorAcademicoRepository.findById(id)
                     .map(res ->{
-                        res.setFechaInicio(solicitudEmpresaEnviada.getFechaInicio());
-                        res.setNumeroAlumnos(solicitudEmpresaEnviada.getNumeroAlumnos());
-                        res.setEstado(solicitudEmpresaEnviada.isEstado());
-                        res.setPdfSolicitud(solicitudEmpresaEnviada.getPdfSolicitud());
-                        res.setRespuesta(solicitudEmpresaEnviada.getRespuesta());
+                        res.setAlumno(tutorAcademicoEnviado.getAlumno());
+                        res.setDocente(tutorAcademicoEnviado.getDocente());
+                        res.setDocAsignacion(tutorAcademicoEnviado.getDocAsignacion());
 
                         //EN CASO DE ENCONTRAR SE ANADE DATA A RESPUESTA
                         data.add(res);
-                        respuesta.setMensaje("SE MODIFICO SolicitudEmpresa CORRECTAMENTE");
+                        respuesta.setMensaje("SE MODIFICO TutorAcademico CORRECTAMENTE");
                         respuesta.setData(data);
                         respuesta.setEstado(0);
-                        //SE RETORNA PERSONA MODIFICADA
-                        return solicitudEmpRepository.save(res);
+                        //SE RETORNA TutorAcademico MODIFICADA
+                        return tutorAcademicoRepository.save(res);
                     })
                     .orElseGet(()->{
-                        respuesta.setMensaje("NO SE ENCONTRO SolicitudEmpresa CON EL ID INGRESADO: "+id);
+                        respuesta.setMensaje("NO SE ENCONTRO TutorAcademico CON EL ID INGRESADO: "+id);
                         respuesta.setData(data);
                         respuesta.setEstado(1);
                         estado.set(HttpStatus.BAD_REQUEST);
-                        return new SolicitudEmpresa();
+                        return new TutorAcademico();
                     });
         }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al MODIFICAR SolicitudEmpresa, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setMensaje("Hubo un problema al MODIFICAR TutorAcademico, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
             estado.set(HttpStatus.BAD_REQUEST);
@@ -119,34 +117,34 @@ public class TutorAcademicoController {
     }
 
 
-    @DeleteMapping("/EliminarPersona/{id}")
-    public ResponseEntity EliminarSolicitudEmpresa (@PathVariable Long id ){
-        List<SolicitudEmpresa> data = new ArrayList<SolicitudEmpresa>();
-        RespuestaGenerica<SolicitudEmpresa> respuesta = new RespuestaGenerica<>();
+    @DeleteMapping("/EliminarTutorAcademico/{id}")
+    public ResponseEntity EliminarTutorAcademico (@PathVariable Long id ){
+        List<TutorAcademico> data = new ArrayList<TutorAcademico>();
+        RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
         HttpStatus estado  = HttpStatus.OK;
 
         try {
 
-            solicitudEmpRepository.deleteById(id);
-            if(solicitudEmpRepository!=null){
-                data.add(new SolicitudEmpresa());
-                respuesta.setMensaje("SE ELIMINO SolicitudEmpresa CORRECTAMENTE");
+            tutorAcademicoRepository.deleteById(id);
+            if(tutorAcademicoRepository!=null){
+                data.add(new TutorAcademico());
+                respuesta.setMensaje("SE ELIMINO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
             }else{
                 estado= HttpStatus.BAD_REQUEST;
                 data.add(null);
-                respuesta.setMensaje("NO SE ELIMINO SolicitudEmpresa CORRECTAMENTE");
+                respuesta.setMensaje("NO SE ELIMINO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
             }
         } catch (Exception e) {
             estado= HttpStatus.BAD_REQUEST;
-            respuesta.setMensaje("Hubo un problema al ELIMINAR SolicitudEmpresa, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setMensaje("Hubo un problema al ELIMINAR TutorAcademico, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }
 
         return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
-    }*/
+    }
 }
