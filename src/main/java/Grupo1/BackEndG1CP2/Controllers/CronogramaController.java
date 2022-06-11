@@ -22,7 +22,7 @@ public class CronogramaController {
     @Autowired
     private CronogramaRepository cronogramaRepository;
 
-    @GetMapping("/ListaActividades")
+    @GetMapping("/ListaCronograma")
     public ResponseEntity<RespuestaGenerica> ListarCronograma(){
         List<Cronograma> data = new ArrayList<>();
         RespuestaGenerica<Cronograma> respuesta = new RespuestaGenerica<>();
