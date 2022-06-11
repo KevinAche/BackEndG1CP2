@@ -78,6 +78,7 @@ public class VistaListarTutoresEmp {
         return control;
     }
 
+
     public void setControl(String control) {
         this.control = control;
     }

@@ -12,7 +12,8 @@ public class TutorEmpresarial{
 	
 	@Column(nullable = false)
 	private String control;
-	
+
+
 	@ManyToOne
 	@JoinColumn(name = "idPersonal", referencedColumnName = "idPersonal")
 	private PersonalEmpresa personalEmpresa;

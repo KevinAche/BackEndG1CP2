@@ -17,4 +17,5 @@ public interface TutorEmpresarialRepository extends JpaRepository<TutorEmpresari
     TutorEmpresarial findByAlumno(Alumno alumno);
 
 
+
 }
