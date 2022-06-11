@@ -82,5 +82,9 @@ INSERT INTO public.tutor_academico VALUES (1, NULL, 1, 1);
 INSERT INTO public.tutor_academico VALUES (2, NULL, 3, 4);
 INSERT INTO public.tutor_empresarial(control, doc_asignacion, id_alumno, id_personal) VALUES ('matutino','2473290932dsjffds',1, 1);
 INSERT INTO public.tutor_empresarial(control, doc_asignacion, id_alumno, id_personal) VALUES ('matutino','hfsdkj87234632',2, 1);
-
+INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis1', 1);
+INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis2', 2);
+INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis3', 3);
+INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis4', 4);
+INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis5', 5);
 
