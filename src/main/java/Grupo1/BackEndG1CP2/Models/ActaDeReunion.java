@@ -29,8 +29,20 @@ public class ActaDeReunion {
     //Anexo 8.1
     private String notificacionTA;
 
+    @ManyToOne
+    @JoinColumn(name = "idAlumno",referencedColumnName = "idAlumno")
+    private Alumno alumno;
+
 
     public ActaDeReunion() {
+    }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
     public Long getIdActaReunion() {
