@@ -19,8 +19,7 @@ public class Registro_Asistencias {
     @JoinColumn(name = "idAlumno",referencedColumnName = "idAlumno")
     private Alumno alumno;
 
-    @OneToMany(mappedBy = "registroA")
-    private List<Actividades_Diarias> actividades;
+
 
     public Registro_Asistencias() {
     }
@@ -49,12 +48,5 @@ public class Registro_Asistencias {
         this.alumno = alumno;
     }
 
-    public List<Actividades_Diarias> getActividades() {
-        return actividades;
-    }
-
-    public void setActividades(List<Actividades_Diarias> actividades) {
-        this.actividades = actividades;
-    }
 }
 

@@ -87,4 +87,15 @@ INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis2
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis3', 3);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis4', 4);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis5', 5);
-
+INSERT INTO public.cronograma (doc_cronograma, id_tutor_academico) VALUES ('cronograma1', 2);
+INSERT INTO public.cronograma (doc_cronograma, id_tutor_academico) VALUES ('cronograma3', 1);
+INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionUno', '2022-12-13', '12:00', '17:00', 5, 1);
+INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionDos', '2022-12-11', '13:00', '18:00', 5, 1);
+INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionTres', '2022-12-14', '11:00', '16:00', 5, 1);
+INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionCuatro', '2022-12-16', '09:00', '14:00', 5, 1);
+INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionCinco', '2022-12-17', '12:00', '17:00', 5, 1);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-11-02', '2022-11-02', 1, 'completa satifactoriamente', 100, 1, 1);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-12-02', '2022-12-02', 2, 'completa insatifactoriamente', 100, 2, 2);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-13-02', '2022-13-02', 3, 'completa satifactoriamente', 70, 3, 2);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-14-02', '2022-14-02', 4, 'completa insatifactoriamente', 80, 4, 2);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-15-02', '2022-15-02', 5, 'completa satifactoriamente', 100, 5, 1);

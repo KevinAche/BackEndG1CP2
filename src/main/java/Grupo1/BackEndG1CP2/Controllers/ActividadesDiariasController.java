@@ -41,32 +41,32 @@ public class ActividadesDiariasController {
         return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
-//    @PostMapping("/CrearActividadesDiarias")
-//    public ResponseEntity<RespuestaGenerica> CrearActividades(@RequestBody Actividades_Diarias actividadesDiarias){
-//        List<Actividades> data = new ArrayList<>();
-//        RespuestaGenerica<Actividades> respuesta = new RespuestaGenerica<>();
-//        HttpStatus estado  = HttpStatus.CREATED;
-//        try {
-//
-//            Actividades actividades = actividadesRepository.save(actividadesEnviado);
-//            data.add(actividades);
-//            if(actividades !=null){
-//                respuesta.setMensaje("SE REGISTRO Actividades CORRECTAMENTE");
-//                respuesta.setData(data);
-//                respuesta.setEstado(0);
-//            }else{
-//                respuesta.setMensaje("NO SE REGISTRO Actividades CORRECTAMENTE");
-//                respuesta.setData(data);
-//                respuesta.setEstado(1);
-//                estado= HttpStatus.BAD_REQUEST;
-//            }
-//        }catch (Exception e){
-//            respuesta.setMensaje("Hubo un problema al insertar Actividades, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
-//            respuesta.setData(data);
-//            respuesta.setEstado(1);
-//            estado= HttpStatus.BAD_REQUEST;
-//        }
-//        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
-//    }
+    @PostMapping("/CrearActividadesDiarias")
+    public ResponseEntity<RespuestaGenerica> CrearActividades(@RequestBody Actividades_Diarias actividadesDiariasEnviado){
+        List<Actividades_Diarias> data = new ArrayList<>();
+        RespuestaGenerica<Actividades_Diarias> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.CREATED;
+        try {
+
+            Actividades_Diarias activiDiarias = actividadesDiariasRepository.save(actividadesDiariasEnviado);
+            data.add(activiDiarias);
+            if(activiDiarias !=null){
+                respuesta.setMensaje("SE REGISTRO Actividades DIARIAS CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else{
+                respuesta.setMensaje("NO SE REGISTRO Actividades DIARIAS CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+                estado= HttpStatus.BAD_REQUEST;
+            }
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al insertar Actividades, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+            estado= HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
+    }
 
 }

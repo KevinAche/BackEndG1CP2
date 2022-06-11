@@ -25,9 +25,6 @@ public class Actividades_Diarias {
     @JoinColumn(name = "idRegistroA",referencedColumnName = "idRegistroAsistencia")
     private Registro_Asistencias registroA;
 
-    @OneToOne(mappedBy = "actividadesDiarias")
-    private Actividades_Cronograma actividadesCronograma;
-
     public Actividades_Diarias() {
     }
 
@@ -87,11 +84,5 @@ public class Actividades_Diarias {
         this.registroA = registroA;
     }
 
-    public Actividades_Cronograma getActividadesCronograma() {
-        return actividadesCronograma;
-    }
 
-    public void setActividadesCronograma(Actividades_Cronograma actividadesCronograma) {
-        this.actividadesCronograma = actividadesCronograma;
-    }
 }
