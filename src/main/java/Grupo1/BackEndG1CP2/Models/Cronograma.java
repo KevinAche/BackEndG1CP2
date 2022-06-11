@@ -11,8 +11,6 @@ public class Cronograma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCronograma;
 
-    @OneToMany(mappedBy = "cronograma")
-    private List<Actividades_Cronograma> actividadesCronograma;
 
     @ManyToOne
     @JoinColumn(name = "idTutorAcademico",referencedColumnName = "idTutorAcademico")
@@ -32,11 +30,19 @@ public class Cronograma {
         this.idCronograma = idCronograma;
     }
 
-    public List<Actividades_Cronograma> getActividadesCronograma() {
-        return actividadesCronograma;
+    public TutorAcademico getTutorAcademico() {
+        return tutorAcademico;
     }
 
-    public void setActividadesCronograma(List<Actividades_Cronograma> actividadesCronograma) {
-        this.actividadesCronograma = actividadesCronograma;
+    public void setTutorAcademico(TutorAcademico tutorAcademico) {
+        this.tutorAcademico = tutorAcademico;
+    }
+
+    public String getDocCronograma() {
+        return docCronograma;
+    }
+
+    public void setDocCronograma(String docCronograma) {
+        this.docCronograma = docCronograma;
     }
 }
