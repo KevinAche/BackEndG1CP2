@@ -21,7 +21,7 @@ public class ActividadesController {
     private ActividadesRepository actividadesRepository;
 
     @GetMapping("/ListaActividades")
-    public ResponseEntity<RespuestaGenerica> ListarTutorAcademico(){
+    public ResponseEntity<RespuestaGenerica> ListarActividades(){
         List<Actividades> data = new ArrayList<>();
         RespuestaGenerica<Actividades> respuesta = new RespuestaGenerica<>();
         try {

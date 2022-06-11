@@ -14,6 +14,13 @@ public class Cronograma {
     @OneToMany(mappedBy = "cronograma")
     private List<Actividades_Cronograma> actividadesCronograma;
 
+    @ManyToOne
+    @JoinColumn(name = "idTutorAcademico",referencedColumnName = "idTutorAcademico")
+    private TutorAcademico tutorAcademico;
+
+    //ANEXO 10
+    private String docCronograma;
+
     public Cronograma() {
     }
 
