@@ -54,9 +54,6 @@ public class SolicitudEmpresa {
 	@JoinColumn(name = "idCarrera",referencedColumnName = "idCarrera")
 	private Carrera carrera;
 
-	@OneToOne(mappedBy = "solicitudEmpresa")
-	private Convocatoria convocatoria;
-
 	public SolicitudEmpresa() {
 	}
 
@@ -141,11 +138,4 @@ public class SolicitudEmpresa {
 		this.carrera = carrera;
 	}
 
-	public Convocatoria getConvocatoria() {
-		return convocatoria;
-	}
-
-	public void setConvocatoria(Convocatoria convocatoria) {
-		this.convocatoria = convocatoria;
-	}
 }
