@@ -1,9 +1,11 @@
 DROP TABLE listar_alumnos;
 DROP TABLE listar_docentes;
 DROP TABLE listar_personal;
+DROP TABLE listar_tutores_emp;
 CREATE VIEW listar_personal AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, t.cargo, t.sueldo, e.nombre_empresa from persona p, personal_empresa t, empresa e where p.id_persona=t.id_persona and t.id_empresa=e.id_empresa;
 CREATE VIEW listar_docentes AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, d.titulo, d.area, d.abrev_titulo, c.nombre as "carrera" from persona p, docente d, carreras c where p.id_persona=d.id_persona and d.id_carrera=c.id_carrera;
 CREATE VIEW listar_alumnos AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, a.ciclo, a.paralelo, a.promedio, c.nombre as "carrera" from persona p, alumno a, carreras c where p.id_persona=a.id_persona and a.id_carrera=c.id_carrera;
+CREATE VIEW listar_tutores_emp AS select p.id_persona, p.cedula, p.primer_nombre ||' '|| p.segundo_nombre as "nombres_t", p.primer_apellido||' '||p.segundo_apellido as "apellidos_t", te.control, te.doc_asignacion, p1.primer_nombre ||' '|| p1.segundo_nombre as "nombres_e", p1.primer_apellido||' '||p1.segundo_apellido as "apellidos_e" from persona p, persona p1, personal_empresa t, alumno a, tutor_empresarial te where p.id_persona=t.id_persona and p1.id_persona = a.id_persona and a.id_alumno=te.id_alumno and te.id_personal = t.id_personal;
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0150287671', 'aaa@gmail.com','Monay','2000-11-10','AGUILAR','KEVIN','LITUMA','VINICIO','0991663079');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1723489742', 'bbb@gmail.com','Monay','2002-11-10','AGUILAR','XIMENA','LITUMA','MARIANA','0962381723');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1234567893', 'ccc@gmail.com','Biblian','2001-1-2','LOPEZ','KATHERINE','LIMA','ANA','0962538361');
@@ -76,3 +78,9 @@ INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Secretario', 330, 3, 13);
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Jefe Planta', 350, 4, 14);
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('RRHH', 380, 5, 15);
+INSERT INTO public.tutor_academico VALUES (1, NULL, 1, 1);
+INSERT INTO public.tutor_academico VALUES (2, NULL, 3, 4);
+INSERT INTO public.tutor_empresarial(control, doc_asignacion, id_alumno, id_personal) VALUES ('matutino','2473290932dsjffds',1, 1);
+INSERT INTO public.tutor_empresarial(control, doc_asignacion, id_alumno, id_personal) VALUES ('matutino','hfsdkj87234632',2, 1);
+
+
