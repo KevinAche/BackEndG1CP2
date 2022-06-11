@@ -127,6 +127,7 @@ public class TutorEmpresarialController {
 
 
 
+
     @DeleteMapping("/EliminarTutorEmpresarial/{id}")
     public ResponseEntity EliminarTutorAcademico (@PathVariable Long id ){
         List<TutorEmpresarial> data = new ArrayList<TutorEmpresarial>();

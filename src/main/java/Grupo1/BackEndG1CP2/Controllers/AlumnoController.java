@@ -142,7 +142,7 @@ public class AlumnoController {
                 estado.set(HttpStatus.BAD_REQUEST);
             }
         }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al MODIFICAR DOCENTE, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setMensaje("Hubo un problema al MODIFICAR ALUMNO, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
             estado.set(HttpStatus.BAD_REQUEST);

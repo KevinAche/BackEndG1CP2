@@ -81,7 +81,7 @@ public class TutorAcademicoController {
     }
 
     @PutMapping("/EditarTutorAcademico/{id}")
-    public ResponseEntity<RespuestaGenerica> EditarSolicitudEmpresa(@RequestBody TutorAcademico tutorAcademicoEnviado,@PathVariable Long id){
+    public ResponseEntity<RespuestaGenerica> EditarTutorAcademico(@RequestBody TutorAcademico tutorAcademicoEnviado,@PathVariable Long id){
         List<TutorAcademico> data = new ArrayList<>();
         RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
         AtomicReference<HttpStatus> estado  = new AtomicReference<>(HttpStatus.OK);

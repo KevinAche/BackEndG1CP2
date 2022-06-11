@@ -61,17 +61,17 @@ public class SolicitudEmpresaController {
             SolicitudEmpresa solicitudEmpresa = solicitudEmpRepository.save(solicitudEmpresaEnviada);
             data.add(solicitudEmpresa);
             if(solicitudEmpresa !=null){
-                respuesta.setMensaje("SE REGISTRO SolicitudEmpresa CORRECTAMENTE");
+                respuesta.setMensaje("SE REGISTRO SOLICITUD EMPRESA CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
             }else{
-                respuesta.setMensaje("NO SE REGISTRO SolicitudEmpresa CORRECTAMENTE");
+                respuesta.setMensaje("NO SE REGISTRO SOLICITUD EMPRESA CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
                 estado= HttpStatus.BAD_REQUEST;
             }
         }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al insertar SolicitudEmpresa, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setMensaje("Hubo un problema al insertar SOLICITUD EMPRESA, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
             estado= HttpStatus.BAD_REQUEST;
