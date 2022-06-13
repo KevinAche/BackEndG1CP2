@@ -4,6 +4,7 @@ import Grupo1.BackEndG1CP2.Models.Convocatoria;
 import Grupo1.BackEndG1CP2.Models.Persona;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
 import Grupo1.BackEndG1CP2.Repositories.ConvocatoriaRepository;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,13 @@ public class ConvocatoriaController {
 
     @Autowired
     private ConvocatoriaRepository convocatoriaRepository;
+
+    @GetMapping("/viaje")
+    @ApiOperation(value="Listar Viajes")
+    public List<Convocatoria> index(){
+        return  convocatoriaRepository.findAll();
+    }
+
 
     @GetMapping("/ListaConvocatoria")
     public ResponseEntity<RespuestaGenerica> ListarConvocatoria(){
