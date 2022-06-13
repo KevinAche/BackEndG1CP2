@@ -99,5 +99,3 @@ INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_act
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-13-02', '2022-13-02', 3, 'completa satifactoriamente', 70, 3, 2);
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-14-02', '2022-14-02', 4, 'completa insatifactoriamente', 80, 4, 2);
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-15-02', '2022-15-02', 5, 'completa satifactoriamente', 100, 5, 1);
-INSERT INTO CONVOCATORIA VALUES(1,'ASZDA2W','30-03-2022','05-05-2022',NULL);
-INSERT INTO CONVOCATORIA VALUES(2,'AASDZDA2W','30-04-2022','05-08-2022',NULL);

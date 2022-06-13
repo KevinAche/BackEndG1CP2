@@ -22,13 +22,6 @@ public class ConvocatoriaController {
     @Autowired
     private ConvocatoriaRepository convocatoriaRepository;
 
-    @GetMapping("/viaje")
-    @ApiOperation(value="Listar Viajes")
-    public List<Convocatoria> index(){
-        return  convocatoriaRepository.findAll();
-    }
-
-
     @GetMapping("/ListaConvocatoria")
     public ResponseEntity<RespuestaGenerica> ListarConvocatoria(){
         List<Convocatoria> data = new ArrayList<>();
