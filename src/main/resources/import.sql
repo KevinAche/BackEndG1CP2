@@ -100,3 +100,14 @@ INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_act
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-13-02', '2022-13-02', 3, 'completa satifactoriamente', 70, 3, 2);
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-14-02', '2022-14-02', 4, 'completa insatifactoriamente', 80, 4, 2);
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-15-02', '2022-15-02', 5, 'completa satifactoriamente', 100, 5, 1);
+
+insert into solicitudes_empresa values(1,false,'20-02-2022','20-04-2022',20,'fgfdf','fdfd',1,null);
+insert into solicitudes_empresa values(2,false,'12-02-2022','23-04-2022',10,'fgfdf','fdfd',2,null
+
+INSERT INTO CONVOCATORIA VALUES(1,'ASZDA2W','30-03-2022','05-05-2022',NULL);
+INSERT INTO CONVOCATORIA VALUES(2,'AASDZDA2W','30-04-2022','05-08-2022',NULL);
+INSERT INTO CONVOCATORIA VALUES(3,'iifjsjfjs','29-05-2022','05-06-2022',1);
+
+insert into solicitud_alumno values(1,false,'20-03-2022',240,null,1);
+insert into solicitud_alumno values(2,false,'15-04-2022',120,null,1);
+insert into solicitud_alumno values(3,false,'25-05-2022',120,null,1);
