@@ -12,6 +12,8 @@ public class Convocatoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idConvocatoria;
 
+    private String nombreConvocatoria;
+
     private Date fechaEmision;
 
     private Date fechaMaxima;
@@ -33,6 +35,14 @@ public class Convocatoria {
 
     public void setIdConvocatoria(Long idConvocatoria) {
         this.idConvocatoria = idConvocatoria;
+    }
+
+    public String getNombreConvocatoria() {
+        return nombreConvocatoria;
+    }
+
+    public void setNombreConvocatoria(String nombreConvocatoria) {
+        this.nombreConvocatoria = nombreConvocatoria;
     }
 
     public Date getFechaEmision() {
