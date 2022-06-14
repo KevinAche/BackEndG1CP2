@@ -68,11 +68,12 @@ INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) V
 INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Tec', 'Calentamientos', 'Tecnologo', 2, 8);
 INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Lic', 'Crossfit', 'Licenciado', 2, 9);
 INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Ing', 'Circuitos', 'Ingeniero', 3, 10);
-INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Centro', 'Mision de Prueba Ejemplo', 'AcheAsociados', '1234567890123', '0987654321', 'Nuestra Vision Ejemplo Prueba');
-INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Mall', 'Mision de Prueba Ejemplo 1', 'AligarAsociados', '1234567890456', '0987654321', 'Nuestra Vision Ejemplo Prueba 1');
-INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Sur', 'Mision de Prueba Ejemplo 2', 'SalinasAsociados', '1234567890789', '0987654321', 'Nuestra Vision Ejemplo Prueba 2');
-INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Mall', 'Mision de Prueba Ejemplo 3', 'RemacheAsociados', '1234567890101', '0987654321', 'Nuestra Vision Ejemplo Prueba 3');
-INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Centro', 'Mision de Prueba Ejemplo 4', 'CuevaAsociados', '1234567890102', '0987654321', 'Nuestra Vision Ejemplo Prueba 4');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Av. Abelardo J', '5', 'Clara', 'Avils', '010223231', '0721564','Maus');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Centro','5' ,'Mision de Prueba Ejemplo', 'AcheAsociados', '1234567890123', '0987654321', 'Nuestra Vision Ejemplo Prueba');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Mall', '5','Mision de Prueba Ejemplo 1', 'AligarAsociados', '1234567890456', '0987654321', 'Nuestra Vision Ejemplo Prueba 1');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Sur', '5','Mision de Prueba Ejemplo 2', 'SalinasAsociados', '1234567890789', '0987654321', 'Nuestra Vision Ejemplo Prueba 2');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Mall', '5','Mision de Prueba Ejemplo 3', 'RemacheAsociados', '1234567890101', '0987654321', 'Nuestra Vision Ejemplo Prueba 3');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Centro', '5','Mision de Prueba Ejemplo 4', 'CuevaAsociados', '1234567890102', '0987654321', 'Nuestra Vision Ejemplo Prueba 4');
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Gerente', 360, 1, 11);
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Bodeguero', 320, 2, 12);
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Secretario', 330, 3, 13);

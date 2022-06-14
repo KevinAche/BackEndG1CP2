@@ -36,6 +36,16 @@ public class Empresa {
 	@Column(nullable = false)
 	private String telefono;
 
+	@Column(nullable = false)
+	private String duracionConvenio;
+
+	public String getDuracionConvenio() {
+		return duracionConvenio;
+	}
+
+	public void setDuracionConvenio(String duracionConvenio) {
+		this.duracionConvenio = duracionConvenio;
+	}
 
 	public Empresa() {
 
