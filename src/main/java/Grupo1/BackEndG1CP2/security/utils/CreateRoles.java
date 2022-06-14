@@ -18,11 +18,21 @@ public class CreateRoles implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		Rol rolDocente = new Rol(RolNombre.ROLE_DOCENTE);
-		Rol rolDocente1 = new Rol(RolNombre.ROLE_ADMIN);
-		Rol rolDocente2 = new Rol(RolNombre.ROLE_USER);
+		Rol rolAdmin = new Rol(RolNombre.ROLE_ADMIN);
+		Rol rolEstudiante = new Rol(RolNombre.ROLE_ESTUDIANTE);
+		Rol rolResponsable = new Rol(RolNombre.ROLE_RESPONSABLEPPP);
+		Rol rolTutorA = new Rol(RolNombre.ROLE_TUTORACADEMICO);
+		Rol rolTutorE = new Rol(RolNombre.ROLE_TUTOREMPRESARIAL);
+		Rol rolEmpleado = new Rol(RolNombre.ROLE_EMPLEADO);
+		
+		
 		rolService.save(rolDocente);
-		rolService.save(rolDocente1);
-		rolService.save(rolDocente2);
+		rolService.save(rolAdmin);
+		rolService.save(rolEstudiante);
+		rolService.save(rolResponsable);
+		rolService.save(rolTutorA);
+		rolService.save(rolTutorE);
+		rolService.save(rolEmpleado);
 	}
 
 }

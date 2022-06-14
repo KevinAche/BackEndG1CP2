@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import Grupo1.BackEndG1CP2.Models.Mensaje;
+import Grupo1.BackEndG1CP2.Models.Persona;
+import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarPersonalRepository;
 import Grupo1.BackEndG1CP2.security.dto.JwtDto;
 import Grupo1.BackEndG1CP2.security.dto.LoginUsuario;
 import Grupo1.BackEndG1CP2.security.dto.NuevoUsuario;
@@ -51,6 +54,9 @@ public class AuthController {
 
 	@Autowired
 	public JwtProvider jwtProvider;
+	
+	@Autowired
+	public PersonaRepository personaRepository;
 
 	@PostMapping("/nuevo")
 	public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
@@ -60,18 +66,31 @@ public class AuthController {
 			return new ResponseEntity(new Mensaje("Ya existe ese username"), HttpStatus.BAD_REQUEST);
 		if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
 			return new ResponseEntity(new Mensaje("Ya existe el email"), HttpStatus.BAD_REQUEST);
-		Usuario usuario = new Usuario(nuevoUsuario.getNombre(), nuevoUsuario.getUsername(), nuevoUsuario.getEmail(),
-				passwordEncoder.encode(nuevoUsuario.getPassword()),nuevoUsuario.getPersona());
+		Persona persona = personaRepository.findById(nuevoUsuario.getPersona().getIdPersona()).get();
+		Usuario usuario = new Usuario(
+				persona.getPrimerNombre() + " " + persona.getPrimerApellido(),
+				persona.getCedula(), persona.getCorreo(),
+				passwordEncoder.encode(persona.getCedula()), nuevoUsuario.getPersona());
 		Set<Rol> roles = new HashSet<>();
-		roles.add(rolService.getByUsername(RolNombre.ROLE_USER).get());
+		if (nuevoUsuario.getRoles().contains("estudiante"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_ESTUDIANTE).get());
 		if (nuevoUsuario.getRoles().contains("admin"))
 			roles.add(rolService.getByUsername(RolNombre.ROLE_ADMIN).get());
-		if (nuevoUsuario.getRoles().contains("docente")) 
+		if (nuevoUsuario.getRoles().contains("docente"))
 			roles.add(rolService.getByUsername(RolNombre.ROLE_DOCENTE).get());
+		if (nuevoUsuario.getRoles().contains("responsable"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_RESPONSABLEPPP).get());
+		if (nuevoUsuario.getRoles().contains("tacademico"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_TUTORACADEMICO).get());
+		if (nuevoUsuario.getRoles().contains("tempresarial"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_TUTOREMPRESARIAL).get());
+		if (nuevoUsuario.getRoles().contains("empleado"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_EMPLEADO).get());
 		usuario.setRoles(roles);
 		usuarioService.save(usuario);
 		return new ResponseEntity(new Mensaje("Usuario Creado"), HttpStatus.CREATED);
 	}
+
 	@PostMapping("/login")
 	public ResponseEntity<JwtDto> login(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())

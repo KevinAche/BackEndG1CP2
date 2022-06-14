@@ -5,10 +5,10 @@ import javax.validation.constraints.NotBlank;
 
 public class LoginUsuario {
 	
-	@NotBlank
+	
 	private String username;
 	
-	@NotBlank
+	
 	private String password;
 
 	public String getUsername() {
