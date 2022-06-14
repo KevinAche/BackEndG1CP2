@@ -80,6 +80,7 @@ public class EmpresaController {
                         res.setVision(empresaEnviada.getVision());
                         res.setTelefono(empresaEnviada.getTelefono());
                         res.setRuc(empresaEnviada.getRuc());
+                        res.setDuracionConvenio(empresaEnviada.getDuracionConvenio());
                         //EN CASO DE ENCONTRAR SE ANADE DATA A RESPUESTA
                         data.add(res);
                         respuesta.setMensaje("SE MODIFICO EMPRESA CORRECTAMENTE");
