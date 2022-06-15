@@ -16,36 +16,26 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "responsable_ppp")
-public class ResponsablePPP{
-	
+public class ResponsablePPP {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idResponsablePPP;
-	
+
 	@OneToOne
 	@JoinColumn(name = "idDocente", referencedColumnName = "idDocente")
 	private Docente docente;
-	
-	@OneToMany(mappedBy = "responsablePPP")
-	private List<SolicitudEmpresa> solicitudEmpresa;
+
 
 	public ResponsablePPP() {
 
 	}
-	
-	
+
+
 	public Docente getDocente() {
 		return docente;
 	}
 
-
-	public List<SolicitudEmpresa> getSolicitudEmpresa() {
-		return solicitudEmpresa;
-	}
-
-	public void setSolicitudEmpresa(List<SolicitudEmpresa> solicitudEmpresa) {
-		this.solicitudEmpresa = solicitudEmpresa;
-	}
 
 	public void setDocente(Docente docente) {
 		this.docente = docente;

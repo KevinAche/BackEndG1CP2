@@ -37,7 +37,7 @@ import Grupo1.BackEndG1CP2.security.services.UsuarioService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100" })
 public class AuthController {
 
 	@Autowired
