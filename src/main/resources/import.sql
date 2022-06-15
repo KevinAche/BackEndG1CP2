@@ -103,14 +103,11 @@ INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_act
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-13-02', '2022-13-02', 3, 'completa satifactoriamente', 70, 3, 2);
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-14-02', '2022-14-02', 4, 'completa insatifactoriamente', 80, 4, 2);
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-15-02', '2022-15-02', 5, 'completa satifactoriamente', 100, 5, 1);
-
 insert into solicitudes_empresa(id_solicitud_empresa,estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp) values(1,false,'20-02-2022','20-04-2022',20,'fgfdf','fdfd',1,null,null);
 insert into solicitudes_empresa(id_solicitud_empresa,estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(2,false,'12-02-2022','23-04-2022',10,'fgfdf','fdfd',2,null,null);
-
 INSERT INTO CONVOCATORIA (id_convocatoria,nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES(1,'Practicas Don Pepe','ASZDA2W','30-03-2022','05-05-2022',NULL);
 INSERT INTO CONVOCATORIA (id_convocatoria,nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES(2,'Practicas Doña Elsa Pato','AASDZDA2W','30-04-2022','05-08-2022',NULL);
 INSERT INTO CONVOCATORIA (id_convocatoria,nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES(3,'Practicas Don Alan Brito','iifjsjfjs','29-05-2022','05-06-2022',1);
-
 insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(false,'20-03-2022',240,1,1);
 insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria)  values(true,'15-04-2022',120,2,1);
 insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(true,'25-05-2022',120,3,1);

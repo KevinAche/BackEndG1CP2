@@ -19,11 +19,16 @@ public class Informe_Culminacion {
 
     private Date fechaEmision;
 
+    private String tiempo;
+
+    private double tiempo_duracion;
+
+    private Date fecha_finalizacion;
+
 
     @OneToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
-
 
     @OneToOne
     @JoinColumn(name = "id_tutor_empresarial")
@@ -33,23 +38,12 @@ public class Informe_Culminacion {
     @JoinColumn(name = "idAlumno",referencedColumnName = "idAlumno")
     private Alumno alumno;
 
-
-    private String tiempo;
-
-
     @OneToOne
-    @JoinColumn(name = "tutor_academico_id_tutor_academico")
+    @JoinColumn(name = "idTutorAcademico",referencedColumnName = "idTutorAcademico")
     private TutorAcademico tutorAcademico;
 
-    private double tiempo_duracion;
-
-    private Date fecha_finalizacion;
-
-
-    //private List<Actividades_Diarias> actividadesDiarias;
-
     @OneToOne
-    @JoinColumn(name = "registro_asistencias_id_registro_asistencia")
+    @JoinColumn(name = "idRegistroAsistencia",referencedColumnName = "idRegistroAsistencia")
     private Registro_Asistencias registro_asistencias;
 
 
@@ -72,14 +66,6 @@ public class Informe_Culminacion {
         this.fechaEmision = fechaEmision;
     }
 
-    public Alumno getAlumno() {
-        return alumno;
-    }
-
-    public void setAlumno(Alumno alumno) {
-        this.alumno = alumno;
-    }
-
     public Empresa getEmpresa() {
         return empresa;
     }
@@ -94,6 +80,14 @@ public class Informe_Culminacion {
 
     public void setTutorEmpresarial(TutorEmpresarial tutorEmpresarial) {
         this.tutorEmpresarial = tutorEmpresarial;
+    }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 
     public String getTiempo() {
@@ -135,6 +129,4 @@ public class Informe_Culminacion {
     public void setRegistro_asistencias(Registro_Asistencias registro_asistencias) {
         this.registro_asistencias = registro_asistencias;
     }
-
-
 }

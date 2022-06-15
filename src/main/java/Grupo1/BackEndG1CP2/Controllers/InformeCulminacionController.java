@@ -65,7 +65,7 @@ public class InformeCulminacionController {
         return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
-/*
+
     @PostMapping("/CrearInformeCulminacion/{cedulaA}")
     public ResponseEntity<RespuestaGenerica> CrearInformeCulminacion(@RequestBody Informe_Culminacion informeEnviado ,@PathVariable String cedula){
         List<Informe_Culminacion> data = new ArrayList<>();
@@ -79,30 +79,17 @@ public class InformeCulminacionController {
             TutorAcademico tutorAcademico = tutorAcademicoRepository.findByAlumno(alumno);
             TutorEmpresarial tutorEmpresarial = tutorEmpresarialRepository.findByAlumno(alumno);
             Registro_Asistencias registro_asistencias = registroAsistenciaRepository.findByAlumno(alumno);
-
-
             informeEnviado.setEmpresa(empresa);
             informeEnviado.setTutorEmpresarial(tutorEmpresarial);
             informeEnviado.setAlumno(alumno);
-            informeEnviado.setTiempo("tiempo completo");
-
             informeEnviado.setTutorAcademico(tutorAcademico);
-
-
-
-
-            informeEnviado.setAlumno(alumno);
-
-            PersonalEmpresa personalEmpresa= personalEmpresaRepository.findByPersona(persona);
-            solicitudEmpresaEnviada.setEmpleado(personalEmpresa);
-            SolicitudEmpresa solicitudEmpresa = solicitudEmpRepository.save(solicitudEmpresaEnviada);
-            data.add(solicitudEmpresa);
-            if(solicitudEmpresa !=null){
-                respuesta.setMensaje("SE REGISTRO SolicitudEmpresa CORRECTAMENTE");
+            data.add(informeEnviado);
+            if(alumno !=null){
+                respuesta.setMensaje("SE REGISTRO INFORME DE CULMINACION CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
             }else{
-                respuesta.setMensaje("NO SE REGISTRO SolicitudEmpresa CORRECTAMENTE");
+                respuesta.setMensaje("NO SE REGISTRO INFORME DE CULMINACION CORRECTAMENTE DEBIDO A QUE LA CEDULA INGRESA -> "+cedula+" NO FUE ENCONTRADA");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
                 estado= HttpStatus.BAD_REQUEST;
@@ -117,7 +104,7 @@ public class InformeCulminacionController {
     }
 
 
-*/
+
 
 
 }
