@@ -40,10 +40,10 @@ public class AlumnoController {
 
     @GetMapping("/ListaAlumnos")
     public ResponseEntity<RespuestaGenerica> ListarAlumnos(){
-       List<VistaListarAlumnos> data = new ArrayList<>();
-       RespuestaGenerica<VistaListarAlumnos> respuesta = new RespuestaGenerica<>();
+       List<Alumno> data = new ArrayList<>();
+       RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
        try{
-           data= listaAlumnosRepository.findAll();
+           data= alumnoRepository.findAll();
            respuesta.setMensaje("Se genero LISTADO ALUMNOS EXITOXAMENTE");
            respuesta.setData(data);
            respuesta.setEstado(0);
