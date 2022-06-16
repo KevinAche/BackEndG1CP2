@@ -54,6 +54,7 @@ INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellid
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0273516246', 'aaav@gmail.com','El Vado','2000-3-5','REMACHE','KARINA','MERA','EMMA','0947589234');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0182639247', 'aaaw@hotmail.com','Vergel','2001-3-10','MERINO','SOFIA','SANTOS','MARIBEL','0983548571');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0192630148', 'aaax@hotmail.com','San Bartolo','2001-5-10','PEREZ','VALENTINA','PINCAY','INES','0947182650');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0152354981', 'xander@gmail.com','Totoracocha','1998-7-17','HERNANDEZ','KEVIN','VASQUEZ','ALEXANDER','0995846413');
 INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSDS','PRESENCIAL','DESARROLLO DE SOFTWARE');
 INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSED','PRESENCIAL','ENTRENAMIENTO DEPORTIVO');
 INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSSP','DUAL','ELECTRICIDAD');
@@ -74,6 +75,32 @@ INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) V
 insert into responsable_ppp(id_docente) VALUES (3);
 insert into responsable_ppp(id_docente) VALUES (4);
 insert into responsable_ppp(id_docente) VALUES (5);
+
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kevin@gmail.com', 'Kevin', '$2a$10$qZ.qx0k5Q1ZjW0mO0lh/sOfGoZwyA0ozGfCueF8qug0BQXw3ZcpDK', '0152354981', 49);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kevina@gmail.com', 'KevinA', '$2a$10$F6SWj4JrH7v6meZg0ITN5.hPWyb1JyJkUldgNruB.SBnvSyIcaP/G', '0150287671', 1);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('bbb@gmail.com', 'Ximena', '$2a$10$i2e3bUgO7eUOFZyMbLcY8O02uF1U3L6dJqPc6i2gTNgeb27.Thqa6', '1723489742', 2);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ccc@gmail.com', 'Katherine', '$2a$10$ZAh3PYY2IIN198QqWgiV6eN/VRW88.nqDqAk70aIPqTNfqan1b.6e', '1234567893', 3);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ddd@gmail.com', 'Andrea', '$2a$10$iiwBeFJpDODp0eKiRM0reOWWniYzqvDtM6sdivjI7Saay8MpjKx76', '1112233454', 4);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('eee@gmail.com', 'Andres', '$2a$10$DGyujI68FNJtF5Uw8rpqde9aRPnPNbzWs60J/F0btbxuWjyjtMcxC', '8746380945', 5);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('fff@gmail.com', 'Marlene', '$2a$10$eDYVjmjH/JfdJ.FUXGo7Ueg8nR9MGCx6gZQZVpN6agTssnF8U9dtK', '9846382766', 6);
+
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_ADMIN');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_DOCENTE');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_ESTUDIANTE');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_RESPONSABLEPPP');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTORACADEMICO');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTOREMPRESARIAL');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_EMPLEADO');
+
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (1, 1);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (2, 2);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (3, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (4, 4);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (5, 5);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (6, 6);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (7, 7);
+
+
 INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Av. Abelardo J', '5', 'Clara', 'Avils', '010223231', '0721564','Maus');
 INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Centro','5' ,'Mision de Prueba Ejemplo', 'AcheAsociados', '1234567890123', '0987654321', 'Nuestra Vision Ejemplo Prueba');
 INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Mall', '5','Mision de Prueba Ejemplo 1', 'AligarAsociados', '1234567890456', '0987654321', 'Nuestra Vision Ejemplo Prueba 1');
