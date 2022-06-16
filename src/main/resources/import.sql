@@ -77,8 +77,8 @@ insert into responsable_ppp(id_docente) values(2);
 insert into responsable_ppp(id_docente) values(3);
 
 insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp) values(false,'20-07-2022','25-07-2022',20,'fgfdf','fdfd',1,null,1);
-insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'12-07-2022','23-08-2022',10,'fgfdf','fdfd',2,null,null);
-insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'12-07-2022','23-07-2022',5,'fgfdf','fdfd',3,null,null);
+insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'12-07-2022','23-08-2022',10,'fgfdf','fdfd',2,null,2);
+insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'12-07-2022','23-07-2022',5,'fgfdf','fdfd',3,null,3);
 
 
 INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Av. Abelardo J', '5', 'Clara', 'Avils', '010223231', '0721564','Maus');
