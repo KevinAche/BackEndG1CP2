@@ -20,6 +20,24 @@ public class PersonaController {
     @Autowired
     private PersonaRepository personaRepository;
 
+    @GetMapping("/PersonaByCedula/{cedula}")
+    public ResponseEntity<RespuestaGenerica> personaByCedula(@PathVariable String cedula){
+        List<Persona> data = new ArrayList<>();
+        RespuestaGenerica<Persona> respuesta = new RespuestaGenerica<>();
+        try {
+            data.add(personaRepository.findByCedula(cedula));
+
+            respuesta.setMensaje("Se genero LISTADO PERSONAS EXITOXAMENTE");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO PERSONAS, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
     @GetMapping("/ListaPersonas")
     public ResponseEntity<RespuestaGenerica> ListarPersonas(){
         List<Persona> data = new ArrayList<>();
