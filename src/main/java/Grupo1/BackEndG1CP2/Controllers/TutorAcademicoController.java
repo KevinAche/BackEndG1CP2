@@ -147,4 +147,34 @@ public class TutorAcademicoController {
 
         return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
     }
+
+    @GetMapping("/BuscarTutorAcd/{id}")
+    public ResponseEntity BuscarTutorAcd (@PathVariable Long id ){
+        List<TutorAcademico> data = new ArrayList<TutorAcademico>();
+        RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            Alumno alumno= alumnoRepository.findById(id).get();
+            if (alumno!=null){
+                TutorAcademico tutorAcademico =tutorAcademicoRepository.findByAlumno(alumno);
+                data.add(tutorAcademico);
+                respuesta.setMensaje("SE ENCONTRO TUTOR ACADEMICO CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else{
+                estado= HttpStatus.BAD_REQUEST;
+                data.add(null);
+                respuesta.setMensaje("NO SE ENCONTRO TUTOR ACADEMICO DEBIDO A QUE EL ID DE ALUMNO MANDADO -> "+id+" NO EXISTE");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+            }
+        } catch (Exception e) {
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al BUSCAR TUTOR ACADEMICO, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+    }
 }

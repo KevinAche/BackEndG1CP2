@@ -1,12 +1,10 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
 import Grupo1.BackEndG1CP2.Models.*;
-import Grupo1.BackEndG1CP2.Models.Views.VistaListarTutoresEmp;
 import Grupo1.BackEndG1CP2.Repositories.AlumnoRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonalEmpresaRepository;
 import Grupo1.BackEndG1CP2.Repositories.TutorEmpresarialRepository;
-import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarTutoresEmpRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -150,6 +148,37 @@ public class TutorEmpresarialController {
         } catch (Exception e) {
             estado= HttpStatus.BAD_REQUEST;
             respuesta.setMensaje("Hubo un problema al ELIMINAR TUTOR EMPRESARIAL, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+    }
+
+
+    @GetMapping("/BuscarTutorEmp/{id}")
+    public ResponseEntity BuscarTutorEmp (@PathVariable Long id ){
+        List<TutorEmpresarial> data = new ArrayList<TutorEmpresarial>();
+        RespuestaGenerica<TutorEmpresarial> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            Alumno alumno= alumnoRepository.findById(id).get();
+            if (alumno!=null){
+                TutorEmpresarial tutorEmpresarial =tutorEmpresarialRepository.findByAlumno(alumno);
+                data.add(tutorEmpresarial);
+                respuesta.setMensaje("SE ENCONTRO TUTOR EMPRESARIAL CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else{
+                estado= HttpStatus.BAD_REQUEST;
+                data.add(null);
+                respuesta.setMensaje("NO SE ENCONTRO TUTOR EMPRESARIAL DEBIDO A QUE EL ID DE ALUMNO MANDADO -> "+id+" NO EXISTE");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+            }
+        } catch (Exception e) {
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al BUSCAR TUTOR EMPRESARIAL, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }
