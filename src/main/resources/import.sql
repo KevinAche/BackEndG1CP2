@@ -56,10 +56,13 @@ INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellid
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0273516246', 'aaav@gmail.com','El Vado','2000-3-5','REMACHE','KARINA','MERA','EMMA','0947589234');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0182639247', 'aaaw@hotmail.com','Vergel','2001-3-10','MERINO','SOFIA','SANTOS','MARIBEL','0983548571');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0192630148', 'aaax@hotmail.com','San Bartolo','2001-5-10','PEREZ','VALENTINA','PINCAY','INES','0947182650');
+INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0152354981', 'xander@gmail.com','Totoracocha','1998-7-17','HERNANDEZ','KEVIN','VASQUEZ','ALEXANDER','0995846413');
+
 INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSDS','PRESENCIAL','DESARROLLO DE SOFTWARE');
 INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSED','PRESENCIAL','ENTRENAMIENTO DEPORTIVO');
 INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSSP','DUAL','ELECTRICIDAD');
 INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSAS','PRESENCIAL','DESARROLLO DE SOFTWARE');
+
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','M5B',10,1,1);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('A','MAB',9,1,2);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('A','MAB',6,1,3);
@@ -68,63 +71,95 @@ INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VAL
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('A','M5B',7,1,6);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','M5B',6,1,7);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('C','M5B',7,1,8);
+
 INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Ing', 'TICS', 'Ingeniero', 1, 6);
 INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Mgtr', 'Ciberseguridad', 'Magister', 1, 7);
 INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Tec', 'Calentamientos', 'Tecnologo', 2, 8);
 INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Lic', 'Crossfit', 'Licenciado', 2, 9);
 INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Ing', 'Circuitos', 'Ingeniero', 3, 10);
 
-insert into responsable_ppp(id_docente) values(1);
-insert into responsable_ppp(id_docente) values(2);
-insert into responsable_ppp(id_docente) values(3);
+insert into responsable_ppp(id_docente) VALUES (3);
+insert into responsable_ppp(id_docente) VALUES (4);
+insert into responsable_ppp(id_docente) VALUES (5);
 
-insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp) values(false,'20-07-2022','25-07-2022',20,'fgfdf','fdfd',1,null,1);
-insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'12-07-2022','23-08-2022',10,'fgfdf','fdfd',2,null,2);
-insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'12-07-2022','23-07-2022',5,'fgfdf','fdfd',3,null,3);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kevin@gmail.com', 'Kevin', '$2a$10$qZ.qx0k5Q1ZjW0mO0lh/sOfGoZwyA0ozGfCueF8qug0BQXw3ZcpDK', '0152354981', 49);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kevina@gmail.com', 'KevinA', '$2a$10$F6SWj4JrH7v6meZg0ITN5.hPWyb1JyJkUldgNruB.SBnvSyIcaP/G', '0150287671', 1);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('bbb@gmail.com', 'Ximena', '$2a$10$i2e3bUgO7eUOFZyMbLcY8O02uF1U3L6dJqPc6i2gTNgeb27.Thqa6', '1723489742', 2);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ccc@gmail.com', 'Katherine', '$2a$10$ZAh3PYY2IIN198QqWgiV6eN/VRW88.nqDqAk70aIPqTNfqan1b.6e', '1234567893', 3);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ddd@gmail.com', 'Andrea', '$2a$10$iiwBeFJpDODp0eKiRM0reOWWniYzqvDtM6sdivjI7Saay8MpjKx76', '1112233454', 4);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('eee@gmail.com', 'Andres', '$2a$10$DGyujI68FNJtF5Uw8rpqde9aRPnPNbzWs60J/F0btbxuWjyjtMcxC', '8746380945', 5);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('fff@gmail.com', 'Marlene', '$2a$10$eDYVjmjH/JfdJ.FUXGo7Ueg8nR9MGCx6gZQZVpN6agTssnF8U9dtK', '9846382766', 6);
+
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_ADMIN');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_DOCENTE');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_ESTUDIANTE');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_RESPONSABLEPPP');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTORACADEMICO');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTOREMPRESARIAL');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_EMPLEADO');
+
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (1, 1);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (2, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (3, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (4, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (5, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (6, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (7, 5);
 
 
 INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Av. Abelardo J', '5', 'Clara', 'Avils', '010223231', '0721564','Maus');
-INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Centro','5' ,'Mision de Prueba Ejemplo', 'AcheAsociados', '1234567890123', '0987654321', 'Nuestra Vision Ejemplo Prueba');
-INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Mall', '5','Mision de Prueba Ejemplo 1', 'AligarAsociados', '1234567890456', '0987654321', 'Nuestra Vision Ejemplo Prueba 1');
-INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Sur', '5','Mision de Prueba Ejemplo 2', 'SalinasAsociados', '1234567890789', '0987654321', 'Nuestra Vision Ejemplo Prueba 2');
-INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Mall', '5','Mision de Prueba Ejemplo 3', 'RemacheAsociados', '1234567890101', '0987654321', 'Nuestra Vision Ejemplo Prueba 3');
-INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision)VALUES ('Centro', '5','Mision de Prueba Ejemplo 4', 'CuevaAsociados', '1234567890102', '0987654321', 'Nuestra Vision Ejemplo Prueba 4');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Centro','5' ,'Mision de Prueba Ejemplo', 'AcheAsociados', '1234567890123', '0987654321', 'Nuestra Vision Ejemplo Prueba');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Mall', '5','Mision de Prueba Ejemplo 1', 'AligarAsociados', '1234567890456', '0987654321', 'Nuestra Vision Ejemplo Prueba 1');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Sur', '5','Mision de Prueba Ejemplo 2', 'SalinasAsociados', '1234567890789', '0987654321', 'Nuestra Vision Ejemplo Prueba 2');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Mall', '5','Mision de Prueba Ejemplo 3', 'RemacheAsociados', '1234567890101', '0987654321', 'Nuestra Vision Ejemplo Prueba 3');
+INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Centro', '5','Mision de Prueba Ejemplo 4', 'CuevaAsociados', '1234567890102', '0987654321', 'Nuestra Vision Ejemplo Prueba 4');
+
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Gerente', 360, 1, 11);
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Bodeguero', 320, 2, 12);
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Secretario', 330, 3, 13);
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Jefe Planta', 350, 4, 14);
 INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('RRHH', 380, 5, 15);
-INSERT INTO public.tutor_academico VALUES (1, NULL, 1, 1);
-INSERT INTO public.tutor_academico VALUES (2, NULL, 3, 4);
+
+INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA1',1, 1);
+INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA2',3, 4);
+
 INSERT INTO public.tutor_empresarial(control, doc_asignacion, id_alumno, id_personal) VALUES ('matutino','2473290932dsjffds',1, 1);
 INSERT INTO public.tutor_empresarial(control, doc_asignacion, id_alumno, id_personal) VALUES ('matutino','hfsdkj87234632',2, 1);
+
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis1', 1);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis2', 2);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis3', 3);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis4', 4);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis5', 5);
+
 INSERT INTO public.cronograma (doc_cronograma, id_tutor_academico) VALUES ('cronograma1', 2);
 INSERT INTO public.cronograma (doc_cronograma, id_tutor_academico) VALUES ('cronograma3', 1);
+
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionUno', '2022-12-13', '12:00', '17:00', 5, 1);
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionDos', '2022-12-11', '13:00', '18:00', 5, 1);
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionTres', '2022-12-14', '11:00', '16:00', 5, 1);
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionCuatro', '2022-12-16', '09:00', '14:00', 5, 1);
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionCinco', '2022-12-17', '12:00', '17:00', 5, 1);
-INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-11-02', '2022-11-02', 1, 'completa satifactoriamente', 100, 1, 1);
-INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-12-02', '2022-12-02', 2, 'completa insatifactoriamente', 100, 2, 2);
-INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-13-02', '2022-13-02', 3, 'completa satifactoriamente', 70, 3, 2);
-INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-14-02', '2022-14-02', 4, 'completa insatifactoriamente', 80, 4, 2);
-INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-15-02', '2022-15-02', 5, 'completa satifactoriamente', 100, 5, 1);
 
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-2-11', '2022-2-11', 1, 'completa satifactoriamente', 100, 1, 1);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-2-12', '2022-2-12', 2, 'completa insatifactoriamente', 100, 2, 2);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-2-13', '2022-2-13', 3, 'completa satifactoriamente', 70, 3, 2);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-2-14', '2022-2-14', 4, 'completa insatifactoriamente', 80, 4, 2);
+INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-2-15', '2022-2-15', 5, 'completa satifactoriamente', 100, 5, 1);
 
-INSERT INTO CONVOCATORIA (id_convocatoria,nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES(1,'Practicas Don Pepe','ASZDA2W','30-03-2022','05-05-2022',1);
-INSERT INTO CONVOCATORIA (id_convocatoria,nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES(2,'Practicas Etapa','AASDZDA2W','30-04-2022','05-08-2022',2);
-INSERT INTO CONVOCATORIA (id_convocatoria,nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES(3,'Practicas El Valle','iifjsjfjs','29-05-2022','05-06-2022',3);
-insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(false,'20-03-2022',240,1,1);
-insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria)  values(true,'15-04-2022',120,2,1);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(true,'25-05-2022',120,3,1);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(false,'25-05-2022',120,4,2);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(true,'25-05-2022',120,5,2);
+insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp) values(false,'2022-7-20','2022-07-25',20,'fgfdf','fdfd',1,1,1);
+insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'2022-7-12','2022-8-23',10,'fgfdf','fdfd',2,2,2);
+insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'2022-7-12','2022-7-23',5,'fgfdf','fdfd',3,3,3);
 
-insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgh','20-03-2022',2);
-insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgasdd','20-04-2022',1);
+INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas Don Pepe','ASZDA2W','2022-3-22','2022-5-5',1);
+INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas Etapa','AASDZDA2W','2022-4-30','2022-8-5',2);
+INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas El Valle','iifjsjfjs','2022-5-29','2022-6-05',3);
+
+insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(false,'2022-3-20',240,1,1);
+insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria)  values(true,'2022-4-15',120,2,1);
+insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(true,'2022-5-25',120,3,1);
+insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(false,'2022-5-25',120,4,2);
+insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(true,'2022-5-25',120,5,2);
+
+insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgh','2022-3-20',2);
+insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgasdd','2022-4-20',1);
