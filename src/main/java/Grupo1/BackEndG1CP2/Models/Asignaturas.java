@@ -12,10 +12,13 @@ public class Asignaturas {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idAsignatura;
 	
+	@Column(nullable = false)
 	private String nombreAsignatura;
 
+	@Column(nullable = false)
 	private String abreviatura;
 	
+	@Column(nullable = false)
 	private Integer ciclo;
 	
 	@ManyToOne
