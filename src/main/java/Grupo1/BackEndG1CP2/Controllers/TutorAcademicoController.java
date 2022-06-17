@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100" })
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:8100"})
 @RequestMapping("/GestionTutorAcademico")
 public class TutorAcademicoController {
 
@@ -29,16 +29,16 @@ public class TutorAcademicoController {
     private AlumnoRepository alumnoRepository;
 
     @GetMapping("/ListaTutorAcademico")
-    public ResponseEntity<RespuestaGenerica> ListarTutorAcademico(){
+    public ResponseEntity<RespuestaGenerica> ListarTutorAcademico() {
         List<TutorAcademico> data = new ArrayList<>();
         RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
         try {
-            data=tutorAcademicoRepository.findAll();
+            data = tutorAcademicoRepository.findAll();
             respuesta.setMensaje("Se genero LISTADO TutorAcademico");
             respuesta.setData(data);
             respuesta.setEstado(0);
-        }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al generar LISTADO TutorAcademico, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+        } catch (Exception e) {
+            respuesta.setMensaje("Hubo un problema al generar LISTADO TutorAcademico, causa ->" + e.getCause() + " || messagge->" + e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }
@@ -47,47 +47,47 @@ public class TutorAcademicoController {
 
 
     @PostMapping("/CrearTutorAcademico/{cedulaD}/{cedulaA}")
-    public ResponseEntity<RespuestaGenerica> CrearTutorAcademico(@RequestBody TutorAcademico tutorAcademicoEnviado ,@PathVariable String cedulaD,@PathVariable String cedulaA){
+    public ResponseEntity<RespuestaGenerica> CrearTutorAcademico(@RequestBody TutorAcademico tutorAcademicoEnviado, @PathVariable String cedulaD, @PathVariable String cedulaA) {
         List<TutorAcademico> data = new ArrayList<>();
         RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
-        HttpStatus estado  = HttpStatus.CREATED;
+        HttpStatus estado = HttpStatus.CREATED;
         try {
             Persona personaD = personaRepository.findByCedula(cedulaD);
             Persona personaA = personaRepository.findByCedula(cedulaA);
 
-            Docente docente= docenteRepository.findByPersona(personaD);
-            Alumno alumno= alumnoRepository.findByPersona(personaA);
+            Docente docente = docenteRepository.findByPersona(personaD);
+            Alumno alumno = alumnoRepository.findByPersona(personaA);
             tutorAcademicoEnviado.setDocente(docente);
             tutorAcademicoEnviado.setAlumno(alumno);
             TutorAcademico tutorAcademico = tutorAcademicoRepository.save(tutorAcademicoEnviado);
             data.add(tutorAcademico);
-            if(tutorAcademico !=null){
+            if (tutorAcademico != null) {
                 respuesta.setMensaje("SE REGISTRO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
-            }else{
+            } else {
                 respuesta.setMensaje("NO SE REGISTRO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
-                estado= HttpStatus.BAD_REQUEST;
+                estado = HttpStatus.BAD_REQUEST;
             }
-        }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al insertar TutorAcademico, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+        } catch (Exception e) {
+            respuesta.setMensaje("Hubo un problema al insertar TutorAcademico, causa ->" + e.getCause() + " || message -> " + e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
-            estado= HttpStatus.BAD_REQUEST;
+            estado = HttpStatus.BAD_REQUEST;
         }
         return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
     }
 
     @PutMapping("/EditarTutorAcademico/{id}")
-    public ResponseEntity<RespuestaGenerica> EditarTutorAcademico(@RequestBody TutorAcademico tutorAcademicoEnviado,@PathVariable Long id){
+    public ResponseEntity<RespuestaGenerica> EditarTutorAcademico(@RequestBody TutorAcademico tutorAcademicoEnviado, @PathVariable Long id) {
         List<TutorAcademico> data = new ArrayList<>();
         RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
-        AtomicReference<HttpStatus> estado  = new AtomicReference<>(HttpStatus.OK);
+        AtomicReference<HttpStatus> estado = new AtomicReference<>(HttpStatus.OK);
         try {
             TutorAcademico tutA = tutorAcademicoRepository.findById(id)
-                    .map(res ->{
+                    .map(res -> {
                         res.setAlumno(tutorAcademicoEnviado.getAlumno());
                         res.setDocente(tutorAcademicoEnviado.getDocente());
                         res.setDocAsignacion(tutorAcademicoEnviado.getDocAsignacion());
@@ -100,15 +100,15 @@ public class TutorAcademicoController {
                         //SE RETORNA TutorAcademico MODIFICADA
                         return tutorAcademicoRepository.save(res);
                     })
-                    .orElseGet(()->{
-                        respuesta.setMensaje("NO SE ENCONTRO TutorAcademico CON EL ID INGRESADO: "+id);
+                    .orElseGet(() -> {
+                        respuesta.setMensaje("NO SE ENCONTRO TutorAcademico CON EL ID INGRESADO: " + id);
                         respuesta.setData(data);
                         respuesta.setEstado(1);
                         estado.set(HttpStatus.BAD_REQUEST);
                         return new TutorAcademico();
                     });
-        }catch (Exception e){
-            respuesta.setMensaje("Hubo un problema al MODIFICAR TutorAcademico, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+        } catch (Exception e) {
+            respuesta.setMensaje("Hubo un problema al MODIFICAR TutorAcademico, causa ->" + e.getCause() + " || message -> " + e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
             estado.set(HttpStatus.BAD_REQUEST);
@@ -118,63 +118,93 @@ public class TutorAcademicoController {
 
 
     @DeleteMapping("/EliminarTutorAcademico/{id}")
-    public ResponseEntity EliminarTutorAcademico (@PathVariable Long id ){
+    public ResponseEntity EliminarTutorAcademico(@PathVariable Long id) {
         List<TutorAcademico> data = new ArrayList<TutorAcademico>();
         RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
-        HttpStatus estado  = HttpStatus.OK;
+        HttpStatus estado = HttpStatus.OK;
 
         try {
 
             tutorAcademicoRepository.deleteById(id);
-            if(tutorAcademicoRepository!=null){
+            if (tutorAcademicoRepository != null) {
                 data.add(new TutorAcademico());
                 respuesta.setMensaje("SE ELIMINO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
-            }else{
-                estado= HttpStatus.BAD_REQUEST;
+            } else {
+                estado = HttpStatus.BAD_REQUEST;
                 data.add(null);
                 respuesta.setMensaje("NO SE ELIMINO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
             }
         } catch (Exception e) {
-            estado= HttpStatus.BAD_REQUEST;
-            respuesta.setMensaje("Hubo un problema al ELIMINAR TutorAcademico, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            estado = HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al ELIMINAR TutorAcademico, causa->" + e.getCause() + " ||  message -> " + e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }
 
-        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
     }
 
     @GetMapping("/BuscarTutorAcd/{id}")
-    public ResponseEntity BuscarTutorAcd (@PathVariable Long id ){
+    public ResponseEntity BuscarTutorAcd(@PathVariable Long id) {
         List<TutorAcademico> data = new ArrayList<TutorAcademico>();
         RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
-        HttpStatus estado  = HttpStatus.OK;
+        HttpStatus estado = HttpStatus.OK;
         try {
-            Alumno alumno= alumnoRepository.findById(id).get();
-            if (alumno!=null){
-                TutorAcademico tutorAcademico =tutorAcademicoRepository.findByAlumno(alumno);
+            Alumno alumno = alumnoRepository.findById(id).get();
+            if (alumno != null) {
+                TutorAcademico tutorAcademico = tutorAcademicoRepository.findByAlumno(alumno);
                 data.add(tutorAcademico);
                 respuesta.setMensaje("SE ENCONTRO TUTOR ACADEMICO CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
-            }else{
-                estado= HttpStatus.BAD_REQUEST;
+            } else {
+                estado = HttpStatus.BAD_REQUEST;
                 data.add(null);
-                respuesta.setMensaje("NO SE ENCONTRO TUTOR ACADEMICO DEBIDO A QUE EL ID DE ALUMNO MANDADO -> "+id+" NO EXISTE");
+                respuesta.setMensaje("NO SE ENCONTRO TUTOR ACADEMICO DEBIDO A QUE EL ID DE ALUMNO MANDADO -> " + id + " NO EXISTE");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
             }
         } catch (Exception e) {
-            estado= HttpStatus.BAD_REQUEST;
-            respuesta.setMensaje("Hubo un problema al BUSCAR TUTOR ACADEMICO, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            estado = HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al BUSCAR TUTOR ACADEMICO, causa->" + e.getCause() + " ||  message -> " + e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }
 
-        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
+    }
+
+
+    @GetMapping("/BuscarTutor/{id}")
+    public ResponseEntity BuscarTutorId(@PathVariable Long id) {
+        List<TutorAcademico> data = new ArrayList<TutorAcademico>();
+        RespuestaGenerica<TutorAcademico> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado = HttpStatus.OK;
+        try {
+            TutorAcademico tutorAcademico = tutorAcademicoRepository.findById(id).get();
+
+            if(tutorAcademico!=null){
+                data.add(tutorAcademico);
+                respuesta.setMensaje("SE ENCONTRO TUTOR ACADEMICO CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else {
+                data.add(tutorAcademico);
+                respuesta.setMensaje("NO SE ENCONTRO TUTOR ACADEMICO POR EL ID MANDADO -> "+id);
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }
+        } catch (Exception e) {
+            estado = HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al BUSCAR TUTOR ACADEMICO, causa->" + e.getCause() + " ||  message -> " + e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
     }
 }
