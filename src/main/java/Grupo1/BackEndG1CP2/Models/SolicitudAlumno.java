@@ -13,7 +13,7 @@ public class SolicitudAlumno {
 
     private Date fechaEmision;
 
-    private Boolean estado;
+    private String estado;
 
     @ManyToOne
     @JoinColumn(name = "idConvocatoria", referencedColumnName = "idConvocatoria")
@@ -28,11 +28,18 @@ public class SolicitudAlumno {
     public SolicitudAlumno() {
     }
 
-    public Boolean getEstado() { return estado; }
+    
+    public String getEstado() {
+		return estado;
+	}
 
-    public void setEstado(Boolean estado) { this.estado = estado;    }
 
-    public Long getIdSolicitudAlumno() {
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+	public Long getIdSolicitudAlumno() {
         return idSolicitudAlumno;
     }
 

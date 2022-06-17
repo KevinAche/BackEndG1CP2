@@ -155,11 +155,11 @@ INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fec
 INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas Etapa','AASDZDA2W','2022-4-30','2022-8-5',2);
 INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas El Valle','iifjsjfjs','2022-5-29','2022-6-05',3);
 
-insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(false,'2022-3-20',240,1,1);
-insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria)  values(true,'2022-4-15',120,2,1);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(true,'2022-5-25',120,3,1);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(false,'2022-5-25',120,4,2);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values(true,'2022-5-25',120,5,2);
+insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('Pendiente','2022-3-20',240,1,1);
+insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria)  values('Pendiente','2022-4-15',120,2,1);
+insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('Pendiente','2022-5-25',120,3,1);
+insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('Pendiente','2022-5-25',120,4,2);
+insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('Pendiente','2022-5-25',120,5,2);
 
 insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgh','2022-3-20',2);
 insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgasdd','2022-4-20',1);
