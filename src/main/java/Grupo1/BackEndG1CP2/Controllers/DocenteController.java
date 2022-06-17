@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.hibernate.annotations.GeneratorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -198,6 +199,44 @@ public class DocenteController {
         }catch (Exception e){
             estado= HttpStatus.BAD_REQUEST;
             respuesta.setMensaje("Hubo un problema al ELIMINAR DOCENTE, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+    }
+
+
+    @GetMapping("/BuscarDocenteCedula/{cedula}")
+    public ResponseEntity<RespuestaGenerica> BuscarDocenteCedula(@PathVariable String cedula){
+        List<Docente> data = new ArrayList<Docente>();
+        RespuestaGenerica<Docente> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            Persona persona = personaRepository.findByCedula(cedula);
+            if(persona!=null){
+                Docente docente = docenteRepository.findByPersona(persona);
+                if(docente.getPersona().getCedula().equals(cedula)){
+                    data.add(docente);
+                    respuesta.setMensaje("DOCENTE ENCONTRADO CORRECTAMENTE");
+                    respuesta.setData(data);
+                    respuesta.setEstado(0);
+                }else{
+                    data.add(null);
+                    respuesta.setMensaje("EL DOCENTE NO FUE ENCONTRADO DEBIDO A QUE LA CEDULA -> "+cedula+" NO FUE ENCONTRADA ALUM");
+                    respuesta.setData(data);
+                    respuesta.setEstado(1);
+                    estado= HttpStatus.BAD_REQUEST;
+                }
+            }else{
+                data.add(null);
+                respuesta.setMensaje("EL DOCENTE NO PUDO ENCONTRADO DEBIDO QUE LA CEDULA -> "+cedula+" NO FUE ENCONTRADA");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+                estado= HttpStatus.BAD_REQUEST;
+            }
+        }catch (Exception e){
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al BUSCAR DOCENTE, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }

@@ -40,10 +40,10 @@ public class AlumnoController {
 
     @GetMapping("/ListaAlumnos")
     public ResponseEntity<RespuestaGenerica> ListarAlumnos(){
-       List<Alumno> data = new ArrayList<>();
-       RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
+       List<VistaListarAlumnos> data = new ArrayList<>();
+       RespuestaGenerica<VistaListarAlumnos> respuesta = new RespuestaGenerica<>();
        try{
-           data= alumnoRepository.findAll();
+           data= listaAlumnosRepository.findAll();
            respuesta.setMensaje("Se genero LISTADO ALUMNOS EXITOXAMENTE");
            respuesta.setData(data);
            respuesta.setEstado(0);
@@ -55,6 +55,22 @@ public class AlumnoController {
        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
+    @GetMapping("/ListaDatosAlumnos")
+    public ResponseEntity<RespuestaGenerica> ListaDatosAlumnos(){
+        List<Alumno> data = new ArrayList<>();
+        RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
+        try{
+            data= alumnoRepository.findAll();
+            respuesta.setMensaje("Se genero LISTADO ALUMNOS EXITOXAMENTE");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO ALUMNOS, causa ->"+e.getCause()+" || message->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
 
     @PostMapping("/CrearAlumno/{id_persona}/{id_carrera}")
     public ResponseEntity<RespuestaGenerica> CrearAlumno(@RequestBody Alumno alumnoEnviado,@PathVariable Long id_persona,@PathVariable Long id_carrera){
