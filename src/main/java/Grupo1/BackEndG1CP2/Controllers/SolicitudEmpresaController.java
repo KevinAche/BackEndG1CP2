@@ -1,13 +1,12 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
-import Grupo1.BackEndG1CP2.Models.Persona;
-import Grupo1.BackEndG1CP2.Models.PersonalEmpresa;
-import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
-import Grupo1.BackEndG1CP2.Models.SolicitudEmpresa;
+import Grupo1.BackEndG1CP2.Models.*;
+import Grupo1.BackEndG1CP2.Models.Views.VistaListarSolicitudesEmpresa;
 import Grupo1.BackEndG1CP2.Repositories.EmpresaRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonalEmpresaRepository;
 import Grupo1.BackEndG1CP2.Repositories.SolicitudEmpRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarSolicitudesEmpresasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +29,9 @@ public class SolicitudEmpresaController {
 
     @Autowired
     private PersonalEmpresaRepository personalEmpresaRepository;
+
+    @Autowired
+    private ListarSolicitudesEmpresasRepository listarSolicitudesEmpresasRepository;
 
     @GetMapping("/ListaSolicitudEmpresa")
     public ResponseEntity<RespuestaGenerica> ListarSolicitudEmpresa(){
@@ -148,4 +150,51 @@ public class SolicitudEmpresaController {
 
         return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
     }
+
+
+    @GetMapping("/ListarSolicitudesEmpresa/{cedula}")
+    public ResponseEntity GenerarListarSolicitudes (@PathVariable String cedula ){
+        List<VistaListarSolicitudesEmpresa> data = new ArrayList<VistaListarSolicitudesEmpresa>();
+        RespuestaGenerica<VistaListarSolicitudesEmpresa> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            //SE VE LA EL EMPLEADO QUE SE LOGUE
+            Persona persona = personaRepository.findByCedula(cedula);
+            PersonalEmpresa personalEmpresa = personalEmpresaRepository.findByPersona(persona);
+            List<SolicitudEmpresa> solicitudEmpresasGeneral = solicitudEmpRepository.findAll();
+
+            List<VistaListarSolicitudesEmpresa> vistaGeneral = listarSolicitudesEmpresasRepository.findAll();
+
+            for (SolicitudEmpresa sol: solicitudEmpresasGeneral) {
+                if(sol.getEmpleado().getEmpresa()==personalEmpresa.getEmpresa()){
+                    for (VistaListarSolicitudesEmpresa vista: vistaGeneral) {
+                        if(vista.getId_solicitud_empresa()==sol.getIdSolicitudEmpresa()){
+                            data.add(vista);
+                        }
+                    }
+                }
+            }
+
+            if(data.size()>=0){
+                respuesta.setMensaje("SE LISTO SOLICITUDES DE ESTA EMPRESA CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else{
+                estado= HttpStatus.BAD_REQUEST;
+                data.add(null);
+                respuesta.setMensaje("NO SE LISTO SOLICITUD DE EMPRESAS CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+            }
+        } catch (Exception e) {
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al ELIMINAR SolicitudEmpresa, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+    }
+
+
 }
