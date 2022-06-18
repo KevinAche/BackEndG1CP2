@@ -15,6 +15,9 @@ public class SolicitudAlumno {
 
     private String estado;
 
+    @Column(nullable = false, columnDefinition="text", length=10485760)
+    private String documentoSoliEstudiante;
+
     @ManyToOne
     @JoinColumn(name = "idConvocatoria", referencedColumnName = "idConvocatoria")
     private Convocatoria convocatoria;
@@ -28,7 +31,14 @@ public class SolicitudAlumno {
     public SolicitudAlumno() {
     }
 
-    
+    public String getDocumentoSoliEstudiante() {
+        return documentoSoliEstudiante;
+    }
+
+    public void setDocumentoSoliEstudiante(String documentoSoliEstudiante) {
+        this.documentoSoliEstudiante = documentoSoliEstudiante;
+    }
+
     public String getEstado() {
 		return estado;
 	}
@@ -39,7 +49,7 @@ public class SolicitudAlumno {
 	}
 
 
-	public Long getIdSolicitudAlumno() {
+    public Long getIdSolicitudAlumno() {
         return idSolicitudAlumno;
     }
 
