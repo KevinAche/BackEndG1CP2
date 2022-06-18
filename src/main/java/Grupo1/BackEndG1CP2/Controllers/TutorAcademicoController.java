@@ -28,6 +28,9 @@ public class TutorAcademicoController {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
+    @Autowired
+    private NotificacionesRepository notificacionesRepository;
+
     @GetMapping("/ListaTutorAcademico")
     public ResponseEntity<RespuestaGenerica> ListarTutorAcademico() {
         List<TutorAcademico> data = new ArrayList<>();
@@ -65,6 +68,10 @@ public class TutorAcademicoController {
                 respuesta.setMensaje("SE REGISTRO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
+                Notificaciones noti = new Notificaciones();
+                noti.setNotificacion("Su tutor académico ha sido asignado!");
+                noti.setPersona(tutorAcademico.getAlumno().getPersona());
+                notificacionesRepository.save(noti);
             } else {
                 respuesta.setMensaje("NO SE REGISTRO TutorAcademico CORRECTAMENTE");
                 respuesta.setData(data);

@@ -2,13 +2,7 @@ package Grupo1.BackEndG1CP2.Models;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "notificaciones")
@@ -25,6 +19,11 @@ public class Notificaciones {
 	@ManyToOne
 	@JoinColumn(name = "idPersona", referencedColumnName = "idPersona")
 	private Persona persona;
+
+	@PrePersist
+	public void fecha(){
+		this.fechaNotificacion=new Date();
+	}
 
 	public Notificaciones() {
 		super();

@@ -1,10 +1,7 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
 import Grupo1.BackEndG1CP2.Models.*;
-import Grupo1.BackEndG1CP2.Repositories.AlumnoRepository;
-import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
-import Grupo1.BackEndG1CP2.Repositories.PersonalEmpresaRepository;
-import Grupo1.BackEndG1CP2.Repositories.TutorEmpresarialRepository;
+import Grupo1.BackEndG1CP2.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +29,9 @@ public class TutorEmpresarialController {
     @Autowired
     private AlumnoRepository alumnoRepository;
 
+    @Autowired
+    private NotificacionesRepository notificacionesRepository;
+
     @GetMapping("/ListarTutoresEmp")
     public ResponseEntity<RespuestaGenerica> ListarTutoresEmpresarial(){
         List<TutorEmpresarial> data = new ArrayList<>();
@@ -41,6 +41,7 @@ public class TutorEmpresarialController {
             respuesta.setMensaje("Se genero LISTADO TUTORES EMPRESARIALES EXITOSAMENTE");
             respuesta.setData(data);
             respuesta.setEstado(0);
+
         }catch (Exception e){
             respuesta.setMensaje("Hubo un problema al generar LISTADO TUTORES EMPRESARIALES, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
             respuesta.setData(data);
@@ -71,6 +72,10 @@ public class TutorEmpresarialController {
                 respuesta.setMensaje("SE REGISTRO TUTOR EMPRESARIAL CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(0);
+                Notificaciones noti = new Notificaciones();
+                noti.setNotificacion("Su tutor empresarial ha sido asignado!");
+                noti.setPersona(tutorEmpresarial.getAlumno().getPersona());
+                notificacionesRepository.save(noti);
             }else{
                 respuesta.setMensaje("NO SE REGISTRO TUTOR EMPRESARIAL CORRECTAMENTE");
                 respuesta.setData(data);
