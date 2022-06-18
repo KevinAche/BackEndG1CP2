@@ -214,5 +214,42 @@ public class AlumnoController {
     }
 
 
+    @GetMapping("/BuscarAlumnoCedula/{cedula}")
+    public ResponseEntity<RespuestaGenerica> BuscarDocenteCedula(@PathVariable String cedula){
+        List<Alumno> data = new ArrayList<Alumno>();
+        RespuestaGenerica<Alumno> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            Persona persona = personaRepository.findByCedula(cedula);
+            if(persona!=null){
+                Alumno alumno = alumnoRepository.findByPersona(persona);
+                if(alumno.getPersona().getCedula().equals(cedula)){
+                    data.add(alumno);
+                    respuesta.setMensaje("ALUMNO ENCONTRADO CORRECTAMENTE");
+                    respuesta.setData(data);
+                    respuesta.setEstado(0);
+                }else{
+                    data.add(null);
+                    respuesta.setMensaje("EL ALUMNO NO FUE ENCONTRADO DEBIDO A QUE LA CEDULA -> "+cedula+" NO FUE ENCONTRADA ALUM");
+                    respuesta.setData(data);
+                    respuesta.setEstado(1);
+                    estado= HttpStatus.BAD_REQUEST;
+                }
+            }else{
+                data.add(null);
+                respuesta.setMensaje("EL ALUMNO NO PUDO SER ENCONTRADO DEBIDO QUE LA CEDULA -> "+cedula+" NO FUE ENCONTRADA");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+                estado= HttpStatus.BAD_REQUEST;
+            }
+        }catch (Exception e){
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al BUSCAR DOCENTE, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+    }
+
 
 }
