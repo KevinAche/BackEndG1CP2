@@ -75,7 +75,7 @@ public class DocenteController {
             Persona persona = personaRepository.findByCedula(cedula);
             if(persona != null){
                 Optional<Carrera> carrera = carreraRepository.findById(id_carrera);
-                if(!carrera.isEmpty()){
+                if(carrera !=null){
                     docenteEnviado.setCarrera(carrera.get());
                     docenteEnviado.setPersona(persona);
                     Docente docente = docenteRepository.save(docenteEnviado);

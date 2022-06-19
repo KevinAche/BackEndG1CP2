@@ -79,9 +79,9 @@ public class AlumnoController {
         HttpStatus estado  = HttpStatus.CREATED;
         try {
             Optional<Persona> persona = personaRepository.findById(id_persona);
-            if(persona.isEmpty()){
+            if(persona != null){
                 Optional<Carrera> carrera = carreraRepository.findById(id_carrera);
-                if(!carrera.isEmpty()){
+                if( carrera != null){
                     alumnoEnviado.setCarrera(carrera.get());
                     alumnoEnviado.setPersona(persona.get());
                     Alumno alumno = alumnoRepository.save(alumnoEnviado);

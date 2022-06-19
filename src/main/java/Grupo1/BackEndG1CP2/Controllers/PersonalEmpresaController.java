@@ -68,7 +68,7 @@ public class PersonalEmpresaController {
             Persona persona = personaRepository.findByCedula(cedula);
             if(persona != null){
                 Optional<Empresa> empresa = empresaRepository.findById(id_empresa);
-                if(!empresa.isEmpty()){
+                if(empresa!= null){
                     personalEnviado.setEmpresa(empresa.get());
                     personalEnviado.setPersona(persona);
                     PersonalEmpresa personal = personalEmpresaRepository.save(personalEnviado);

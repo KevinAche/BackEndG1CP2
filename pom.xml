@@ -15,7 +15,7 @@
 	<name>BackEndG1CP2</name>
 	<description>Examen Practico desarrollado por : KH - GO - MN - RR - PC - VS - FD - TG - KA - CS</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
