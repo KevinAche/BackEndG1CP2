@@ -4,6 +4,7 @@ DROP TABLE listar_personal;
 DROP TABLE listar_tutores_emp;
 DROP TABLE obtener_empresa_desig_tutor_a;
 DROP TABLE lista_solicitudes_empresa;
+DROP TABLE lista_tutores_acad;
 
 CREATE VIEW listar_personal AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, t.cargo, t.sueldo, e.nombre_empresa from persona p, personal_empresa t, empresa e where p.id_persona=t.id_persona and t.id_empresa=e.id_empresa;
 CREATE VIEW listar_docentes AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, d.titulo, d.area, d.abrev_titulo, c.nombre as "carrera" from persona p, docente d, carreras c where p.id_persona=d.id_persona and d.id_carrera=c.id_carrera;
@@ -11,7 +12,7 @@ CREATE VIEW listar_alumnos AS select p.id_persona, p.cedula, p.primer_nombre,p.s
 CREATE VIEW listar_tutores_emp AS select p.id_persona, p.cedula, p.primer_nombre ||' '|| p.segundo_nombre as "nombres_t", p.primer_apellido||' '||p.segundo_apellido as "apellidos_t", te.control, te.doc_asignacion, p1.primer_nombre ||' '|| p1.segundo_nombre as "nombres_e", p1.primer_apellido||' '||p1.segundo_apellido as "apellidos_e" from persona p, persona p1, personal_empresa t, alumno a, tutor_empresarial te where p.id_persona=t.id_persona and p1.id_persona = a.id_persona and a.id_alumno=te.id_alumno and te.id_personal = t.id_personal;
 CREATE VIEW obtener_empresa_desig_tutor_a AS SELECT a.id_alumno,p.cedula, p.primer_nombre||' '||p.segundo_nombre as "nombres", p.primer_apellido||' '||p.segundo_apellido as "apellidos", a.ciclo, a.paralelo, a.promedio, car.nombre as "carrera", s.id_solicitud_alumno, c.id_convocatoria, se.id_solicitud_empresa , emp.nombre_empresa FROM alumno a JOIN persona p on p.id_persona=a.id_persona JOIN solicitud_alumno s ON a.id_alumno = s.id_alumno JOIN convocatoria c ON c.id_convocatoria = s.id_convocatoria JOIN solicitudes_empresa se ON se.id_solicitud_empresa = c.id_solicitud_empresa JOIN carreras car ON car.id_carrera = se.id_carrera JOIN personal_empresa pe on pe.id_personal = se.id_empleado JOIN empresa emp ON emp.id_empresa = pe.id_empresa where a.id_alumno not in (select id_alumno from tutor_academico);
 CREATE VIEW lista_solicitudes_empresa AS select s. id_solicitud_empresa, s.fecha_emision, s.fecha_inicio, s.numero_alumnos, s.pdf_solicitud, s.respuesta,  e.primer_nombre||' '||e.primer_apellido as "empleado", r.primer_nombre||' '||e.primer_apellido as "responsable" from solicitudes_empresa s JOIN personal_empresa pe ON pe.id_personal = s.id_empleado JOIN persona e on e.id_persona = pe.id_persona JOIN responsable_ppp rp ON rp.id_responsableppp = s.id_responsableppp JOIN docente d on d.id_docente = rp.id_docente JOIN persona r ON r.id_persona = d.id_persona;
-
+CREATE VIEW lista_tutores_acad AS SELECT t.id_tutor_academico, pa.primer_nombre||' '||pa.segundo_nombre as "a_nombres", pa.primer_apellido||' '||pa.segundo_apellido as "a_apellidos", pd.primer_nombre||' '||pd.segundo_nombre as "d_nombres", pd.primer_apellido||' '||pd.segundo_apellido as "d_apellidos", t.doc_asignacion from tutor_academico t JOIN alumno al ON al.id_alumno = t.id_alumno JOIN persona pa ON pa.id_persona = al.id_persona JOIN docente d ON d.id_docente = t.id_docente JOIN persona pd ON pd.id_persona = d.id_persona;
 
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0150287671', 'aaa@gmail.com','Monay','2000-11-10','AGUILAR','KEVIN','LITUMA','VINICIO','0991663079');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1723489742', 'bbb@gmail.com','Monay','2002-11-10','AGUILAR','XIMENA','LITUMA','MARIANA','0962381723');
@@ -121,11 +122,11 @@ INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa,
 INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Mall', '5','Mision de Prueba Ejemplo 3', 'RemacheAsociados', '1234567890101', '0987654321', 'Nuestra Vision Ejemplo Prueba 3');
 INSERT INTO public.empresa(direccion, duracion_convenio, mision, nombre_empresa, ruc, telefono, vision) VALUES ('Centro', '5','Mision de Prueba Ejemplo 4', 'CuevaAsociados', '1234567890102', '0987654321', 'Nuestra Vision Ejemplo Prueba 4');
 
-INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Gerente', 360, 1, 11);
-INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Bodeguero', 320, 2, 12);
-INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Secretario', 330, 3, 13);
-INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('Jefe Planta', 350, 4, 14);
-INSERT INTO public.personal_empresa(cargo, sueldo, id_empresa, id_persona)VALUES ('RRHH', 380, 5, 15);
+INSERT INTO public.personal_empresa(cargo, sueldo, abrev_titulo, id_empresa, id_persona)VALUES ('Gerente', 360, 'Ing',1, 11);
+INSERT INTO public.personal_empresa(cargo, sueldo, abrev_titulo, id_empresa, id_persona)VALUES ('Bodeguero', 320, 'Dct',2, 12);
+INSERT INTO public.personal_empresa(cargo, sueldo, abrev_titulo, id_empresa, id_persona)VALUES ('Secretario', 330, 'Ing',3, 13);
+INSERT INTO public.personal_empresa(cargo, sueldo, abrev_titulo, id_empresa, id_persona)VALUES ('Jefe Planta', 350, 'Ing',4, 14);
+INSERT INTO public.personal_empresa(cargo, sueldo, abrev_titulo, id_empresa, id_persona)VALUES ('RRHH', 380,'Lcd' ,5, 15);
 
 insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp) values(false,'2022-7-20','2022-07-25',20,'fgfdf','fdfd',1,1,1);
 insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'2022-7-12','2022-8-23',10,'fgfdf','fdfd',1,1,2);
@@ -136,11 +137,11 @@ INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fec
 INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas Etapa','AASDZDA2W','2022-4-30','2022-8-5',2);
 INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas El Valle','iifjsjfjs','2022-5-29','2022-6-05',3);
 
-insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('Pendiente','2022-3-20',240,1,1);
-insert into solicitud_alumno(estado,fecha_emision,horasppp,id_alumno,id_convocatoria)  values('Pendiente','2022-4-15',120,2,1);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('Pendiente','2022-5-25',120,3,1);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('Pendiente','2022-5-25',120,4,2);
-insert into solicitud_alumno (estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('Pendiente','2022-5-25',120,5,2);
+insert into solicitud_alumno(documento_soli_estudiante,estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('doc1','Pendiente','2022-3-20',240,1,1);
+insert into solicitud_alumno(documento_soli_estudiante,estado,fecha_emision,horasppp,id_alumno,id_convocatoria)  values('doc2','Aceptado','2022-4-15',120,2,1);
+insert into solicitud_alumno (documento_soli_estudiante,estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('doc3','Pendiente','2022-5-25',120,3,1);
+insert into solicitud_alumno (documento_soli_estudiante,estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('doc4','Aceptado','2022-5-25',120,4,2);
+insert into solicitud_alumno (documento_soli_estudiante,estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('doc5','Aceptado','2022-5-25',120,5,2);
 
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis1', 1);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis2', 2);
@@ -155,12 +156,12 @@ INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, nu
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionCinco', '2022-12-17', '12:00', '17:00', 5, 1);
 
 INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA1',1, 1);
-INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA2',3, 4);
-INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA3',2, 4);
+INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA2',3, 1);
+INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA3',2, 2);
 
 
-INSERT INTO public.tutor_empresarial(control, doc_asignacion, id_alumno, id_personal) VALUES ('matutino','2473290932dsjffds',1, 1);
-INSERT INTO public.tutor_empresarial(control, doc_asignacion, id_alumno, id_personal) VALUES ('matutino','hfsdkj87234632',2, 1);
+INSERT INTO public.tutor_empresarial(control, doc_asignacion ,id_alumno, id_personal) VALUES ('matutino','2473290932dsjffds',1, 1);
+INSERT INTO public.tutor_empresarial(control, doc_asignacion ,id_alumno, id_personal) VALUES ('matutino','hfsdkj87234632',2, 1);
 
 
 INSERT INTO public.cronograma (doc_cronograma, id_tutor_academico) VALUES ('cronograma1', 2);

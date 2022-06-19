@@ -28,6 +28,9 @@ public class PersonalEmpresa {
 	
 	@Column(nullable = false)
 	private double sueldo;
+
+	@Column(nullable = false)
+	private String abrev_titulo;
 	
 	@ManyToOne
 	@JoinColumn(name = "idEmpresa", referencedColumnName = "idEmpresa")
@@ -83,4 +86,11 @@ public class PersonalEmpresa {
 		this.persona = persona;
 	}
 
+	public String getAbrev_titulo() {
+		return abrev_titulo;
+	}
+
+	public void setAbrev_titulo(String abrev_titulo) {
+		this.abrev_titulo = abrev_titulo;
+	}
 }

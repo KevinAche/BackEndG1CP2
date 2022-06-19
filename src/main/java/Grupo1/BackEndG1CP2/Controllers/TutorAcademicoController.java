@@ -1,7 +1,9 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
 import Grupo1.BackEndG1CP2.Models.*;
+import Grupo1.BackEndG1CP2.Models.Views.VistaListarTutoresAcad;
 import Grupo1.BackEndG1CP2.Repositories.*;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarTutoresAcadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,9 @@ public class TutorAcademicoController {
     @Autowired
     private NotificacionesRepository notificacionesRepository;
 
+    @Autowired
+    private ListarTutoresAcadRepository listarTutoresAcadRepository;
+
     @GetMapping("/ListaTutorAcademico")
     public ResponseEntity<RespuestaGenerica> ListarTutorAcademico() {
         List<TutorAcademico> data = new ArrayList<>();
@@ -38,6 +43,23 @@ public class TutorAcademicoController {
         try {
             data = tutorAcademicoRepository.findAll();
             respuesta.setMensaje("Se genero LISTADO TutorAcademico");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        } catch (Exception e) {
+            respuesta.setMensaje("Hubo un problema al generar LISTADO TutorAcademico, causa ->" + e.getCause() + " || messagge->" + e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
+    @GetMapping("/ListaTutorAcademicoVista")
+    public ResponseEntity<RespuestaGenerica> ListarTutorAcademicoVista() {
+        List<VistaListarTutoresAcad> data = new ArrayList<>();
+        RespuestaGenerica<VistaListarTutoresAcad> respuesta = new RespuestaGenerica<>();
+        try {
+            data = listarTutoresAcadRepository.findAll();
+            respuesta.setMensaje("Se genero LISTADO TUTOR ACADEMICOS");
             respuesta.setData(data);
             respuesta.setEstado(0);
         } catch (Exception e) {
