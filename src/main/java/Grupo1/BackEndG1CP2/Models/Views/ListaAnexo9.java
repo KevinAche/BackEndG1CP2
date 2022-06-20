@@ -13,7 +13,9 @@ public class ListaAnexo9 {
 	
 	@Id
 	private Long id_alumno;
-	
+
+	private Long id_registro_asistencia;
+
 	private String cedula_a;
 	
 	private String nombre_a;
@@ -141,7 +143,8 @@ public class ListaAnexo9 {
 	public void setNombre_empresa(String nombre_empresa) {
 		this.nombre_empresa = nombre_empresa;
 	}
-	
-	
 
+	public Long getId_registro_asistencia() { return id_registro_asistencia;	}
+
+	public void setId_registro_asistencia(Long id_registro_asistencia) { this.id_registro_asistencia = id_registro_asistencia;	}
 }
