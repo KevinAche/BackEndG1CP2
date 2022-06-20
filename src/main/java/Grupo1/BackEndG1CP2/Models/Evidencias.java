@@ -13,6 +13,7 @@ public class Evidencias {
     private String descripcion;
 
     //se refiere a la imagen u otro tipo de archivo
+    @Column(columnDefinition="text", length=10485760)
     private String anexos;
 
     @ManyToOne

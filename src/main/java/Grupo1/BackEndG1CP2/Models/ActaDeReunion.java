@@ -21,12 +21,15 @@ public class ActaDeReunion {
     private String horario;
 
     //Anexo 7
+    @Column(columnDefinition="text", length=10485760)
     private String docActaReunion;
 
     //Anexo 8
+    @Column(columnDefinition="text", length=10485760)
     private String respuestaEstudiante;
 
     //Anexo 8.1
+    @Column(columnDefinition="text", length=10485760)
     private String notificacionTA;
 
     @ManyToOne

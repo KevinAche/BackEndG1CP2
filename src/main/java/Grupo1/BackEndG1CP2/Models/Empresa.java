@@ -37,20 +37,11 @@ public class Empresa {
 	private String telefono;
 
 	@Column(nullable = false)
-	private String duracionConvenio;
-
-	public String getDuracionConvenio() {
-		return duracionConvenio;
-	}
-
-	public void setDuracionConvenio(String duracionConvenio) {
-		this.duracionConvenio = duracionConvenio;
-	}
+	private String naturaleza;
 
 	public Empresa() {
 
 	}
-
 
 	public Long getIdEmpresa() {
 		return idEmpresa;
@@ -106,6 +97,14 @@ public class Empresa {
 
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public String getNaturaleza() {
+		return naturaleza;
+	}
+
+	public void setNaturaleza(String naturaleza) {
+		this.naturaleza = naturaleza;
 	}
 
 	

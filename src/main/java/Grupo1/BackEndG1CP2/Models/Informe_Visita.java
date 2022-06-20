@@ -19,6 +19,9 @@ public class Informe_Visita {
     private String horaInicio;
 
     private String horaFin;
+    
+    @Column(columnDefinition="text", length=10485760)
+    private String documento;
 
     @ManyToOne
     @JoinColumn(name = "idRegistroVisitaE",referencedColumnName = "idRegistroVisitaE")
@@ -82,4 +85,14 @@ public class Informe_Visita {
     public void setRegistroVisitaEmpresa(Registro_VisitaEmpresa registroVisitaEmpresa) {
         this.registroVisitaEmpresa = registroVisitaEmpresa;
     }
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+    
+    
 }

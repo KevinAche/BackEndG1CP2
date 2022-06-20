@@ -13,6 +13,7 @@ public class Registro_Asistencias {
     private Long idRegistroAsistencia;
 
     //Anexo 9
+    @Column(columnDefinition="text", length=10485760)
     private String docRegistroA;
 
     @OneToOne

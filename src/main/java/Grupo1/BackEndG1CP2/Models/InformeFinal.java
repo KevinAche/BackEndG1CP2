@@ -18,6 +18,7 @@ public class InformeFinal {
     private Alumno alumno;
 
     //Anexo15
+    @Column(columnDefinition="text", length=10485760)
     private String docInformeFinal;
 
     @PrePersist

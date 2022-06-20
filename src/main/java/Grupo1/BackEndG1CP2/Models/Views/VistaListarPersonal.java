@@ -33,7 +33,7 @@ public class VistaListarPersonal {
 	
 	private String cargo;
 	
-	private Double sueldo;
+	private String abrev_titulo;
 	
 	private String nombre_empresa;
 
@@ -129,12 +129,14 @@ public class VistaListarPersonal {
 		this.cargo = cargo;
 	}
 
-	public Double getSueldo() {
-		return sueldo;
+	
+
+	public String getAbrev_titulo() {
+		return abrev_titulo;
 	}
 
-	public void setSueldo(Double sueldo) {
-		this.sueldo = sueldo;
+	public void setAbrev_titulo(String abrev_titulo) {
+		this.abrev_titulo = abrev_titulo;
 	}
 
 	public String getNombre_empresa() {

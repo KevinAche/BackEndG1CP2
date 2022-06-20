@@ -18,6 +18,7 @@ public class Evaluacion_TA {
     private TutorAcademico tutorAcademico;
 
     //Anexo14
+    @Column(columnDefinition="text", length=10485760)
     private String docEvaluacionTA;
 
     public Evaluacion_TA() {

@@ -13,6 +13,7 @@ public class Registro_VisitaEmpresa {
     private String observaciones;
 
     //Anexo 11
+    @Column(columnDefinition="text", length=10485760)
     private String docRegistroVisita;
 
     @OneToOne

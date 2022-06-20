@@ -24,6 +24,9 @@ public class Informe_Culminacion {
     private double tiempo_duracion;
 
     private Date fecha_finalizacion;
+    
+    @Column(columnDefinition="text", length=10485760)
+    private String documento;
 
 
     @OneToOne
@@ -129,4 +132,14 @@ public class Informe_Culminacion {
     public void setRegistro_asistencias(Registro_Asistencias registro_asistencias) {
         this.registro_asistencias = registro_asistencias;
     }
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+    
+    
 }

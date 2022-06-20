@@ -19,6 +19,7 @@ public class Convocatoria {
     private Date fechaMaxima;
 
     //Anexo 2
+    @Column(columnDefinition="text", length=10485760)
     private String docConvocatoria;
 
     @OneToOne

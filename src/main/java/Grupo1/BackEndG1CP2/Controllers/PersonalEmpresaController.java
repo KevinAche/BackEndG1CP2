@@ -122,7 +122,6 @@ public class PersonalEmpresaController {
                 }
                 PersonalEmpresa personal = personalEmpresaRepository.findById(personalEnviado.getIdPersonal()).map(res ->{
                     res.setCargo(personalEnviado.getCargo());
-                    res.setSueldo(personalEnviado.getSueldo());
                     res.setEmpresa(personalEnviado.getEmpresa());
                     res.setPersona(personalEnviado.getPersona());
                     data.add(res);

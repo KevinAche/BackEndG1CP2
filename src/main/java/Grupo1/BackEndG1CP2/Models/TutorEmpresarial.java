@@ -23,6 +23,7 @@ public class TutorEmpresarial{
 	private Alumno alumno;
 
 	//Anexo 5
+	@Column(columnDefinition="text", length=10485760)
 	private String docAsignacion;
 
 	public TutorEmpresarial() {

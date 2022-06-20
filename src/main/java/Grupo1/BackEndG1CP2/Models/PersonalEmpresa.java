@@ -26,8 +26,6 @@ public class PersonalEmpresa {
 	@Column(nullable = false)
 	private String cargo;
 	
-	@Column(nullable = false)
-	private double sueldo;
 
 	@Column(nullable = false)
 	private String abrev_titulo;
@@ -62,13 +60,6 @@ public class PersonalEmpresa {
 		this.cargo = cargo;
 	}
 
-	public double getSueldo() {
-		return sueldo;
-	}
-
-	public void setSueldo(double sueldo) {
-		this.sueldo = sueldo;
-	}
 
 	public Empresa getEmpresa() {
 		return empresa;

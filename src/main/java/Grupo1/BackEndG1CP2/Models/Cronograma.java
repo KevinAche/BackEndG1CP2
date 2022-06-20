@@ -17,6 +17,7 @@ public class Cronograma {
     private TutorAcademico tutorAcademico;
 
     //ANEXO 10
+    @Column(columnDefinition="text", length=10485760)
     private String docCronograma;
 
     public Cronograma() {

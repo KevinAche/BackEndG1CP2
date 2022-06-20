@@ -15,6 +15,7 @@ public class CertificadoEmpresa {
     private Date fechaEmision;
 
     //Anexo12.1
+    @Column(columnDefinition="text", length=10485760)
     private String docCertificadoE;
 
     @ManyToOne

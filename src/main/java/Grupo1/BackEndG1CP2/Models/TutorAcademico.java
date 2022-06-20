@@ -19,7 +19,7 @@ public class TutorAcademico{
 	private Alumno alumno;
 
 	//Anexo 6
-	@Column(length = 10485760)
+	@Column(columnDefinition="text", length=10485760)
 	private String docAsignacion;
 	
 	public TutorAcademico() {
