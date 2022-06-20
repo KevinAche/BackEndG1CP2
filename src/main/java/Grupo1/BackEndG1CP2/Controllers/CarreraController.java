@@ -77,6 +77,7 @@ public class CarreraController {
                         res.setAbreviatura(carreraEnviada.getAbreviatura());
                         res.setModalidad(carreraEnviada.getModalidad());
                         res.setNombre(carreraEnviada.getNombre());
+                        res.setDuracion(carreraEnviada.getDuracion());
                         //EN CASO DE ENCONTRAR SE ANADE DATA A RESPUESTA
                         data.add(res);
                         respuesta.setMensaje("SE MODIFICO CARRERA CORRECTAMENTE");

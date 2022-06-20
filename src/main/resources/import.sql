@@ -66,10 +66,10 @@ INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellid
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0192630148', 'aaax@hotmail.com','San Bartolo','2001-5-10','PEREZ','VALENTINA','PINCAY','INES','0947182650');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0152354981', 'xander@gmail.com','Totoracocha','1998-7-17','HERNANDEZ','KEVIN','VASQUEZ','ALEXANDER','0995846413');
 
-INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSDS','PRESENCIAL','DESARROLLO DE SOFTWARE');
-INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSED','PRESENCIAL','ENTRENAMIENTO DEPORTIVO');
-INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSSP','DUAL','ELECTRICIDAD');
-INSERT INTO public.carreras(abreviatura, modalidad, nombre) VALUES ('TSAS','PRESENCIAL','DESARROLLO DE SOFTWARE');
+INSERT INTO public.carreras(abreviatura, modalidad, nombre,duracion) VALUES ('TSDS','PRESENCIAL','DESARROLLO DE SOFTWARE','2 años');
+INSERT INTO public.carreras(abreviatura, modalidad, nombre,duracion) VALUES ('TSED','PRESENCIAL','ENTRENAMIENTO DEPORTIVO','2 años');
+INSERT INTO public.carreras(abreviatura, modalidad, nombre,duracion) VALUES ('TSSP','DUAL','ELECTRICIDAD','2 años');
+INSERT INTO public.carreras(abreviatura, modalidad, nombre,duracion) VALUES ('TSAS','PRESENCIAL','DESARROLLO DE SOFTWARE','2 años');
 
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','M5B',10,1,1);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('A','MAB',9,1,2);

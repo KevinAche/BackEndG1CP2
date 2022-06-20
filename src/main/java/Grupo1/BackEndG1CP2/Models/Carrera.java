@@ -26,6 +26,9 @@ public class Carrera {
 	
 	@Column(nullable = false)
 	private String modalidad;
+	
+	@Column(nullable = false)
+	private String duracion;
 
 
 	public Carrera() {
@@ -63,6 +66,16 @@ public class Carrera {
 
 	public void setModalidad(String modalidad) {
 		this.modalidad = modalidad;
+	}
+
+
+	public String getDuracion() {
+		return duracion;
+	}
+
+
+	public void setDuracion(String duracion) {
+		this.duracion = duracion;
 	}
 
 	
