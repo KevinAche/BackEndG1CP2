@@ -2,6 +2,7 @@ package Grupo1.BackEndG1CP2.Controllers;
 
 import Grupo1.BackEndG1CP2.Models.Actividades;
 import Grupo1.BackEndG1CP2.Models.Actividades_Diarias;
+import Grupo1.BackEndG1CP2.Models.Carrera;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
 import Grupo1.BackEndG1CP2.Repositories.ActividadesDiariasRepository;
 import Grupo1.BackEndG1CP2.Repositories.RegistroAsistenciaRepository;
@@ -69,4 +70,34 @@ public class ActividadesDiariasController {
         return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
     }
 
+
+
+    @DeleteMapping("/EliminarActividadDiaria/{id}")
+    public ResponseEntity EliminarActividad (@PathVariable Long id ){
+        List<Actividades_Diarias> data = new ArrayList<>();
+        RespuestaGenerica<Actividades_Diarias> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            actividadesDiariasRepository.deleteById(id);
+            if(actividadesDiariasRepository!=null){
+                data.add(new Actividades_Diarias());
+                respuesta.setMensaje("SE ELIMINO ACTIVIDAD DIARIA CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else{
+                estado= HttpStatus.BAD_REQUEST;
+                data.add(null);
+                respuesta.setMensaje("NO SE ELIMINO ACTIVIDAD DIARIA CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+            }
+        } catch (Exception e) {
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al ELIMINAR ACTIVIDAD DIARIA, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+    }
 }
