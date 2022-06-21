@@ -138,6 +138,26 @@ INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)
 INSERT INTO public.convenios(documento, duracion, fecha_emision, id_gerente, id_responsableppp)VALUES ('CONVENIO 1', 6, '2022-6-19', 1, 1);
 INSERT INTO public.convenios(documento, duracion, fecha_emision, id_gerente, id_responsableppp)VALUES ('CONVENIO 2', 5, '2022-6-18', 4, 1);
 
+
+INSERT INTO public.asignaturas(abreviatura, ciclo, nombre_asignatura, id_carrera)VALUES ( 'TAP', 5, 'TENDENCIAS ACTUALES DE PROGRAMACION', 1);
+INSERT INTO public.asignaturas(abreviatura, ciclo, nombre_asignatura, id_carrera)VALUES ( 'PAW', 5, 'PROGRAMACION DE APLICACIONES WEB', 1);
+INSERT INTO public.asignaturas(abreviatura, ciclo, nombre_asignatura, id_carrera)VALUES ( 'DDI', 4, 'DISENO DE INTERFACES GRAFICAS', 1);
+INSERT INTO public.asignaturas(abreviatura, ciclo, nombre_asignatura, id_carrera)VALUES ( 'BDA', 5, 'BASE DE DATOS AVANZADA', 1);
+INSERT INTO public.asignaturas(abreviatura, ciclo, nombre_asignatura, id_carrera)VALUES ( 'MDS', 5, 'METODOLOGIAS DE DESARROLLO DE SOFTWARE', 1);
+INSERT INTO public.asignaturas(abreviatura, ciclo, nombre_asignatura, id_carrera)VALUES ( 'POO', 5, 'PROGRAMACION ORIENTEDA A OBJETOS', 1);
+
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','CREACION DE FORMULARIOS EN ANGULAR',2,1);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','CREACION DE LABELS Y REDIRECCIONAMIENTO A OTRAS RUTSAS',2,1);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','DESPLIEGUE DE APLCIACIONES WEB POR MEDIO DE AZURE',2,1);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','MANTENIMEINTO DE BASE DE DATOS EN SGBD POSTGRES',5,1);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','DESPLIEGUE DE APLICACIONES MOVILES EN AMBIENTE WEB',4,2);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','GESTION DE DESARROLLO DE INTERFACES CARGASDAS EN LA NUBE',4,2);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','MODIFICACION DE INTERFACES MOVILES',1,2);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','MODIFCAIONES EN BASE DE DATOS Y CREDENCIALES',4,2);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','GESTIONAMIENTO DE VERSIONES EN SGBD',4,2);
+INSERT INTO public.actividades(area, descripcion, id_asignatura, id_convenio) VALUES ('PROGRAMACION WEB','DESPLIGUE DE APLICACIONES EN LA NUBE',2,1);
+
+
 insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp) values(false,'2022-7-20','2022-07-25',20,'fgfdf','fdfd',1,1,1);
 insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'2022-7-12','2022-8-23',10,'fgfdf','fdfd',1,1,2);
 insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'2022-7-12','2022-7-23',5,'fgfdf','fdfd',3,3,3);
@@ -158,6 +178,7 @@ INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis2
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis3', 3);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis4', 4);
 INSERT INTO public.reg_asistencias (doc_registroa, id_alumno) VALUES ('docRegis5', 5);
+
 
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionUno', '2022-12-13', '12:00', '17:00', 5, 1);
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionDos', '2022-12-11', '13:00', '18:00', 5, 1);
