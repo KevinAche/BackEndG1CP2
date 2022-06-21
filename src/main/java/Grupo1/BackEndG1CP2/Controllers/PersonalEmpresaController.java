@@ -196,5 +196,46 @@ public class PersonalEmpresaController {
         return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
     }
 
+
+    @GetMapping("/DevolverEmpresa/{cedula}")
+    public ResponseEntity<RespuestaGenerica> BuscarEmpresaEmpleado(@PathVariable String cedula){
+        List<Empresa> data = new ArrayList<>();
+        RespuestaGenerica<Empresa> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            Persona persona = personaRepository.findByCedula(cedula);
+            if(persona!=null){
+
+                PersonalEmpresa personalEmpresa = personalEmpresaRepository.findByPersona(persona);
+                if(personalEmpresa!= null){
+                    Empresa empresa = empresaRepository.findById(personalEmpresa.getEmpresa().getIdEmpresa()).get();
+                    data.add(empresa);
+                    respuesta.setMensaje("SE ENCONTRO EMPRESA DE EMPLEADO ");
+                    respuesta.setData(data);
+                    respuesta.setEstado(0);
+
+                }else{
+                    data.add(null);
+                    respuesta.setMensaje("NO SE ENCONTRO PERSONAL DEL EMPLEADO");
+                    respuesta.setData(data);
+                    respuesta.setEstado(1);
+                    estado= HttpStatus.BAD_REQUEST;
+                }
+            }else{
+                data.add(null);
+                respuesta.setMensaje("EL EMPLEADO NO PUDO SER ELIMINADO DEBIDO A QUE LA CEDULA -> "+cedula+" NO FUE ENCONTRADA");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+                estado= HttpStatus.BAD_REQUEST;
+            }
+        }catch (Exception e){
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al ELIMINAR EL EMPLEADO, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+    }
+
     
 }
