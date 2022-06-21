@@ -20,8 +20,8 @@ public class Actividades {
     private Asignaturas asignatura;
     
     @ManyToOne
-    @JoinColumn(name = "idSolicitudEmpresa", referencedColumnName = "idSolicitudEmpresa")
-    private SolicitudEmpresa solicitudEmpresa;
+    @JoinColumn(name = "idConvenio", referencedColumnName = "idConvenio")
+    private Convenio convenio;
 
 
     public Actividades() {
@@ -59,11 +59,11 @@ public class Actividades {
         this.asignatura = asignatura;
     }
 
-    public SolicitudEmpresa getSolicitudEmpresa() {
-        return solicitudEmpresa;
+    public Convenio getConvenio() {
+        return convenio;
     }
 
-    public void setSolicitudEmpresa(SolicitudEmpresa solicitudEmpresa) {
-        this.solicitudEmpresa = solicitudEmpresa;
+    public void setConvenio(Convenio convenio) {
+        this.convenio = convenio;
     }
 }

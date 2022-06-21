@@ -77,7 +77,7 @@ public class ActividadesController {
                         res.setArea(actividadesEnviado.getArea());
                         res.setAsignatura(actividadesEnviado.getAsignatura());
                         res.setDescripcion(actividadesEnviado.getDescripcion());
-                        res.setSolicitudEmpresa(actividadesEnviado.getSolicitudEmpresa());
+                        res.setConvenio(actividadesEnviado.getConvenio());
 
                         //EN CASO DE ENCONTRAR SE ANADE DATA A RESPUESTA
                         data.add(res);
