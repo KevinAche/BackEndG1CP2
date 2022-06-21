@@ -24,9 +24,7 @@ public class Asignaturas {
 	@ManyToOne
 	@JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera")
 	private Carrera carrera;
-	
-	@OneToMany(mappedBy = "asignatura")
-	private List<Actividades> actividades;
+
 
 	public Asignaturas() {
 	}
@@ -73,11 +71,5 @@ public class Asignaturas {
 		this.carrera = carrera;
 	}
 
-	public List<Actividades> getActividades() {
-		return actividades;
-	}
 
-	public void setActividades(List<Actividades> actividades) {
-		this.actividades = actividades;
-	}
 }
