@@ -15,6 +15,8 @@ public class VistaListarAlumnos {
     @Id
     private Long id_persona;
 
+    private Long id_alumno;
+
     private String cedula;
 
     private String primer_nombre;
@@ -156,6 +158,13 @@ public class VistaListarAlumnos {
         this.carrera = carrera;
     }
 
+    public Long getId_alumno() {
+        return id_alumno;
+    }
+
+    public void setId_alumno(Long id_alumno) {
+        this.id_alumno = id_alumno;
+    }
 
     @Override
     public String toString() {

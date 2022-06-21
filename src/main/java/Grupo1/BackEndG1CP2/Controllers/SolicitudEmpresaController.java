@@ -120,7 +120,7 @@ public class SolicitudEmpresaController {
     }
 
 
-    @DeleteMapping("/EliminarPersona/{id}")
+    @DeleteMapping("/EliminarSolicitud/{id}")
     public ResponseEntity EliminarSolicitudEmpresa (@PathVariable Long id ){
         List<SolicitudEmpresa> data = new ArrayList<SolicitudEmpresa>();
         RespuestaGenerica<SolicitudEmpresa> respuesta = new RespuestaGenerica<>();
