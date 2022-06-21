@@ -66,6 +66,8 @@ INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellid
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0192630148', 'aaax@hotmail.com','San Bartolo','2001-5-10','PEREZ','VALENTINA','PINCAY','INES','0947182650');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0152354981', 'xander@gmail.com','Totoracocha','1998-7-17','HERNANDEZ','KEVIN','VASQUEZ','ALEXANDER','0995846413');
 
+
+
 INSERT INTO public.carreras(abreviatura, modalidad, nombre,duracion) VALUES ('TSDS','PRESENCIAL','DESARROLLO DE SOFTWARE','2 años');
 INSERT INTO public.carreras(abreviatura, modalidad, nombre,duracion) VALUES ('TSED','PRESENCIAL','ENTRENAMIENTO DEPORTIVO','2 años');
 INSERT INTO public.carreras(abreviatura, modalidad, nombre,duracion) VALUES ('TSSP','DUAL','ELECTRICIDAD','2 años');
@@ -159,6 +161,10 @@ INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, nu
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionTres', '2022-12-14', '11:00', '16:00', 5, 1);
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionCuatro', '2022-12-16', '09:00', '14:00', 5, 1);
 INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionCinco', '2022-12-17', '12:00', '17:00', 5, 1);
+INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionSeis', '2022-12-17', '12:00', '17:00', 5, 1);
+INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionSiete', '2022-12-17', '12:00', '17:00', 5, 1);
+INSERT INTO public.act_diarias(descripcion, fecha, hora_llegada, hora_salida, num_horas, id_registroa) VALUES ('DescripcionOcho', '2022-12-17', '12:00', '17:00', 5, 1);
+
 
 INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA1',1, 1);
 INSERT INTO public.tutor_academico(doc_asignacion, id_alumno, id_docente) VALUES ('docasignadotutorA2',3, 1);
