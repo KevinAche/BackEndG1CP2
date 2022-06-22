@@ -216,3 +216,4 @@ INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_act
 insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgh','2022-3-20',2);
 insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgasdd','2022-4-20',1);
 
+insert into acta_reunion(doc_acta_reunion,fecha_emision,fecha_finppp,fecha_inicioppp,horario,notificacionta,respuesta_estudiante,id_alumno)values('doc1','2022-6-2','2022-8-2','2022-6-14','9HOO - 18H00','baba','esta aprobado',2);
