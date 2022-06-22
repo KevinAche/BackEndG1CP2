@@ -3,10 +3,12 @@ package Grupo1.BackEndG1CP2.Controllers;
 import Grupo1.BackEndG1CP2.Models.*;
 import Grupo1.BackEndG1CP2.Models.Views.VistaActividadesEmpresa;
 import Grupo1.BackEndG1CP2.Repositories.ActividadesRepository;
+import Grupo1.BackEndG1CP2.Repositories.ConveniosRepository;
 import Grupo1.BackEndG1CP2.Repositories.DocenteRepository;
 import Grupo1.BackEndG1CP2.Repositories.EmpresaRepository;
 import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarActividadesEmpresaRepository;
 
+import Grupo1.BackEndG1CP2.Repositories.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +25,16 @@ public class ActividadesController {
 
     @Autowired
     private ActividadesRepository actividadesRepository;
-    
+
     @Autowired
     private ListarActividadesEmpresaRepository actividadesEmpresa;
-    
+
     @Autowired
     private EmpresaRepository empresaRepository;
+
+    @Autowired
+    private ConveniosRepository conveniosRepository;
+
 
     @GetMapping("/ListaActividades")
     public ResponseEntity<RespuestaGenerica> ListarActividades(){
@@ -46,7 +52,7 @@ public class ActividadesController {
         }
         return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
-    
+
     @GetMapping("/CargarActividadesEmpresa/{id_empresa}")
     public ResponseEntity CargarActividadesEmpresa (@PathVariable Long id_empresa ){
         List<VistaActividadesEmpresa> data = new ArrayList<VistaActividadesEmpresa>();
@@ -183,4 +189,6 @@ public class ActividadesController {
 
         return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
     }
+
+
 }
