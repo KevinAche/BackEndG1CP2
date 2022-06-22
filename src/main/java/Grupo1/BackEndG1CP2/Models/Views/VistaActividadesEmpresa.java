@@ -29,6 +29,8 @@ public class VistaActividadesEmpresa {
 	private String apellidosrp;
 	
 	private String titulo;
+
+	private String carrera;
 	
 	private String abrev_titulo;
 
@@ -103,6 +105,12 @@ public class VistaActividadesEmpresa {
 	public void setAbrev_titulo(String abrev_titulo) {
 		this.abrev_titulo = abrev_titulo;
 	}
-	
 
+	public String getCarrera() {
+		return carrera;
+	}
+
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
+	}
 }
