@@ -86,11 +86,11 @@ INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VAL
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','M5B',6,1,7);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('C','M5B',7,1,8);
 
-INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Ing', 'TICS', 'Ingeniero', 1, 6);
-INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Mgtr', 'Ciberseguridad', 'Magister', 1, 7);
-INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Tec', 'Calentamientos', 'Tecnologo', 2, 8);
-INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Lic', 'Crossfit', 'Licenciado', 2, 9);
-INSERT INTO public.docente(abrev_titulo, area, titulo, id_carrera, id_persona) VALUES ('Ing', 'Circuitos', 'Ingeniero', 3, 10);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'TICS', 'Ingeniero', 1, 6);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Mgtr', 'Ciberseguridad', 'Magister', 1, 7);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Tec', 'Calentamientos', 'Tecnologo', 2, 8);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Lic', 'Crossfit', 'Licenciado', 2, 9);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'Circuitos', 'Ingeniero', 3, 10);
 
 insert into responsable_ppp(id_docente) VALUES (3);
 insert into responsable_ppp(id_docente) VALUES (4);
@@ -164,9 +164,9 @@ insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos
 insert into solicitudes_empresa(estado,fecha_emision,fecha_inicio,numero_alumnos,pdf_solicitud,respuesta,id_carrera,id_empleado,id_responsableppp)  values(false,'2022-7-12','2022-7-23',5,'fgfdf','fdfd',3,3,3);
 
 
-INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas Don Pepe','ASZDA2W','2022-3-22','2022-5-5',1);
-INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas Etapa','AASDZDA2W','2022-4-30','2022-8-5',2);
-INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa)VALUES('Practicas El Valle','iifjsjfjs','2022-5-29','2022-6-05',3);
+INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa, estado)VALUES('Practicas Don Pepe','ASZDA2W','2022-3-22','2022-5-5',1, 'ABIERTO');
+INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa, estado)VALUES('Practicas Etapa','AASDZDA2W','2022-4-30','2022-8-5',2, 'ABIERTO');
+INSERT INTO CONVOCATORIA (nombre_convocatoria,doc_convocatoria,fecha_emision,fecha_maxima,id_solicitud_empresa, estado)VALUES('Practicas El Valle','iifjsjfjs','2022-5-29','2022-6-05',3, 'ABIERTO');
 
 insert into solicitud_alumno(documento_soli_estudiante,estado,fecha_emision,horasppp,id_alumno,id_convocatoria) values('doc1','Pendiente','2022-3-20',240,1,1);
 insert into solicitud_alumno(documento_soli_estudiante,estado,fecha_emision,horasppp,id_alumno,id_convocatoria)  values('doc2','Aceptado','2022-4-15',120,2,1);
