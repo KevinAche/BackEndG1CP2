@@ -222,4 +222,34 @@ public class SolicitudEmpresaController {
     }
 
 
+    @GetMapping("/ListarSolicitudesEmpresaVista")
+    public ResponseEntity GenerarListarSolicitudes() {
+        List<VistaListarSolicitudesEmpresa> data = new ArrayList<VistaListarSolicitudesEmpresa>();
+        RespuestaGenerica<VistaListarSolicitudesEmpresa> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado = HttpStatus.OK;
+        try {
+            List<VistaListarSolicitudesEmpresa> lISTA = listarSolicitudesEmpresasRepository.findAll();
+            if (lISTA.size() >= 0) {
+                data.addAll(lISTA);
+                respuesta.setMensaje("SE LISTO SOLICITUDES DE ESTA EMPRESA CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            } else {
+                estado = HttpStatus.BAD_REQUEST;
+                data.add(null);
+                respuesta.setMensaje("NO SE LISTO SOLICITUD DE EMPRESAS CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+            }
+        } catch (Exception e) {
+            estado = HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al ELIMINAR SolicitudEmpresa, causa->" + e.getCause() + " ||  message -> " + e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
+    }
+
+
 }
