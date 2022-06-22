@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -27,7 +29,17 @@ public class ConvocatoriaController {
         List<Convocatoria> data = new ArrayList<>();
         RespuestaGenerica<Convocatoria> respuesta = new RespuestaGenerica<>();
         try {
+            Date fechaActual = new Date();
             data=convocatoriaRepository.findAll();
+
+            for(Convocatoria convocatoria: data){
+                if(convocatoria.getFechaMaxima().compareTo(fechaActual)<0){
+                    convocatoria.setEstado("CERRADA");
+                    convocatoriaRepository.save(convocatoria);
+                }
+            }
+            data=convocatoriaRepository.findAll();
+
             respuesta.setMensaje("Se genero LISTADO Convocatoria EXITOXAMENTE");
             respuesta.setData(data);
             respuesta.setEstado(0);
@@ -47,6 +59,7 @@ public class ConvocatoriaController {
         HttpStatus estado  = HttpStatus.CREATED;
         try {
             Convocatoria convocatoria = convocatoriaRepository.save(convocatoriaEnviada);
+            convocatoria.setEstado("ABIERTA");
             data.add(convocatoria);
             if(convocatoria !=null){
                 respuesta.setMensaje("SE REGISTRO Convocatoria CORRECTAMENTE");

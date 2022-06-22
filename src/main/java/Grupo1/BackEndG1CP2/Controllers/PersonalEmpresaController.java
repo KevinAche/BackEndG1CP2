@@ -14,14 +14,22 @@ import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonalEmpresaRepository;
 import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarPersonalRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
+import Grupo1.BackEndG1CP2.security.controller.AuthController;
+import Grupo1.BackEndG1CP2.security.dto.NuevoUsuario;
+import Grupo1.BackEndG1CP2.security.entity.Rol;
+import Grupo1.BackEndG1CP2.security.entity.Usuario;
+import Grupo1.BackEndG1CP2.security.enums.RolNombre;
+import Grupo1.BackEndG1CP2.security.jwt.JwtProvider;
+import Grupo1.BackEndG1CP2.security.services.RolService;
+import Grupo1.BackEndG1CP2.security.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -40,6 +48,24 @@ public class PersonalEmpresaController {
     
     @Autowired
     private EmpresaRepository empresaRepository;
+
+    @Autowired
+    private AuthController authController;
+
+    @Autowired
+    public AuthenticationManager authenticationManager;
+
+    @Autowired
+    public UsuarioService usuarioService;
+
+    @Autowired
+    public RolService rolService;
+
+    @Autowired
+    public JwtProvider jwtProvider;
+
+    @Autowired
+    public PasswordEncoder passwordEncoder;
     
     @GetMapping("/ListaPersonal")
     public ResponseEntity<RespuestaGenerica> ListarPersonal(){
@@ -58,6 +84,29 @@ public class PersonalEmpresaController {
        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
+    @GetMapping("/ListaGerente/{id}")
+    public ResponseEntity<RespuestaGenerica> ListarGerente(@PathVariable Long idEmpresa){
+        List<PersonalEmpresa> data = new ArrayList<>();
+        RespuestaGenerica<PersonalEmpresa> respuesta = new RespuestaGenerica<>();
+        try{
+            Empresa empresa = empresaRepository.findById(idEmpresa).get();
+            List<PersonalEmpresa> personalGeneral= personalEmpresaRepository.findByEmpresa(empresa);
+            for (PersonalEmpresa per: personalGeneral){
+                if(per.getCargo().equalsIgnoreCase("gerente")){
+                    data.add(per);
+                }
+            }
+            respuesta.setMensaje("Se generó LISTADO DE PERSONAL EXITOXAMENTE");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO DE PERSONAL, causa ->"+e.getCause()+" || message->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
 
     @PostMapping("/CrearPersonal/{cedula}/{id_empresa}")
     public ResponseEntity<RespuestaGenerica> CrearPersonalE(@RequestBody PersonalEmpresa personalEnviado,@PathVariable String cedula,@PathVariable Long id_empresa){
@@ -72,6 +121,17 @@ public class PersonalEmpresaController {
                     personalEnviado.setEmpresa(empresa.get());
                     personalEnviado.setPersona(persona);
                     PersonalEmpresa personal = personalEmpresaRepository.save(personalEnviado);
+                    Set<String> roles = new HashSet<>();
+                    roles.add("empleado");
+                    NuevoUsuario nuevoUsuario = new NuevoUsuario();
+                    nuevoUsuario.setPersona(persona);
+                    nuevoUsuario.setRoles(roles);
+                    System.out.println(roles);
+                    if(authController.creacionUsuarios(nuevoUsuario)){
+                        System.out.println("USUARIO EMPLEADO CREADO");
+                    }else{
+                        System.out.println("ERROR AL CREAR USUARIO");
+                    }
                     data.add(personal);
                     if(personal !=null){
                         respuesta.setMensaje("SE REGISTRO EMPLEADO CORRECTAMENTE");
@@ -237,5 +297,51 @@ public class PersonalEmpresaController {
         return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
     }
 
+    public boolean creacionUsuarios(NuevoUsuario nuevoUsuario){
+        System.out.println("ENTRO AL METODO");
+        if (usuarioService.existsByUsername(nuevoUsuario.getUsername()))
+            return false;
+        if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
+            return false;
+        Persona persona = personaRepository.findById(nuevoUsuario.getPersona().getIdPersona()).get();
+        System.out.println("persona obtenida: "+persona.getCedula());
+        Usuario usuario = new Usuario(
+                persona.getPrimerNombre() + " " + persona.getPrimerApellido(),
+                persona.getCedula(), persona.getCorreo(),
+                passwordEncoder.encode(persona.getCedula()), nuevoUsuario.getPersona());
+        System.out.println("usuario generado");
+        Set<Rol> roles = new HashSet<>();
+        try {
+            if (nuevoUsuario.getRoles().contains("estudiante")){
+                System.out.println(rolService.getByUsername(RolNombre.ROLE_ESTUDIANTE).get());
+                roles.add(rolService.getByUsername(RolNombre.ROLE_ESTUDIANTE).get());
+            }
+        } catch (Exception ex){
+            System.out.println(ex);
+        }
+
+        if (nuevoUsuario.getRoles().contains("admin")){
+            roles.add(rolService.getByUsername(RolNombre.ROLE_ADMIN).get());}
+        if (nuevoUsuario.getRoles().contains("docente")){
+            roles.add(rolService.getByUsername(RolNombre.ROLE_DOCENTE).get());}
+        if (nuevoUsuario.getRoles().contains("responsable")){
+            roles.add(rolService.getByUsername(RolNombre.ROLE_RESPONSABLEPPP).get());}
+        if (nuevoUsuario.getRoles().contains("tacademico")){
+            roles.add(rolService.getByUsername(RolNombre.ROLE_TUTORACADEMICO).get());}
+        if (nuevoUsuario.getRoles().contains("tempresarial")){
+            roles.add(rolService.getByUsername(RolNombre.ROLE_TUTOREMPRESARIAL).get());}
+        System.out.println("NO COINCIDIO NINGUN ROL");
+        if (nuevoUsuario.getRoles().contains("empleado")){
+            System.out.println("ROL EMPLEADO SELECCIONADO");
+            roles.add(rolService.getByUsername(RolNombre.ROLE_EMPLEADO).get());
+
+        }
+        System.out.println("ROL ASIGNADO");
+        usuario.setRoles(roles);
+        System.out.println("TERMINA EL METODO");
+        usuarioService.save(usuario);
+        System.out.println("USUARIO CREADO");
+        return true;
+    }
     
 }

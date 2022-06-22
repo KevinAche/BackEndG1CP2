@@ -18,6 +18,8 @@ public class Convocatoria {
 
     private Date fechaMaxima;
 
+    private String estado;
+
     //Anexo 2
     @Column(columnDefinition="text", length=10485760)
     private String docConvocatoria;
@@ -76,5 +78,13 @@ public class Convocatoria {
 
     public void setSolicitudEmpresa(SolicitudEmpresa solicitudEmpresa) {
         this.solicitudEmpresa = solicitudEmpresa;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

@@ -28,6 +28,8 @@ public class Docente{
 	@JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera")
 	private Carrera carrera;
 
+	private boolean coordinador = false;
+
 	public Docente() {
 	}
 	
@@ -86,5 +88,13 @@ public class Docente{
 
 	public void setAbrevTitulo(String abrevTitulo) {
 		this.abrevTitulo = abrevTitulo;
+	}
+
+	public boolean isCoordinador() {
+		return coordinador;
+	}
+
+	public void setCoordinador(boolean coordinador) {
+		this.coordinador = coordinador;
 	}
 }

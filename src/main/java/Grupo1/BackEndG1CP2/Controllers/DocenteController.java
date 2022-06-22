@@ -49,12 +49,12 @@ public class DocenteController {
     private CarreraRepository carreraRepository;
     
 
-    @GetMapping("/ListaDocentes")
-    public ResponseEntity<RespuestaGenerica> ListarDocentes(){
-       List<VistaListarDocentes> data = new ArrayList<>();
-       RespuestaGenerica<VistaListarDocentes> respuesta = new RespuestaGenerica<>();
+    @GetMapping("/ListaDocentesGeneral")
+    public ResponseEntity<RespuestaGenerica> ListarDocentesGeneral(){
+       List<Docente> data = new ArrayList<>();
+       RespuestaGenerica<Docente> respuesta = new RespuestaGenerica<>();
        try{
-           data= listarDocentesRepository.findAll();
+           data= docenteRepository.findAll();
            respuesta.setMensaje("Se generó LISTADO DOCENTES EXITOXAMENTE");
            respuesta.setData(data);
            respuesta.setEstado(0);
@@ -64,6 +64,23 @@ public class DocenteController {
            respuesta.setEstado(1);
        }
        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
+    @GetMapping("/ListaDocentes")
+    public ResponseEntity<RespuestaGenerica> ListarDocentes(){
+        List<VistaListarDocentes> data = new ArrayList<>();
+        RespuestaGenerica<VistaListarDocentes> respuesta = new RespuestaGenerica<>();
+        try{
+            data= listarDocentesRepository.findAll();
+            respuesta.setMensaje("Se generó LISTADO DOCENTES EXITOXAMENTE");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO DOCENTES, causa ->"+e.getCause()+" || message->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
     
     @PostMapping("/CrearDocente/{cedula}/{id_carrera}")
@@ -133,6 +150,19 @@ public class DocenteController {
                     res.setAbrevTitulo(docenteEnviado.getAbrevTitulo());
                     res.setCarrera(docenteEnviado.getCarrera());
                     res.setPersona(docenteEnviado.getPersona());
+                    res.setCoordinador(docenteEnviado.isCoordinador());
+
+                    if(docenteEnviado.isCoordinador()){
+                        List<Docente> listgeneral = docenteRepository.findAll();
+                        for(Docente doc: listgeneral){
+                            if(doc.getIdDocente()!=docenteEnviado.getIdDocente()
+                                    && doc.getCarrera().getIdCarrera()==docenteEnviado.getCarrera().getIdCarrera()){
+                                doc.setCoordinador(false);
+                                docenteRepository.save(doc);
+                            }
+                        }
+                    }
+
                     data.add(res);
                     respuesta.setMensaje("SE MODIFICO DOCENTE CORRECTAMENTE");
                     respuesta.setData(data);

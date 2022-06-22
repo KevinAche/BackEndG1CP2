@@ -103,4 +103,35 @@ public class AuthController {
 		JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
 		return new ResponseEntity<>(jwtDto, HttpStatus.OK);
 	}
+
+	public boolean creacionUsuarios(NuevoUsuario nuevoUsuario){
+		System.out.println("ENTRO AL METODO");
+		if (usuarioService.existsByUsername(nuevoUsuario.getUsername()))
+			return false;
+		if (usuarioService.existsByEmail(nuevoUsuario.getEmail()))
+			return false;
+		Persona persona = personaRepository.findById(nuevoUsuario.getPersona().getIdPersona()).get();
+		Usuario usuario = new Usuario(
+				persona.getPrimerNombre() + " " + persona.getPrimerApellido(),
+				persona.getCedula(), persona.getCorreo(),
+				passwordEncoder.encode(persona.getCedula()), nuevoUsuario.getPersona());
+		Set<Rol> roles = new HashSet<>();
+		if (nuevoUsuario.getRoles().contains("estudiante"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_ESTUDIANTE).get());
+		if (nuevoUsuario.getRoles().contains("admin"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_ADMIN).get());
+		if (nuevoUsuario.getRoles().contains("docente"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_DOCENTE).get());
+		if (nuevoUsuario.getRoles().contains("responsable"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_RESPONSABLEPPP).get());
+		if (nuevoUsuario.getRoles().contains("tacademico"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_TUTORACADEMICO).get());
+		if (nuevoUsuario.getRoles().contains("tempresarial"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_TUTOREMPRESARIAL).get());
+		if (nuevoUsuario.getRoles().contains("empleado"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_EMPLEADO).get());
+		usuario.setRoles(roles);
+		usuarioService.save(usuario);
+		return true;
+	}
 }
