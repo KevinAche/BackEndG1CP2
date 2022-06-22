@@ -1,8 +1,12 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
 import Grupo1.BackEndG1CP2.Models.*;
+import Grupo1.BackEndG1CP2.Models.Views.VistaActividadesEmpresa;
 import Grupo1.BackEndG1CP2.Repositories.ActividadesRepository;
 import Grupo1.BackEndG1CP2.Repositories.DocenteRepository;
+import Grupo1.BackEndG1CP2.Repositories.EmpresaRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarActividadesEmpresaRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +23,12 @@ public class ActividadesController {
 
     @Autowired
     private ActividadesRepository actividadesRepository;
+    
+    @Autowired
+    private ListarActividadesEmpresaRepository actividadesEmpresa;
+    
+    @Autowired
+    private EmpresaRepository empresaRepository;
 
     @GetMapping("/ListaActividades")
     public ResponseEntity<RespuestaGenerica> ListarActividades(){
@@ -35,6 +45,45 @@ public class ActividadesController {
             respuesta.setEstado(1);
         }
         return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+    
+    @GetMapping("/CargarActividadesEmpresa/{id_empresa}")
+    public ResponseEntity CargarActividadesEmpresa (@PathVariable Long id_empresa ){
+        List<VistaActividadesEmpresa> data = new ArrayList<VistaActividadesEmpresa>();
+        RespuestaGenerica<VistaActividadesEmpresa> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+        try {
+            List<Actividades> listaAct = actividadesRepository.findAll();
+            Empresa empresa = empresaRepository.findById(id_empresa).get();
+            if(empresa!=null){
+                List<VistaActividadesEmpresa> actEmpresa = actividadesEmpresa.findAll();
+                List<VistaActividadesEmpresa> actEmpresa1 = new ArrayList<>();
+                for (VistaActividadesEmpresa act: actEmpresa) {
+                    if(act.getId_empresa()==id_empresa){
+                        actEmpresa1.add(act);
+                    }
+                }
+                data=actEmpresa1;
+                respuesta.setMensaje("Se genero LISTADO ACTIVIDADES DE EMPRESA");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+
+            }else{
+                estado= HttpStatus.BAD_REQUEST;
+                data.add(null);
+                respuesta.setMensaje("ID EMPRESA NO ENCONTRADO");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+            }
+
+        } catch (Exception e) {
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al ELIMINAR Actividades, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
     }
 
 
