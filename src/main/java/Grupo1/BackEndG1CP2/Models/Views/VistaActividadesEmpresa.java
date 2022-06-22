@@ -23,7 +23,9 @@ public class VistaActividadesEmpresa {
 	private Long id_empresa;
 	
 	private String nombre_empresa;
-	
+
+	private String cedula;
+
 	private String nombresrp;
 	
 	private String apellidosrp;
@@ -110,7 +112,17 @@ public class VistaActividadesEmpresa {
 		return carrera;
 	}
 
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
 	public void setCarrera(String carrera) {
 		this.carrera = carrera;
+
+
 	}
 }
