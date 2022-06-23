@@ -15,11 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import Grupo1.BackEndG1CP2.Models.Mensaje;
 import Grupo1.BackEndG1CP2.Models.Persona;
@@ -37,7 +33,7 @@ import Grupo1.BackEndG1CP2.security.services.UsuarioService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100" })
+@CrossOrigin(value = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 public class AuthController {
 
 	@Autowired

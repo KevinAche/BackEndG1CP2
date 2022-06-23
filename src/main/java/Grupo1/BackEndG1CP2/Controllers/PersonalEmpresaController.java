@@ -33,7 +33,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100" })
+@CrossOrigin(value = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 @RequestMapping("/GestionPersonalEmpresa")
 public class PersonalEmpresaController {
 

@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
-@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:8100" })
+@CrossOrigin(value = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
 @RequestMapping("/GestionAlumno")
 public class AlumnoController {
 
