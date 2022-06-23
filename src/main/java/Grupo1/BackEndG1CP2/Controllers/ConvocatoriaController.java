@@ -149,4 +149,43 @@ public class ConvocatoriaController {
 
         return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
     }
+
+
+    @GetMapping("/ObtenerNumCon")
+    public ResponseEntity ObtenerNumero (){
+        List<Long> data = new ArrayList<Long>();
+        RespuestaGenerica<Long> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.OK;
+
+        try {
+            List<Convocatoria> convocatorias = convocatoriaRepository.findAll();
+            if(convocatorias.size()==0){
+                data.add(1L);
+            }else{
+                convocatorias.sort((Convocatoria a,Convocatoria b)-> a.getIdConvocatoria().compareTo(b.getIdConvocatoria()));
+                System.out.println(convocatorias.toString());
+                Convocatoria con=convocatorias.get(convocatorias.size()-1);
+                System.out.println(con.getIdConvocatoria());
+                data.add(con.getIdConvocatoria()+1);
+            }
+            if(convocatorias.size()>=0){
+                respuesta.setMensaje("SE GENERO EL PROXIMO ID DE CONVOCATORIA");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else{
+                estado= HttpStatus.BAD_REQUEST;
+                data.add(null);
+                respuesta.setMensaje("NO SE GENERO EL PROXIMO ID DE CONVOCATORIA");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+            }
+        } catch (Exception e) {
+            estado= HttpStatus.BAD_REQUEST;
+            respuesta.setMensaje("Hubo un problema al ELIMINAR Convocatoria, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+
+        return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+    }
 }
