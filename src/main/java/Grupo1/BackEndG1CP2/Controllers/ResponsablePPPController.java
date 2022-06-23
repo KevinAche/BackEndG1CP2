@@ -42,4 +42,28 @@ public class ResponsablePPPController {
         }
         return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
+
+    @GetMapping("/ObtenerResponsable/{cedula}")
+    public ResponseEntity<RespuestaGenerica> DeolverResponsable(@PathVariable String cedula){
+        List<VistaLista_Responsables> data = new ArrayList<>();
+        RespuestaGenerica<VistaLista_Responsables> respuesta = new RespuestaGenerica<>();
+        try {
+            VistaLista_Responsables vistaLista_responsables =listarResponsablesRepository.findByCedula(cedula);
+            if(vistaLista_responsables!=null){
+                data.add(vistaLista_responsables);
+                respuesta.setMensaje("Se obtuvo  RESPONSABLE EXITOSAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else{
+                respuesta.setMensaje("Hubo un problema al obtener RESPONSABLE debido a que la cedula -> "+cedula+" no esta designada como responsable");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+            }
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO RESPONSABLES, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
 }
