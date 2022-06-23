@@ -3,7 +3,9 @@ package Grupo1.BackEndG1CP2.Controllers;
 import Grupo1.BackEndG1CP2.Models.Convocatoria;
 import Grupo1.BackEndG1CP2.Models.Persona;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
+import Grupo1.BackEndG1CP2.Models.SolicitudEmpresa;
 import Grupo1.BackEndG1CP2.Repositories.ConvocatoriaRepository;
+import Grupo1.BackEndG1CP2.Repositories.SolicitudEmpRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,9 @@ public class ConvocatoriaController {
 
     @Autowired
     private ConvocatoriaRepository convocatoriaRepository;
+
+    @Autowired
+    private SolicitudEmpRepository solicitudEmpRepository;
 
     @GetMapping("/ListaConvocatoria")
     public ResponseEntity<RespuestaGenerica> ListarConvocatoria(){
@@ -68,6 +73,36 @@ public class ConvocatoriaController {
                 respuesta.setEstado(0);
             }else{
                 respuesta.setMensaje("NO SE REGISTRO Convocatoria CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(1);
+                estado= HttpStatus.BAD_REQUEST;
+            }
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al insertar Convocatoria, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+            estado= HttpStatus.BAD_REQUEST;
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
+    }
+
+    @PostMapping("/CrearConD/{id_solicitud}")
+    public ResponseEntity<RespuestaGenerica> CrearConvocatoriaDatos(@RequestBody Convocatoria convocatoriaEnviada,@PathVariable Long id_solicitud){
+        List<Convocatoria> data = new ArrayList<>();
+        RespuestaGenerica<Convocatoria> respuesta = new RespuestaGenerica<>();
+        HttpStatus estado  = HttpStatus.CREATED;
+        try {
+            SolicitudEmpresa solicitudEmpresa = solicitudEmpRepository.findById(id_solicitud).get();
+            if(solicitudEmpresa!=null){
+                convocatoriaEnviada.setEstado("ABIERTA");
+                convocatoriaEnviada.setSolicitudEmpresa(solicitudEmpresa);
+                Convocatoria convocatoria = convocatoriaRepository.save(convocatoriaEnviada);
+                data.add(convocatoria);
+                respuesta.setMensaje("SE REGISTRO CONVOCATORIA CORRECTAMENTE");
+                respuesta.setData(data);
+                respuesta.setEstado(0);
+            }else{
+                respuesta.setMensaje("NO SE REGISTRO CONVOCATORIA CORRECTAMENTE");
                 respuesta.setData(data);
                 respuesta.setEstado(1);
                 estado= HttpStatus.BAD_REQUEST;
