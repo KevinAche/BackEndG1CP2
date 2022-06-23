@@ -25,7 +25,7 @@ public class Convenio {
 	@Column(nullable = false)
 	private int duracion;
 	
-	@Column(columnDefinition="text", length=10485760)
+	@Column(columnDefinition="text", length=10485760, nullable = true)
 	private String documento;
 	
 	@OneToOne

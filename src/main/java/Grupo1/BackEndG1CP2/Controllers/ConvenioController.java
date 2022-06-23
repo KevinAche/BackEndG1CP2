@@ -2,7 +2,9 @@ package Grupo1.BackEndG1CP2.Controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
+import Grupo1.BackEndG1CP2.Models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -107,6 +109,40 @@ public class ConvenioController {
 			estado = HttpStatus.BAD_REQUEST;
 		}
 		return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
+	}
+
+	@PutMapping("/EditarConvenio/{id}")
+	public ResponseEntity<RespuestaGenerica> EditarConvenio(@RequestBody Convenio convenioEnviado, @PathVariable Long id){
+		List<Convenio> data = new ArrayList<>();
+		RespuestaGenerica<Convenio> respuesta = new RespuestaGenerica<>();
+		AtomicReference<HttpStatus> estado  = new AtomicReference<>(HttpStatus.OK);
+		try {
+			Convenio con = conveniosRepository.findById(id)
+					.map(res ->{
+						res.setDocumento(convenioEnviado.getDocumento());
+
+						//EN CASO DE ENCONTRAR SE ANADE DATA A RESPUESTA
+						data.add(res);
+						respuesta.setMensaje("SE MODIFICO Convenio CORRECTAMENTE");
+						respuesta.setData(data);
+						respuesta.setEstado(0);
+						//SE RETORNA Actividades MODIFICADA
+						return conveniosRepository.save(res);
+					})
+					.orElseGet(()->{
+						respuesta.setMensaje("NO SE ENCONTRO Convenio CON EL ID INGRESADO: "+id);
+						respuesta.setData(data);
+						respuesta.setEstado(1);
+						estado.set(HttpStatus.BAD_REQUEST);
+						return new Convenio();
+					});
+		}catch (Exception e){
+			respuesta.setMensaje("Hubo un problema al MODIFICAR Convenio, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+			respuesta.setData(data);
+			respuesta.setEstado(1);
+			estado.set(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<RespuestaGenerica>(respuesta, estado.get());
 	}
 
 }

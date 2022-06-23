@@ -1,22 +1,19 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
-import Grupo1.BackEndG1CP2.Models.Alumno;
-import Grupo1.BackEndG1CP2.Models.Carrera;
-import Grupo1.BackEndG1CP2.Models.Docente;
-import Grupo1.BackEndG1CP2.Models.Persona;
-import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
+import Grupo1.BackEndG1CP2.Models.*;
 import Grupo1.BackEndG1CP2.Models.Views.VistaListarDocentes;
 import Grupo1.BackEndG1CP2.Repositories.CarreraRepository;
 import Grupo1.BackEndG1CP2.Repositories.DocenteRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
+import Grupo1.BackEndG1CP2.Repositories.ResponsablePPPRepository;
 import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarAlumnosRepository;
 import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarDocentesRepository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
+import Grupo1.BackEndG1CP2.security.controller.AuthController;
+import Grupo1.BackEndG1CP2.security.dto.NuevoUsuario;
 import org.hibernate.annotations.GeneratorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +36,12 @@ public class DocenteController {
 
     @Autowired
     private CarreraRepository carreraRepository;
-    
+
+    @Autowired
+    private ResponsablePPPRepository responsablePPPRepository;
+
+    @Autowired
+    private AuthController authController;
 
     @GetMapping("/ListaDocentesGeneral")
     public ResponseEntity<RespuestaGenerica> ListarDocentesGeneral(){
@@ -146,6 +148,20 @@ public class DocenteController {
 
                     if(docenteEnviado.isCoordinador()){
                         List<Docente> listgeneral = docenteRepository.findAll();
+                        ResponsablePPP responsablePPP = new ResponsablePPP();
+                        responsablePPP.setDocente(docenteEnviado);
+                        responsablePPPRepository.save(responsablePPP);
+                        Set<String> roles = new HashSet<>();
+                        roles.add("responsable");
+                        NuevoUsuario nuevoUsuario = new NuevoUsuario();
+                        nuevoUsuario.setPersona(docenteEnviado.getPersona());
+                        nuevoUsuario.setRoles(roles);
+                        System.out.println(roles);
+                        if(authController.creacionUsuarios(nuevoUsuario)){
+                            System.out.println("USUARIO RPP CREADO");
+                        }else{
+                            System.out.println("ERROR AL CREAR USUARIO");
+                        }
                         for(Docente doc: listgeneral){
                             if(doc.getIdDocente()!=docenteEnviado.getIdDocente()
                                     && doc.getCarrera().getIdCarrera()==docenteEnviado.getCarrera().getIdCarrera()){

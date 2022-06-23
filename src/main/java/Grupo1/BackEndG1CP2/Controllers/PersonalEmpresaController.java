@@ -85,11 +85,12 @@ public class PersonalEmpresaController {
     }
 
     @GetMapping("/ListaGerente/{id}")
-    public ResponseEntity<RespuestaGenerica> ListarGerente(@PathVariable Long idEmpresa){
+    public ResponseEntity<RespuestaGenerica> ListarGerente(@PathVariable Long id){
+
         List<PersonalEmpresa> data = new ArrayList<>();
         RespuestaGenerica<PersonalEmpresa> respuesta = new RespuestaGenerica<>();
         try{
-            Empresa empresa = empresaRepository.findById(idEmpresa).get();
+            Empresa empresa = empresaRepository.findById(id).get();
             List<PersonalEmpresa> personalGeneral= personalEmpresaRepository.findByEmpresa(empresa);
             for (PersonalEmpresa per: personalGeneral){
                 if(per.getCargo().equalsIgnoreCase("gerente")){

@@ -91,9 +91,9 @@ INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VAL
 
 INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'TICS', 'Ingeniero', 1, 6);
 INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Mgtr', 'Ciberseguridad', 'Magister', 1, 7);
-INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Tec', 'SGBD', 'Tecnologo', 1, 8);
-INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Lic', 'TICS', 'Licenciado', 1, 9);
-INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'Circuitos', 'Ingeniero', 1, 10);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Tec', 'Calentamientos', 'Tecnologo', 2, 8);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Lic', 'Crossfit', 'Licenciado', 2, 9);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'Circuitos', 'Ingeniero', 3, 10);
 
 insert into responsable_ppp(id_docente) VALUES (3);
 insert into responsable_ppp(id_docente) VALUES (4);
