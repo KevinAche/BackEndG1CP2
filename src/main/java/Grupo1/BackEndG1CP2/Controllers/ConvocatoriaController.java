@@ -4,8 +4,10 @@ import Grupo1.BackEndG1CP2.Models.Convocatoria;
 import Grupo1.BackEndG1CP2.Models.Persona;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
 import Grupo1.BackEndG1CP2.Models.SolicitudEmpresa;
+import Grupo1.BackEndG1CP2.Models.Views.VistaListaConvocatorias;
 import Grupo1.BackEndG1CP2.Repositories.ConvocatoriaRepository;
 import Grupo1.BackEndG1CP2.Repositories.SolicitudEmpRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListaConvocatoriasRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,9 @@ public class ConvocatoriaController {
     @Autowired
     private SolicitudEmpRepository solicitudEmpRepository;
 
+    @Autowired
+    private ListaConvocatoriasRepository listaConvocatoriasRepository;
+
     @GetMapping("/ListaConvocatoria")
     public ResponseEntity<RespuestaGenerica> ListarConvocatoria(){
         List<Convocatoria> data = new ArrayList<>();
@@ -51,6 +56,25 @@ public class ConvocatoriaController {
             respuesta.setEstado(0);
         }catch (Exception e){
             respuesta.setMensaje("Hubo un problema al generar LISTADO Convocatoria, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/ListaConvocatoriaVista")
+    public ResponseEntity<RespuestaGenerica> ListarConvocatoriaVista(){
+        List<VistaListaConvocatorias> data = new ArrayList<>();
+        RespuestaGenerica<VistaListaConvocatorias> respuesta = new RespuestaGenerica<>();
+        try {
+            Date fechaActual = new Date();
+            data=listaConvocatoriasRepository.findAll();
+            respuesta.setMensaje("Se genero LISTADO Convocatoria VISTA EXITOXAMENTE");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO Convocatoria VISTA , causa ->"+e.getCause()+" || messagge->"+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }

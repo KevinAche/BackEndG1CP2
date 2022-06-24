@@ -4,7 +4,9 @@ import Grupo1.BackEndG1CP2.Models.Actividades;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
 import Grupo1.BackEndG1CP2.Models.SolicitudAlumno;
 import Grupo1.BackEndG1CP2.Models.SolicitudEmpresa;
+import Grupo1.BackEndG1CP2.Models.Views.VistaAlumSolicitudes;
 import Grupo1.BackEndG1CP2.Repositories.SolicitudAlumnoRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListaAlumSoliRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,11 @@ public class SolicitudAlumnoControler {
     @Autowired
     private SolicitudAlumnoRepository solicitudAlumnoRepository;
 
+    @Autowired
+    private ListaAlumSoliRepository listaAlumSoliRepository;
+
+
+
     @GetMapping("/ListaSolicitudAlumno")
     public ResponseEntity<RespuestaGenerica> ListarSolicitudAlumno(){
         List<SolicitudAlumno> data = new ArrayList<>();
@@ -33,6 +40,30 @@ public class SolicitudAlumnoControler {
             respuesta.setEstado(0);
         }catch (Exception e){
             respuesta.setMensaje("Hubo un problema al generar LISTADO SOLICITUDES EMPRESA, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
+    @GetMapping("/ListaSolAlumnosAprobados/{id_empresa}")
+    public ResponseEntity<RespuestaGenerica> ListarAlumnosAprobados(@PathVariable Long id_empresa){
+        List<VistaAlumSolicitudes> data = new ArrayList<>();
+        RespuestaGenerica<VistaAlumSolicitudes> respuesta = new RespuestaGenerica<>();
+        try {
+            List<VistaAlumSolicitudes> vistaTotal = listaAlumSoliRepository.findAll();
+           List<VistaAlumSolicitudes> listaMandar = new ArrayList<>();
+            for (VistaAlumSolicitudes vis:vistaTotal) {
+                if(vis.getId_empresa() == id_empresa){
+                    listaMandar.add(vis);
+                }
+            }
+            data=listaMandar;
+            respuesta.setMensaje("Se genero LISTADO ALUMNOS APROBADOS PARA EMPRESA");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO ALUMNOS PARA EMPRESA, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }

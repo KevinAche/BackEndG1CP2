@@ -1,17 +1,17 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
-import Grupo1.BackEndG1CP2.Models.Alumno;
-import Grupo1.BackEndG1CP2.Models.Carrera;
-import Grupo1.BackEndG1CP2.Models.Docente;
 import Grupo1.BackEndG1CP2.Models.Empresa;
 import Grupo1.BackEndG1CP2.Models.Persona;
 import Grupo1.BackEndG1CP2.Models.PersonalEmpresa;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
-import Grupo1.BackEndG1CP2.Models.Views.VistaListarDocentes;
+import Grupo1.BackEndG1CP2.Models.Views.VistaEmpleadosEmpresa;
+import Grupo1.BackEndG1CP2.Models.Views.VistaTutoresEmpresa;
 import Grupo1.BackEndG1CP2.Models.Views.VistaListarPersonal;
 import Grupo1.BackEndG1CP2.Repositories.EmpresaRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonalEmpresaRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListaEmpleadosEmpRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListaTutoresEmpresaRepository;
 import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarPersonalRepository;
 
 import java.util.*;
@@ -66,6 +66,12 @@ public class PersonalEmpresaController {
 
     @Autowired
     public PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private ListaTutoresEmpresaRepository listaTutoresEmpresaRepository;
+
+    @Autowired
+    private ListaEmpleadosEmpRepository listaEmpleadosEmpRepository;
     
     @GetMapping("/ListaPersonal")
     public ResponseEntity<RespuestaGenerica> ListarPersonal(){
@@ -82,6 +88,57 @@ public class PersonalEmpresaController {
            respuesta.setEstado(1);
        }
        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
+    @GetMapping("/ListaTutoreslEmpresa/{id_empresa}")
+    public ResponseEntity<RespuestaGenerica> ListarTutoresEmpresa(@PathVariable Long id_empresa){
+        List<VistaTutoresEmpresa> data = new ArrayList<>();
+        RespuestaGenerica<VistaTutoresEmpresa> respuesta = new RespuestaGenerica<>();
+        try{
+            List<VistaTutoresEmpresa> vista = listaTutoresEmpresaRepository.findAll();
+            List<VistaTutoresEmpresa> lista = new ArrayList<>();
+
+            for (VistaTutoresEmpresa vis: vista) {
+                if(vis.getId_empresa()==id_empresa){
+                    lista.add(vis);
+                }
+            }
+
+            data= lista;
+            respuesta.setMensaje("Se generó LISTADO DE TUTORES DE EMPRESA EXITOXAMENTE");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO DE TUTORES DE EMPRESA, causa ->"+e.getCause()+" || message->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
+    @GetMapping("/ListaPersonalEmpresa/{id_empresa}")
+    public ResponseEntity<RespuestaGenerica> ListarPersonalEmpresa(@PathVariable Long id_empresa){
+        List<VistaEmpleadosEmpresa> data = new ArrayList<>();
+        RespuestaGenerica<VistaEmpleadosEmpresa> respuesta = new RespuestaGenerica<>();
+        try{
+            List<VistaEmpleadosEmpresa> vista = listaEmpleadosEmpRepository.findAll();
+            List<VistaEmpleadosEmpresa> lista = new ArrayList<>();
+
+            for (VistaEmpleadosEmpresa vis: vista) {
+                if (vis.getId_empresa()==id_empresa){
+                    lista.add(vis);
+                }
+            }
+            data= lista;
+            respuesta.setMensaje("Se generó LISTADO DE EMPLEADOS DE EMPRESA EXITOXAMENTE");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO DE EMPLEADOS DE EMPRESA, causa ->"+e.getCause()+" || message->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
     @GetMapping("/ListaGerente/{id}")
