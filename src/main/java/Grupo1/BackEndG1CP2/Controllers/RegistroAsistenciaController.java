@@ -1,10 +1,7 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
 
-import Grupo1.BackEndG1CP2.Models.Alumno;
-import Grupo1.BackEndG1CP2.Models.Persona;
-import Grupo1.BackEndG1CP2.Models.Registro_Asistencias;
-import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
+import Grupo1.BackEndG1CP2.Models.*;
 import Grupo1.BackEndG1CP2.Repositories.AlumnoRepository;
 import Grupo1.BackEndG1CP2.Repositories.PersonaRepository;
 import Grupo1.BackEndG1CP2.Repositories.RegistroAsistenciaRepository;
@@ -15,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @CrossOrigin(value = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE })
@@ -94,6 +92,41 @@ public class RegistroAsistenciaController {
             estado= HttpStatus.BAD_REQUEST;
         }
         return new ResponseEntity<RespuestaGenerica>(respuesta, estado);
+    }
+
+    @PutMapping("/EditarRegistroAsistencia/{id}")
+    public ResponseEntity<RespuestaGenerica> EditarRegistro_VisitaEmpresa(@RequestBody Registro_Asistencias registro_asistenciasEnviados, @PathVariable Long id){
+        List<Registro_Asistencias> data = new ArrayList<>();
+        RespuestaGenerica<Registro_Asistencias> respuesta = new RespuestaGenerica<>();
+        AtomicReference<HttpStatus> estado  = new AtomicReference<>(HttpStatus.OK);
+        try {
+            Registro_Asistencias rve = registroAsistenciaRepository.findById(id)
+                    .map(res ->{
+                        res.setDocRegistroA(registro_asistenciasEnviados.getDocRegistroA());
+                        res.setAlumno(registro_asistenciasEnviados.getAlumno());
+
+                        //EN CASO DE ENCONTRAR SE ANADE DATA A RESPUESTA
+                        data.add(res);
+                        respuesta.setMensaje("SE MODIFICO REGISTRO ASISTENCIA CORRECTAMENTE");
+                        respuesta.setData(data);
+                        respuesta.setEstado(0);
+                        //SE RETORNA Registro_VisitaEmpresa MODIFICADA
+                        return registroAsistenciaRepository.save(res);
+                    })
+                    .orElseGet(()->{
+                        respuesta.setMensaje("NO SE ENCONTRO EL REGISTRO DE ASISTENCIA CON EL ID INGRESADO: "+id);
+                        respuesta.setData(data);
+                        respuesta.setEstado(1);
+                        estado.set(HttpStatus.BAD_REQUEST);
+                        return new Registro_Asistencias();
+                    });
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al MODIFICAR REGISTRO ASISTENCIA, causa ->"+e.getCause()+ " || message -> "+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+            estado.set(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, estado.get());
     }
 
 }
