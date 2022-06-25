@@ -13,6 +13,8 @@ public class VistaListarPersonal {
 	@Id
 	private Long id_persona;
 
+	private Long id_personal;
+
 	private String cedula;
 
 	private String primer_nombre;
@@ -129,7 +131,14 @@ public class VistaListarPersonal {
 		this.cargo = cargo;
 	}
 
-	
+
+	public Long getId_personal() {
+		return id_personal;
+	}
+
+	public void setId_personal(Long id_personal) {
+		this.id_personal = id_personal;
+	}
 
 	public String getAbrev_titulo() {
 		return abrev_titulo;
