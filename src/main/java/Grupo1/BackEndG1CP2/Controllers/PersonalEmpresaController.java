@@ -90,7 +90,7 @@ public class PersonalEmpresaController {
        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
-    @GetMapping("/ListaTutoreslEmpresa/{id_empresa}")
+    @GetMapping("/ListaTutoresEmpresa/{id_empresa}")
     public ResponseEntity<RespuestaGenerica> ListarTutoresEmpresa(@PathVariable Long id_empresa){
         List<VistaTutoresEmpresa> data = new ArrayList<>();
         RespuestaGenerica<VistaTutoresEmpresa> respuesta = new RespuestaGenerica<>();
