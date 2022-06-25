@@ -4,6 +4,7 @@ import Grupo1.BackEndG1CP2.Models.Empresa;
 import Grupo1.BackEndG1CP2.Models.Persona;
 import Grupo1.BackEndG1CP2.Models.PersonalEmpresa;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
+import Grupo1.BackEndG1CP2.Models.Views.VistaAlumSolicitudes;
 import Grupo1.BackEndG1CP2.Models.Views.VistaEmpleadosEmpresa;
 import Grupo1.BackEndG1CP2.Models.Views.VistaTutoresEmpresa;
 import Grupo1.BackEndG1CP2.Models.Views.VistaListarPersonal;
@@ -88,6 +89,30 @@ public class PersonalEmpresaController {
            respuesta.setEstado(1);
        }
        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
+    @GetMapping("/ListaPersonalEmp/{cedula}")
+    public ResponseEntity<RespuestaGenerica> ListarPersonalEmp(@PathVariable String cedula){
+        List<VistaListarPersonal> data = new ArrayList<>();
+        RespuestaGenerica<VistaListarPersonal> respuesta = new RespuestaGenerica<>();
+        try{
+            List<VistaListarPersonal> empleados= listarPersonalRepository.findAll();
+            List<VistaListarPersonal> lista = new ArrayList<>();
+            for (VistaListarPersonal vis: empleados){
+               if (vis.getCedula().equals(cedula)){
+                   lista.add(vis);
+               }
+            }
+            data=lista;
+            respuesta.setMensaje("Se generó LISTADO DE PERSONAL EXITOXAMENTE");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO DE PERSONAL, causa ->"+e.getCause()+" || message->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return  new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
     @GetMapping("/ListaTutoresEmpresa/{id_empresa}")
