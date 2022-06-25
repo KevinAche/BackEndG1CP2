@@ -20,6 +20,9 @@ public class InformeFinal {
     //Anexo15
     @Column(columnDefinition="text", length=10485760)
     private String docInformeFinal;
+    
+    
+    private String estado;
 
     @PrePersist
     public void fecha(){
@@ -60,4 +63,14 @@ public class InformeFinal {
     public void setDocInformeFinal(String docInformeFinal) {
         this.docInformeFinal = docInformeFinal;
     }
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+    
+    
 }

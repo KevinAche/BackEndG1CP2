@@ -3,8 +3,11 @@ package Grupo1.BackEndG1CP2.Controllers;
 import Grupo1.BackEndG1CP2.Models.Actividades;
 import Grupo1.BackEndG1CP2.Models.InformeFinal;
 import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
+import Grupo1.BackEndG1CP2.Models.Views.VistaInformeFinal;
 import Grupo1.BackEndG1CP2.Repositories.ActividadesRepository;
 import Grupo1.BackEndG1CP2.Repositories.InformeFinalRepository;
+import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListarInformeFinalRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,9 @@ import java.util.concurrent.atomic.AtomicReference;
 public class InformeFinalController {
     @Autowired
     private InformeFinalRepository informeFinalRepository;
+    
+    @Autowired
+    private ListarInformeFinalRepository finalRepository;
 
     @GetMapping("/ListaInformeFinal")
     public ResponseEntity<RespuestaGenerica> ListarInformeFinal(){
@@ -32,6 +38,23 @@ public class InformeFinalController {
             respuesta.setEstado(0);
         }catch (Exception e){
             respuesta.setMensaje("Hubo un problema al generar LISTADO InformeFinal, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+    
+    @GetMapping("/ListaInformesEstudiantes")
+    public ResponseEntity<RespuestaGenerica> ListarInformesFinales(){
+    	List<VistaInformeFinal> data = new ArrayList<>();
+    	RespuestaGenerica<VistaInformeFinal> respuesta = new RespuestaGenerica<>();
+    	try {
+            data=finalRepository.findAll();
+            respuesta.setMensaje("Se genero LISTADO INFORMES FINALES X ESTUDIANTES");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO INFORMES DE ESTUDIANTES, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
             respuesta.setData(data);
             respuesta.setEstado(1);
         }

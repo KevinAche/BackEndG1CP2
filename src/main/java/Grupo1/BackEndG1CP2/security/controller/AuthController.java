@@ -82,6 +82,8 @@ public class AuthController {
 			roles.add(rolService.getByUsername(RolNombre.ROLE_TUTOREMPRESARIAL).get());
 		if (nuevoUsuario.getRoles().contains("empleado"))
 			roles.add(rolService.getByUsername(RolNombre.ROLE_EMPLEADO).get());
+		if (nuevoUsuario.getRoles().contains("ccarrera"))
+			roles.add(rolService.getByUsername(RolNombre.ROLE_CARRERA).get());
 		usuario.setRoles(roles);
 		usuarioService.save(usuario);
 		return new ResponseEntity(new Mensaje("Usuario Creado"), HttpStatus.CREATED);

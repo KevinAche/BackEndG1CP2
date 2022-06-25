@@ -13,6 +13,7 @@ DROP TABLE lista_convocatorias_lanzadas;
 DROP TABLE tutores_empresa;
 DROP TABLE lista_empleado_mi_empresa;
 DROP TABLE alumnos_solicitudes_aceptadas;
+DROP TABLE informes_finales_estudiantes;
 
 
 CREATE VIEW listar_personal AS select p.id_persona, p.cedula, p.primer_nombre,p.segundo_nombre, p.primer_apellido, p.segundo_apellido, p.correo, p.direccion, p.fecha_nac, p.telefono, t.abrev_titulo, t.cargo, e.nombre_empresa from persona p, personal_empresa t, empresa e where p.id_persona=t.id_persona and t.id_empresa=e.id_empresa;
@@ -30,6 +31,8 @@ CREATE VIEW lista_convocatorias_lanzadas AS select con.id_convocatoria, con.doc_
 CREATE VIEW tutores_empresa AS select t.id_tutor_empresarial, al.primer_nombre||' '||al.segundo_nombre as "a_nombres", al.primer_apellido||' '||al.segundo_apellido as "a_apellidos", pe.primer_nombre||' '||pe.segundo_nombre as "e_nombres", pe.primer_apellido||' '||pe.segundo_apellido as "e_apellidos", t.doc_asignacion, e.id_empresa, e.nombre_empresa from tutor_empresarial t JOIN alumno a ON a.id_alumno = t.id_alumno JOIN persona al ON a.id_persona = al.id_persona JOIN personal_empresa per ON per.id_personal = t.id_personal JOIN persona pe ON pe.id_persona = per.id_persona JOIN empresa e ON e.id_empresa = per.id_empresa;
 CREATE VIEW lista_empleado_mi_empresa AS select p.id_personal, pe.cedula, pe.primer_nombre||' '||pe.segundo_nombre as "p_nombres", pe.primer_apellido||' '||pe.segundo_apellido as "p_apellidos", p.abrev_titulo, p.cargo, e.id_empresa, e.nombre_empresa from personal_empresa p JOIN persona pe ON pe.id_persona = p.id_persona JOIN empresa e ON e.id_empresa = p.id_empresa;
 CREATE VIEW alumnos_solicitudes_aceptadas AS select a.id_alumno, al.cedula, al.primer_nombre||' '||al.segundo_nombre as "a_nombres", al.primer_apellido||' '||al.segundo_apellido as "a_apellidos", sa.estado as "estado_solicitud", e.id_empresa, e.nombre_empresa from solicitud_alumno sa JOIN alumno a on a.id_alumno = sa.id_alumno JOIN convocatoria c on c.id_convocatoria =sa.id_convocatoria JOIN solicitudes_empresa se ON c.id_solicitud_empresa = se.id_solicitud_empresa JOIN personal_empresa pe on pe.id_personal = se.id_empleado JOIN empresa e on e.id_empresa = pe.id_empresa JOIN persona al on al.id_persona = a.id_alumno where upper(sa.estado) like '%ACEPTADO%' OR upper(sa.estado) like '%ACEPTADA%';
+CREATE VIEW informes_finales_estudiantes AS SELECT if.id_informe_final, if.fecha_emision, if.estado, p.primer_nombre||' '||p.segundo_nombre as "a_nombres", p.primer_apellido||' '||p.segundo_apellido as "a_apellidos", p.cedula FROM informe_final if JOIN alumno al ON if.id_alumno = al.id_alumno JOIN persona p ON p.id_persona = al.id_persona;
+
 
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('0150287671', 'aaa@gmail.com','Monay','2000-11-10','AGUILAR','KEVIN','LITUMA','VINICIO','0991663079');
 INSERT INTO public.persona( cedula, correo, direccion, fecha_nac, primer_apellido, primer_nombre, segundo_apellido, segundo_nombre, telefono) VALUES ('1723489742', 'bbb@gmail.com','Monay','2002-11-10','AGUILAR','XIMENA','LITUMA','MARIANA','0962381723');
@@ -126,16 +129,18 @@ INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_RESPONSABLEPPP');
 INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTORACADEMICO');
 INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTOREMPRESARIAL');
 INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_EMPLEADO');
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_CARRERA');
 
 INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (1, 1);
 INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (2, 3);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (3, 3);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (4, 3);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (5, 3);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (6, 3);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (7, 5);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (3, 4);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (4, 5);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (5, 6);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (6, 7);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (7, 8);
 INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (8, 7);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (9, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (9, 2);
+
 
 
 INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vision, naturaleza) VALUES ('Av. Abelardo J', 'Clara', 'Avils', '010223231', '0721564', 'Maus', 'Pública');
@@ -236,9 +241,9 @@ INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_act
 INSERT INTO public.act_cronograma(fecha_finalizacion, fecha_seguimiento, num_actividad, observacion, porcentaje, id_actividadesd, id_cronograma) VALUES ('2022-2-15', '2022-2-15', 5, 'completa satifactoriamente', 100, 10, 1);
 
 
-insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgh','2022-3-20',2);
-insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgasdd','2022-4-20',1);
-insert into informe_final (doc_informe_final,fecha_emision,id_alumno) values ('gvbhggbgasdd','2022-4-20',9);
+insert into informe_final (estado, doc_informe_final,fecha_emision,id_alumno) values ('APROBADO', 'gvbhggbgh','2022-3-20',2);
+insert into informe_final (estado, doc_informe_final,fecha_emision,id_alumno) values ('NO APROBADO','gvbhggbgasdd','2022-4-20',1);
+insert into informe_final (estado, doc_informe_final,fecha_emision,id_alumno) values ('APROBADO','gvbhggbgasdd','2022-4-20',9);
 
 
 insert into acta_reunion(doc_acta_reunion,fecha_emision,fecha_finppp,fecha_inicioppp,horario,notificacionta,respuesta_estudiante,id_alumno)values('doc1','2022-6-2','2022-8-2','2022-6-14','9HOO - 18H00','baba','esta aprobado',2);
