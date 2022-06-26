@@ -111,6 +111,7 @@ insert into responsable_ppp(id_docente) VALUES (3);
 insert into responsable_ppp(id_docente) VALUES (4);
 insert into responsable_ppp(id_docente) VALUES (5);
 
+insert into coordinador_vin(id_docente) VALUES (2);
 --admin
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kevin@gmail.com', 'Kevin', '$2a$10$qZ.qx0k5Q1ZjW0mO0lh/sOfGoZwyA0ozGfCueF8qug0BQXw3ZcpDK', '0152354981', 49);
 
