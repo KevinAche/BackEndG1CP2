@@ -81,6 +81,12 @@ public class VistaInformeFinal {
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
-	
 
+	public String getId_alumno() {
+		return id_alumno;
+	}
+
+	public void setId_alumno(String id_alumno) {
+		this.id_alumno = id_alumno;
+	}
 }
