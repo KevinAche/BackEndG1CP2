@@ -89,7 +89,7 @@ public class ConvocatoriaController {
         HttpStatus estado  = HttpStatus.CREATED;
         try {
             Convocatoria convocatoria = convocatoriaRepository.save(convocatoriaEnviada);
-            convocatoria.setEstado("ABIERTA");
+            convocatoria.setEstado("ABIERTO");
             data.add(convocatoria);
             if(convocatoria !=null){
                 respuesta.setMensaje("SE REGISTRO Convocatoria CORRECTAMENTE");
@@ -118,7 +118,7 @@ public class ConvocatoriaController {
         try {
             SolicitudEmpresa solicitudEmpresa = solicitudEmpRepository.findById(id_solicitud).get();
             if(solicitudEmpresa!=null){
-                convocatoriaEnviada.setEstado("ABIERTA");
+                convocatoriaEnviada.setEstado("ABIERTO");
                 convocatoriaEnviada.setSolicitudEmpresa(solicitudEmpresa);
                 Convocatoria convocatoria = convocatoriaRepository.save(convocatoriaEnviada);
                 data.add(convocatoria);

@@ -101,45 +101,78 @@ INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VAL
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('C','M5B',7,1,8);
 INSERT INTO public.alumno(ciclo, paralelo, promedio, id_carrera, id_persona) VALUES ('B','M5B',7,1,36);
 
-INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'TICS', 'Ingeniero', 1, 6);
-INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Mgtr', 'Ciberseguridad', 'Magister', 1, 7);
-INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Tec', 'Calentamientos', 'Tecnologo', 2, 8);
-INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Lic', 'Crossfit', 'Licenciado', 2, 9);
-INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'Circuitos', 'Ingeniero', 3, 10);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'TICS', 'Ingeniero', 1, 9);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Mgtr', 'Ciberseguridad', 'Magister', 1, 10);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Tec', 'Calentamientos', 'Tecnologo', 1,11);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Lic', 'Crossfit', 'Licenciado', 1, 12);
+INSERT INTO public.docente(coordinador, abrev_titulo, area, titulo, id_carrera, id_persona) VALUES (false, 'Ing', 'Circuitos', 'Ingeniero', 1, 13);
 
 insert into responsable_ppp(id_docente) VALUES (3);
 insert into responsable_ppp(id_docente) VALUES (4);
 insert into responsable_ppp(id_docente) VALUES (5);
 
+--admin
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kevin@gmail.com', 'Kevin', '$2a$10$qZ.qx0k5Q1ZjW0mO0lh/sOfGoZwyA0ozGfCueF8qug0BQXw3ZcpDK', '0152354981', 49);
+
+--estudiantes--
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kevina@gmail.com', 'KevinA', '$2a$10$F6SWj4JrH7v6meZg0ITN5.hPWyb1JyJkUldgNruB.SBnvSyIcaP/G', '0150287671', 1);
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('bbb@gmail.com', 'Ximena', '$2a$10$i2e3bUgO7eUOFZyMbLcY8O02uF1U3L6dJqPc6i2gTNgeb27.Thqa6', '1723489742', 2);
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ccc@gmail.com', 'Katherine', '$2a$10$ZAh3PYY2IIN198QqWgiV6eN/VRW88.nqDqAk70aIPqTNfqan1b.6e', '1234567893', 3);
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ddd@gmail.com', 'Andrea', '$2a$10$iiwBeFJpDODp0eKiRM0reOWWniYzqvDtM6sdivjI7Saay8MpjKx76', '1112233454', 4);
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('eee@gmail.com', 'Andres', '$2a$10$DGyujI68FNJtF5Uw8rpqde9aRPnPNbzWs60J/F0btbxuWjyjtMcxC', '8746380945', 5);
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('fff@gmail.com', 'Marlene', '$2a$10$eDYVjmjH/JfdJ.FUXGo7Ueg8nR9MGCx6gZQZVpN6agTssnF8U9dtK', '9846382766', 6);
-INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kkk@hotmail.com', 'KEVIN', '$2a$10$UuxlrgiVkuijq.dIg1SsDu756sgVHnL.2amYB3GBE1QMsRWlvjcgu', '0184628411',11);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ggg@gmail.com', 'Marlene', '$2a$10$48FJ5NE5ZBSYUnNooDGpWeUU2pDbiDX.2STfQRouQJiaQqObNNDdi', '1827364597', 7);--falta
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('hhh@gmail.com', 'Marlene', '$2a$10$nUvILkmZaET2k2.8czAKFeljGAfYSGLw1o4b.qhHjf3p8bmRCsAHu', '9736485768', 8);--falta
 INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('aaal@hotmail.com', 'MARLA', '$2a$10$IkaUAjDBdzIz8Gw.BkFps.Y7atoznGFI8MSTk/QDRDy9XhkOVd6yi', '0182638136',36);
 
+--docentes--
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('qqq@hotmail.com', 'DOC1 ', '$2a$10$UVktmJJlw7D/nR7MvI7xDOXj3ImQ7YMiah41ASe4DaKSFLwstRig2', '9273649179',9);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ooo@gmail.com', 'DOC2', '$2a$10$.XnEA052h.KO9qV/9ILtnu1HU7/fs1ULwtZHYRsePh9SN5apiq/.q', '0273947110',10);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('kkk@hotmail.com', 'DOC3', '$2a$10$UuxlrgiVkuijq.dIg1SsDu756sgVHnL.2amYB3GBE1QMsRWlvjcgu','0184628411',11);
+--responsable
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('lll@hotmail.com', 'RESP1 ', '$2a$10$yl0t.F7i1Lp2f9YNvgJl0.wnDw74i36rAch6ZeDwwlvxYdvwLGWoe', '0142738412',12);
+--docente--
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ppp@gmail.com', 'DOC4 ', '$2a$10$SXIPFpUxbQfEueVSTEUjieP4b9XTgZSrWrCAKTXmlgtpz8dC0KEn2', '8372839413',13);
 
-INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_ADMIN');
-INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_DOCENTE');
-INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_ESTUDIANTE');
-INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_RESPONSABLEPPP');
-INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTORACADEMICO');
-INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTOREMPRESARIAL');
-INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_EMPLEADO');
-INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_CARRERA');
+--empleados--
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('nnn@gmail.com', 'EMP1 ', '$2a$10$slZ/jtZudtFrMfhqs3fTD.GpTOShAraPS9BCa3iLyZJ31kmJVjEHu', '0927346114',14);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ooo@gmail.com', 'EMP2 ', '$2a$10$oJbyGwi3YT3O0AP9Eimeeupzq.s3hhJbTv8INm/Yqx9KIUouRVgnu', '0192734615',15);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('ppp@gmail.com', 'EMP3 ', '$2a$10$zNOWPXwNj1UOzjmUpyfb9OESvCk5n/xRI.HhZhraM8Xdoq/JdsJz6', '0192739116',16);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('qqq@hotmail.com', 'EMP4 ', '$2a$10$IW0McHXjAYzQY46DbAGpG.uGLezS3cRB1f6JWN3g8biyya2Z.mh1u', '0192734517',17);
+INSERT INTO public.usuario(email, nombre, password, username, id_persona) VALUES ('rrr@hotmail.com', 'EMP5 ', '$2a$10$Xm5vgwTsTTyzu4MFvIEU4u0xbyQthdF6ecOjpdR480/vljZVT6746', '0192749318',18);
 
+--ROLES DE USUARIO--
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_ADMIN'); --1--
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_DOCENTE'); --2--
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_ESTUDIANTE');--3--
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_RESPONSABLEPPP'); --4--
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTORACADEMICO'); --5--
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_TUTOREMPRESARIAL'); --6--
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_EMPLEADO');  --7--
+INSERT INTO public.rol(rol_nombre) VALUES ('ROLE_CARRERA');  --8--
+
+
+--DESIGANCION DE USAURIOS CON ROL--
 INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (1, 1);
 INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (2, 3);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (3, 4);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (4, 5);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (5, 6);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (6, 7);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (7, 8);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (8, 7);
-INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (9, 2);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (3, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (4, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (5, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (6, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (7, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (8, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (9, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (10, 3);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (11, 2);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (12, 5);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (13, 2);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (14, 4);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (15, 2);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (16, 6);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (17, 6);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (18, 7);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (19, 7);
+INSERT INTO public.usuario_rol(usuario_id, rol_id) VALUES (20, 7);
 
 
 
@@ -150,11 +183,11 @@ INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vis
 INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vision, naturaleza) VALUES ('Mall', 'Mision de Prueba Ejemplo 3', 'RemacheAsociados', '1234567890101', '0987654321', 'Nuestra Vision Ejemplo Prueba 3', 'Privada');
 INSERT INTO public.empresa(direccion, mision, nombre_empresa, ruc, telefono, vision, naturaleza) VALUES ('Centro', 'Mision de Prueba Ejemplo 4', 'CuevaAsociados', '1234567890102', '0987654321', 'Nuestra Vision Ejemplo Prueba 4', 'Privada');
 
-INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('Gerente', 'Ing',1, 11);
-INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('Bodeguero', 'Dct',2, 12);
-INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('Secretario', 'Ing',3, 13);
-INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('Jefe Planta', 'Ing',4, 14);
-INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('RRHH', 'Lcd' ,5, 15);
+INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('Gerente', 'Ing',1, 14);
+INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('Bodeguero', 'Dct',2, 15);
+INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('Secretario', 'Ing',3, 16);
+INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('Jefe Planta', 'Ing',4, 17);
+INSERT INTO public.personal_empresa(cargo, abrev_titulo, id_empresa, id_persona)VALUES ('RRHH', 'Lcd' ,5, 18);
 
 INSERT INTO public.convenios(documento, duracion, fecha_emision, id_gerente, id_responsableppp)VALUES ('CONVENIO 1', 6, '2022-6-19', 1, 1);
 INSERT INTO public.convenios(documento, duracion, fecha_emision, id_gerente, id_responsableppp)VALUES ('CONVENIO 2', 5, '2022-6-18', 4, 1);
