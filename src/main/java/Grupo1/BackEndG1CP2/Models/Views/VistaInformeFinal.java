@@ -20,6 +20,8 @@ public class VistaInformeFinal {
 
 	private String estado;
 
+	private String id_alumno;
+
 	private String a_nombres;
 
 	private String a_apellidos;
