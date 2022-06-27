@@ -1,7 +1,24 @@
 ﻿# BackEndG1CP2
 BACKEND DESARRROLLADO G1 CP2:
 
+- INTEGRANTES: 
+
+1. CHRISTIAN PATRICIO SALINAS VILLA
+2. PATRICIO ROLANDO CUEVA GONZAGA 
+3. FRANKLIN SANTIAGO DOMINGUEZ YANQUE
+4. GISELLE XIMENA ORTIZ VILLALTA
+5. KEVIN ALEXANDER HERNANDEZ VASQUEZ
+6. KEVIN VINICIO AGUILAR LITUMA
+7. LISSETH THALIA SIZALIMA GUAYLLASACA
+8. MARIELA LISSETH NIEVES LUPERCIO
+9. ROLANDO PATRICIO REMACHE ORTIZ
+10. VERONICA LORENA SARI MOLINA
+
+
+*************************************************************************************************************************************************
+
 - HERRAMIENTAS DE USO:
+
  1. HEROKU: PARA DESPLIEGUE DE APLICACION EN LA NUBE
  2. SPRINGBOOT: PARA DESARROLLO DE SERRVICIOS CONSUMIDOS EN FRONT-END.
  3. SWAGGER: LIBRERIA PARA DOCUMENTACION DE SERVICIOS.
@@ -21,14 +38,14 @@ BACKEND DESARRROLLADO G1 CP2:
 
 
 *************************************************************************************************************************************************
-- Descripcion de estructuras: 
+- DESCRIPCION DE LAS ESTRUCTURAS: 
 
 1. Para la creacion de anexos y poder descargarlos, en la aprte del front, todos estos anexos se encuentran precargados en la ruta "/uploads".
 2. La estructura del proyecto esta compuesta por "controllers - models - repositories - security - services", cada carpeta cuenta con diferentes archivos para la ejecucion del proyecto, estas carpetas de las puede apreciar en la ruta "/src/main/Grupo1/BackEndG1CP2"
 3. Dentro de las carpetas "models - repositories" se clasifican en clases modelos para la creacion de tablas, y otra carpeta extra "Views - Repositories/ReposiotiresViews" se encuentran clases de vistas que se utilizan para poder listar y obtener resultados en la parte visual. 
 
 *************************************************************************************************************************************************
-- Requisitos para la ejecucion de back:
+- REQUISITOS PARA LA EJECUCION DEL BACKEND:
 
 1. El usuario que desee probar todo el proyecto de back, debera contar con la version JDK No. 8, ya que el proyecto fue desarrollado bajo esas caracteristicas.
 2. En cuanto a los datos base que contendra el proyecto, estos se encuentra precargados dentro del archivo "import.sql" dentro de la ruta "/src/main/resources"
