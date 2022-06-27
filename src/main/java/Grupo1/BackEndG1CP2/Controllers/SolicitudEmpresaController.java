@@ -47,6 +47,9 @@ public class SolicitudEmpresaController {
     @Autowired
     private SolicitudesGenerarRepository solicitudesGenerarRepository;
 
+    @Autowired
+    private NotificacionesRepository notificacionesRepository;
+
     @GetMapping("/ListaSolicitudEmpresa")
     public ResponseEntity<RespuestaGenerica> ListarSolicitudEmpresa() {
         List<SolicitudEmpresa> data = new ArrayList<>();
@@ -124,6 +127,14 @@ public class SolicitudEmpresaController {
                         res.setEstado(solicitudEmpresaEnviada.isEstado());
                         res.setPdfSolicitud(solicitudEmpresaEnviada.getPdfSolicitud());
                         res.setRespuesta(solicitudEmpresaEnviada.getRespuesta());
+
+                        if(solicitudEmpresaEnviada.getRespuesta() != null){
+                            Notificaciones noti = new
+                                    Notificaciones("Respuesta asignada a solicitud para Prácticas PreProfesionales",
+                                    solicitudEmpresaEnviada.getEmpleado().getPersona());
+
+                            notificacionesRepository.save(noti);
+                        }
 
                         //EN CASO DE ENCONTRAR SE ANADE DATA A RESPUESTA
                         data.add(res);

@@ -53,6 +53,29 @@ public class ActividadesController {
         return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
     }
 
+    @GetMapping("/ListaActividadesConvenio/{id}")
+    public ResponseEntity<RespuestaGenerica> ListarActividadesConvenio(@PathVariable Long id){
+        List<Actividades> data = new ArrayList<>();
+        RespuestaGenerica<Actividades> respuesta = new RespuestaGenerica<>();
+        try {
+            Convenio convenio = conveniosRepository.findById(id).get();
+            List<Actividades> actgeneral=actividadesRepository.findAll();
+            for (Actividades act : actgeneral){
+                if(act.getConvenio() == convenio){
+                    data.add(act);
+                }
+            }
+            respuesta.setMensaje("Se genero LISTADO Actividades");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO Actividades, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
     @GetMapping("/CargarActividadesEmpresa/{id_empresa}")
     public ResponseEntity CargarActividadesEmpresa (@PathVariable Long id_empresa ){
         List<VistaActividadesEmpresa> data = new ArrayList<VistaActividadesEmpresa>();

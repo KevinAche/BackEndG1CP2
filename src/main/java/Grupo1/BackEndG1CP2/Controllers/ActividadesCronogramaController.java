@@ -1,10 +1,7 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
-import Grupo1.BackEndG1CP2.Models.Actividades;
-import Grupo1.BackEndG1CP2.Models.Actividades_Cronograma;
-import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
-import Grupo1.BackEndG1CP2.Repositories.ActivCronogramRepository;
-import Grupo1.BackEndG1CP2.Repositories.ActividadesRepository;
+import Grupo1.BackEndG1CP2.Models.*;
+import Grupo1.BackEndG1CP2.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +19,57 @@ public class ActividadesCronogramaController {
     @Autowired
     private ActivCronogramRepository activCronogramRepository;
 
+    @Autowired
+    private CronogramaRepository cronogramaRepository;
+
+    @Autowired
+    private RegistroAsistenciaRepository registroAsistenciaRepository;
+
+    @Autowired
+    private ActividadesDiariasRepository actividadesDiariasRepository;
+
     @GetMapping("/ListaActividades_Cronograma")
     public ResponseEntity<RespuestaGenerica> ListarActividades_Cronograma(){
         List<Actividades_Cronograma> data = new ArrayList<>();
         RespuestaGenerica<Actividades_Cronograma> respuesta = new RespuestaGenerica<>();
         try {
             data=activCronogramRepository.findAll();
+            respuesta.setMensaje("Se genero LISTADO Actividades_Cronograma");
+            respuesta.setData(data);
+            respuesta.setEstado(0);
+        }catch (Exception e){
+            respuesta.setMensaje("Hubo un problema al generar LISTADO Actividades_Cronograma, causa ->"+e.getCause()+" || messagge->"+e.getMessage());
+            respuesta.setData(data);
+            respuesta.setEstado(1);
+        }
+        return new ResponseEntity<RespuestaGenerica>(respuesta, HttpStatus.OK);
+    }
+
+    @GetMapping("/ListaActividadesPorCronograma/{id}")
+    public ResponseEntity<RespuestaGenerica> ListarActividadesPorCronograma(@PathVariable Long id){
+        List<Actividades_Cronograma> data = new ArrayList<>();
+        RespuestaGenerica<Actividades_Cronograma> respuesta = new RespuestaGenerica<>();
+        try {
+
+            Cronograma cronograma = cronogramaRepository.findById(id).get();
+            Registro_Asistencias registroAsistencias = registroAsistenciaRepository
+                    .findByAlumno(cronograma.getTutorAcademico().getAlumno());
+
+            List<Actividades_Diarias> actividadesDiarias = actividadesDiariasRepository.findByRegistroA(registroAsistencias);
+
+            List<Actividades_Cronograma> actividadesCronograma = activCronogramRepository.findByCronograma(cronograma);
+
+            for(Actividades_Diarias actD : actividadesDiarias){
+
+                if(activCronogramRepository.findByActividadesDiarias(actD)== null){
+                    Actividades_Cronograma actN= new Actividades_Cronograma();
+                    actN.setActividadesDiarias(actD);
+                    actN.setCronograma(cronograma);
+                    activCronogramRepository.save(actN);
+                }
+            }
+
+            data=activCronogramRepository.findByCronograma(cronograma);
             respuesta.setMensaje("Se genero LISTADO Actividades_Cronograma");
             respuesta.setData(data);
             respuesta.setEstado(0);

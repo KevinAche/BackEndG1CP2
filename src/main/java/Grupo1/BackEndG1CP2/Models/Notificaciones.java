@@ -29,6 +29,11 @@ public class Notificaciones {
 		super();
 	}
 
+	public Notificaciones(String notificacion, Persona persona) {
+		this.notificacion = notificacion;
+		this.persona = persona;
+	}
+
 	public Long getIdNotificacion() {
 		return idNotificacion;
 	}

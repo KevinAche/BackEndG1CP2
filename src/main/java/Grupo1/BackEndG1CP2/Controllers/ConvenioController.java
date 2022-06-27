@@ -145,4 +145,34 @@ public class ConvenioController {
 		return new ResponseEntity<RespuestaGenerica>(respuesta, estado.get());
 	}
 
+	@DeleteMapping("/EliminarActividades/{id}")
+	public ResponseEntity EliminarConvenio (@PathVariable Long id ){
+		List<Convenio> data = new ArrayList<Convenio>();
+		RespuestaGenerica<Convenio> respuesta = new RespuestaGenerica<>();
+		HttpStatus estado  = HttpStatus.OK;
+
+		try {
+
+			conveniosRepository.deleteById(id);
+			if(conveniosRepository!=null){
+				data.add(new Convenio());
+				respuesta.setMensaje("SE ELIMINO Convenio CORRECTAMENTE");
+				respuesta.setData(data);
+				respuesta.setEstado(0);
+			}else{
+				estado= HttpStatus.BAD_REQUEST;
+				data.add(null);
+				respuesta.setMensaje("NO SE ELIMINO Convenio CORRECTAMENTE");
+				respuesta.setData(data);
+				respuesta.setEstado(1);
+			}
+		} catch (Exception e) {
+			estado= HttpStatus.BAD_REQUEST;
+			respuesta.setMensaje("Hubo un problema al ELIMINAR Convenio, causa->"+e.getCause()+ " ||  message -> "+e.getMessage());
+			respuesta.setData(data);
+			respuesta.setEstado(1);
+		}
+
+		return new ResponseEntity<RespuestaGenerica>(respuesta,estado);
+	}
 }

@@ -1,9 +1,7 @@
 package Grupo1.BackEndG1CP2.Controllers;
 
-import Grupo1.BackEndG1CP2.Models.Actividades;
-import Grupo1.BackEndG1CP2.Models.RespuestaGenerica;
-import Grupo1.BackEndG1CP2.Models.SolicitudAlumno;
-import Grupo1.BackEndG1CP2.Models.SolicitudEmpresa;
+import Grupo1.BackEndG1CP2.Models.*;
+import Grupo1.BackEndG1CP2.Repositories.NotificacionesRepository;
 import Grupo1.BackEndG1CP2.Models.Views.VistaAlumSolicitudes;
 import Grupo1.BackEndG1CP2.Repositories.SolicitudAlumnoRepository;
 import Grupo1.BackEndG1CP2.Repositories.ViewRepositories.ListaAlumSoliRepository;
@@ -28,6 +26,9 @@ public class SolicitudAlumnoControler {
     private ListaAlumSoliRepository listaAlumSoliRepository;
 
 
+
+    @Autowired
+    private NotificacionesRepository notificacionesRepository;
 
     @GetMapping("/ListaSolicitudAlumno")
     public ResponseEntity<RespuestaGenerica> ListarSolicitudAlumno(){
@@ -112,6 +113,14 @@ public class SolicitudAlumnoControler {
             			soli.setHorasPPP(solicitudEnviado.getHorasPPP());
             			soli.setEstado(solicitudEnviado.getEstado());
             			soli.setAlumno(solicitudEnviado.getAlumno());
+
+            			if(solicitudEnviado.getEstado().equalsIgnoreCase("ACEPTADO")){
+                            Notificaciones noti = new Notificaciones(
+                                    "Su solicitud para Prácticas PreProfesionales ha sido aceptada",
+                                    solicitudEnviado.getAlumno().getPersona()
+                            );
+                            notificacionesRepository.save(noti);
+                        }
 
                         //EN CASO DE ENCONTRAR SE ANADE DATA A RESPUESTA
                         data.add(soli);

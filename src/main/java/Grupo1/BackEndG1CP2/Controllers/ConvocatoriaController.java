@@ -42,7 +42,7 @@ public class ConvocatoriaController {
             Date fechaActual = new Date();
             data=convocatoriaRepository.findAll();
 
-            /*
+
             for(Convocatoria convocatoria: data){
                 if(convocatoria.getFechaMaxima().compareTo(fechaActual)<0){
                     convocatoria.setEstado("CERRADA");
@@ -50,7 +50,7 @@ public class ConvocatoriaController {
                 }
             }
             data=convocatoriaRepository.findAll();
-*/
+
             respuesta.setMensaje("Se genero LISTADO Convocatoria EXITOXAMENTE");
             respuesta.setData(data);
             respuesta.setEstado(0);
