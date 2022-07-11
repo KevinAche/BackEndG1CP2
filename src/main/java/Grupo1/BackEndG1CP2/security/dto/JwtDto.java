@@ -11,13 +11,30 @@ public class JwtDto {
 	private String bearer = "Bearer";
 	
 	private String username;
+
+	private String nameUser;
 	
 	private Collection<? extends GrantedAuthority> authorities;
+
+	public JwtDto(String token, String username, String nameUser, Collection<? extends GrantedAuthority> authorities) {
+		this.token = token;
+		this.username = username;
+		this.nameUser = nameUser;
+		this.authorities = authorities;
+	}
 
 	public JwtDto(String token, String username, Collection<? extends GrantedAuthority> authorities) {
 		this.token = token;
 		this.username = username;
 		this.authorities = authorities;
+	}
+
+	public String getNameUser() {
+		return nameUser;
+	}
+
+	public void setNameUser(String nameUser) {
+		this.nameUser = nameUser;
 	}
 
 	public String getToken() {

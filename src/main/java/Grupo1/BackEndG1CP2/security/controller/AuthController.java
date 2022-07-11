@@ -1,5 +1,6 @@
 package Grupo1.BackEndG1CP2.security.controller;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,6 +55,7 @@ public class AuthController {
 	@Autowired
 	public PersonaRepository personaRepository;
 
+
 	@PostMapping("/nuevo")
 	public ResponseEntity<?> nuevo(@Valid @RequestBody NuevoUsuario nuevoUsuario, BindingResult bindingResult) {
 		if (bindingResult.hasErrors())
@@ -98,7 +100,30 @@ public class AuthController {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtProvider.generateToken(authentication);
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
 		JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), userDetails.getAuthorities());
+		return new ResponseEntity<>(jwtDto, HttpStatus.OK);
+	}
+
+	@PostMapping("/login2")
+	public ResponseEntity<JwtDto> login2(@Valid @RequestBody LoginUsuario loginUsuario, BindingResult bindingResult) {
+		if (bindingResult.hasErrors())
+			return new ResponseEntity(new Mensaje("Campos mal puestos"), HttpStatus.BAD_REQUEST);
+		Authentication authentication = authenticationManager.authenticate(
+				new UsernamePasswordAuthenticationToken(loginUsuario.getUsername(), loginUsuario.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
+		Persona persona = personaRepository.findByCedula(loginUsuario.getUsername());
+		String nombre = persona.getPrimerNombre()+" "+persona.getPrimerApellido();
+		System.out.println(nombre);
+
+		String jwt = jwtProvider.generateToken(authentication);
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+
+
+		JwtDto jwtDto = new JwtDto(jwt, userDetails.getUsername(), nombre,userDetails.getAuthorities());
 		return new ResponseEntity<>(jwtDto, HttpStatus.OK);
 	}
 
